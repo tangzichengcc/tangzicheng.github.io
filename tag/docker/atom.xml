@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://tangzichengcc.github.io</id>
+    <title>唐仔橙 • Posts by &#34;docker&#34; tag</title>
+    <link href="https://tangzichengcc.github.io" />
+    <updated>2023-09-16T05:30:16.000Z</updated>
+    <category term="旅游" />
+    <category term="路由器" />
+    <category term="浏览器安全" />
+    <category term="csapp" />
+    <category term="C语言" />
+    <category term="PWN入门" />
+    <category term="堆" />
+    <category term="docker" />
+    <category term="脚本" />
+    <category term="研究生课程" />
+    <category term="诗歌" />
+    <category term="调试" />
+    <category term="论文" />
+    <category term="KVM" />
+    <category term="USENIX" />
+    <entry>
+        <id>https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-39-docker%E5%85%A5%E9%97%A8%E5%8F%8Apwn%E5%87%BA%E9%A2%98%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</id>
+        <title>pwn入门-39-docker入门及pwn出题环境搭建</title>
+        <link rel="alternate" href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-39-docker%E5%85%A5%E9%97%A8%E5%8F%8Apwn%E5%87%BA%E9%A2%98%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+        <content type="html">&lt;h1 id=&#34;docker&#34;&gt;&lt;a href=&#34;#docker&#34; class=&#34;headerlink&#34; title=&#34;docker&#34;&gt;&lt;/a&gt;docker&lt;/h1&gt;&lt;p&gt;入门参考资料:&lt;a href=&#34;https://www.runoob.com/docker&#34;&gt;https://www.runoob.com/docker&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://yeasy.gitbook.io/docker_practice/&#34;&gt;https://yeasy.gitbook.io/docker_practice/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;一、安装&#34;&gt;&lt;a href=&#34;#一、安装&#34; class=&#34;headerlink&#34; title=&#34;一、安装&#34;&gt;&lt;/a&gt;一、安装&lt;/h2&gt;&lt;p&gt;使用官方脚本安装docker&lt;/p&gt;
+&lt;p&gt;curl -fsSL &lt;a href=&#34;https://get.docker.com/&#34;&gt;https://get.docker.com&lt;/a&gt; | bash -s docker –mirror Aliyun&lt;/p&gt;
+&lt;p&gt;手动安装(不如脚本稳定少出错)&lt;/p&gt;
+&lt;p&gt;开启docker &lt;/p&gt;
+&lt;p&gt;systemctl enable docker &lt;/p&gt;
+&lt;p&gt;systemctl start docker&lt;/p&gt;
+&lt;p&gt;测试是否安装成功: docker run –rm hello-world&lt;/p&gt;
+&lt;p&gt;hello-world是测试容器, –rm表示退出容器后,自动删除容器&lt;/p&gt;
+&lt;h2 id=&#34;二、使用入门&#34;&gt;&lt;a href=&#34;#二、使用入门&#34; class=&#34;headerlink&#34; title=&#34;二、使用入门&#34;&gt;&lt;/a&gt;二、使用入门&lt;/h2&gt;&lt;h3 id=&#34;1-镜像&#34;&gt;&lt;a href=&#34;#1-镜像&#34; class=&#34;headerlink&#34; title=&#34;1.镜像&#34;&gt;&lt;/a&gt;1.镜像&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;docker images 查看本地镜像&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;docker pull xxxx 拉去镜像, 例如docker pull ubuntu:18.04&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​		不给镜像仓库地址的话, 会从 Docker Hub （&lt;code&gt;docker.io&lt;/code&gt;）获取镜像, 而镜像名称是 &lt;code&gt;ubuntu:18.04&lt;/code&gt;，因此将会获取官方镜像 &lt;code&gt;library/ubuntu&lt;/code&gt; 仓库中标签为 &lt;code&gt;18.04&lt;/code&gt; 的镜像。&lt;code&gt;docker pull&lt;/code&gt;命令的输出结果最后一行给出了镜像的完整名称，例如： &lt;code&gt;docker.io/library/ubuntu:18.04&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;docker rmi xxxx  删除镜像&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;docker build -t xxxx .  用dockerfile构建镜像&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-容器&#34;&gt;&lt;a href=&#34;#2-容器&#34; class=&#34;headerlink&#34; title=&#34;2.容器&#34;&gt;&lt;/a&gt;2.容器&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;docker ps 查看容器 -a查看所有(包括停止的)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;docker run -it ubuntu:18.04 bash&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​	-it: -i 交互式操作 -t 终端 &lt;/p&gt;
+&lt;p&gt;​	bash 命令,希望有交互式shell,所以用这个,或者&amp;#x2F;bin&amp;#x2F;sh之类的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;docker stop xxx  停止容器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;CTF-pwn出题环境搭建&#34;&gt;&lt;a href=&#34;#CTF-pwn出题环境搭建&#34; class=&#34;headerlink&#34; title=&#34;CTF-pwn出题环境搭建&#34;&gt;&lt;/a&gt;CTF-pwn出题环境搭建&lt;/h1&gt;&lt;p&gt;​		pwn出题主要用到了 &lt;a href=&#34;https://github.com/Eadom/ctf_xinetd&#34;&gt;https://github.com/Eadom/ctf_xinetd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;环境搭建&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_53757397/article/details/128489015&#34;&gt;https://blog.csdn.net/weixin_53757397/article/details/128489015&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/mylyylmy/article/details/79917776&#34;&gt;https://blog.csdn.net/mylyylmy/article/details/79917776&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://nocbtm.github.io/2019/09/25/pwn%E9%A2%98%E7%9A%84%E6%90%AD%E5%BB%BA/&#34;&gt;https://nocbtm.github.io/2019/09/25/pwn题的搭建/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_53757397/article/details/128489015&#34;&gt;https://blog.csdn.net/weixin_53757397/article/details/128489015&lt;/a&gt; 感觉有点啰嗦,不一定需要上传docker仓库&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_46521144/article/details/120572274&#34;&gt;https://blog.csdn.net/weixin_46521144/article/details/120572274&lt;/a&gt; 排错&lt;/p&gt;
+&lt;h2 id=&#34;搭建步骤&#34;&gt;&lt;a href=&#34;#搭建步骤&#34; class=&#34;headerlink&#34; title=&#34;搭建步骤&#34;&gt;&lt;/a&gt;搭建步骤&lt;/h2&gt;&lt;p&gt;git clone &lt;a href=&#34;https://github.com/Eadom/ctf_xinetd.git&#34;&gt;https://github.com/Eadom/ctf_xinetd.git&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将编译好的libc、flag、题目文件拷贝到bin目录下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​		如果需要特定的libc&lt;/p&gt;
+&lt;p&gt;​		提前patchelf好,把libc文件页拷贝到ctf_xinetd的bin目录下&lt;/p&gt;
+&lt;p&gt;​		patchelf –set-interpreter .&amp;#x2F;2.31-0ubuntu9_amd64&amp;#x2F;ld-linux-x86-64.so.2 .&amp;#x2F;timu&lt;br&gt;​		patchelf –set-rpath .&amp;#x2F;2.31-0ubuntu9_amd64&amp;#x2F; .&amp;#x2F;timu&lt;/p&gt;
+&lt;p&gt;​		用绝对路径不知道为什么不行????&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;创建docker-compose.yml文件,这里的3389改成题目要映射的端口(物理机的),9999是docker里面的端口,image名字要和后面创建的docker images名字一样&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;version: &amp;#x27;3&amp;#x27;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;services:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    pwn:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        build: ./&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        image: pwn1 #这里修改的是images名,将和 docker build -t &amp;quot;pwn1&amp;quot; . 该命令有关&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        ports:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            - &amp;quot;3389:9999&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        pids_limit: 1024&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        # cpus: 0.5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        restart: unless-stopped&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        # privileged: true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;Dockerfile&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;FROM ubuntu:&lt;span class=&#34;number&#34;&gt;22.04&lt;/span&gt; 根据情况修改版本&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;RUN cp -R /lib* /home/ctf &amp;amp;&amp;amp;\  版本高于&lt;span class=&#34;number&#34;&gt;18.04&lt;/span&gt;要删除这一句??为啥呢??&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  	cp -R /usr/lib* /home/ctf &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;p&gt;ctf.xinetd&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;service ctf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    disable = no&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    socket_type = stream&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    protocol    = tcp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    wait        = no&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    user        = root&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    type        = UNLISTED&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    port        = &lt;span class=&#34;number&#34;&gt;9999&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    bind        = &lt;span class=&#34;number&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;number&#34;&gt;.0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    server      = /usr/sbin/chroot&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;# replace helloworld to your program&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    server_args = --userspec=&lt;span class=&#34;number&#34;&gt;1000&lt;/span&gt;:&lt;span class=&#34;number&#34;&gt;1000&lt;/span&gt; /home/ctf ./timu   这里timu是题目bin文件名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    banner_fail = /etc/banner_fail&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;# safety options&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    per_source	= &lt;span class=&#34;number&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;meta&#34;&gt;# the maximum instances of this service per source IP address&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    rlimit_cpu	= &lt;span class=&#34;number&#34;&gt;20&lt;/span&gt; &lt;span class=&#34;meta&#34;&gt;# the maximum number of CPU seconds that the service may use&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    #rlimit_as  = &lt;span class=&#34;number&#34;&gt;1024&lt;/span&gt;M &lt;span class=&#34;meta&#34;&gt;# the Address Space resource limit for the service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    #access_times = &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;:&lt;span class=&#34;number&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;number&#34;&gt;-9&lt;/span&gt;:&lt;span class=&#34;number&#34;&gt;00&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;12&lt;/span&gt;:&lt;span class=&#34;number&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;number&#34;&gt;-24&lt;/span&gt;:&lt;span class=&#34;number&#34;&gt;00&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;制作镜像&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​		建立容器,pwn1名字就是镜像的名字&lt;/p&gt;
+&lt;figure class=&#34;highlight erlang&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker build -t &lt;span class=&#34;string&#34;&gt;&amp;quot;pwn1&amp;quot;&lt;/span&gt; .&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;p&gt;4.创建运行容器&lt;/p&gt;
+&lt;p&gt;​		docker run -d -p 0.0.0.0:3389:9999 pwn1 运行容器,这里就部署好了,可以进行打了,3389是暴露出来的端口&lt;/p&gt;
+&lt;p&gt;​		docker exec -it 16a224caf905 &amp;#x2F;bin&amp;#x2F;bash  和容器进行交互,(这个是退出后再次进入,和run时候-it不一样)&lt;/p&gt;
+&lt;p&gt;文件拷贝 &lt;a href=&#34;https://blog.csdn.net/sunhuaqiang1/article/details/88354410&#34;&gt;https://blog.csdn.net/sunhuaqiang1/article/details/88354410&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;docker cp &amp;#x2F;root&amp;#x2F;chuti&amp;#x2F;uaf&amp;#x2F;timu pwncp:&amp;#x2F;home&amp;#x2F;ctf&amp;#x2F;timu&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/yue7603835/article/details/122456650&#34;&gt;https://blog.csdn.net/yue7603835/article/details/122456650&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="PWN入门" />
+        <category term="docker" />
+        <updated>2023-09-16T05:30:16.000Z</updated>
+    </entry>
+</feed>

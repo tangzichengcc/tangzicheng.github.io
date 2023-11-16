@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://tangzichengcc.github.io</id>
+    <title>唐仔橙 • Posts by &#34;调试&#34; category</title>
+    <link href="https://tangzichengcc.github.io" />
+    <updated>2023-10-26T13:54:31.000Z</updated>
+    <category term="旅游" />
+    <category term="路由器" />
+    <category term="浏览器安全" />
+    <category term="csapp" />
+    <category term="C语言" />
+    <category term="PWN入门" />
+    <category term="堆" />
+    <category term="docker" />
+    <category term="脚本" />
+    <category term="研究生课程" />
+    <category term="诗歌" />
+    <category term="调试" />
+    <category term="论文" />
+    <category term="KVM" />
+    <category term="USENIX" />
+    <entry>
+        <id>https://tangzichengcc.github.io/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/</id>
+        <title>盛格塾课程-拍案惊奇GDB以战说法1-谁截断了我的指针?</title>
+        <link rel="alternate" href="https://tangzichengcc.github.io/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/"/>
+        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;​	之前知道老师是因为《软件调试》这本书，非常厉害，但是因为主要是windows的一直还没读（因为主要学习Linux，不过最近越发感觉不能局限于一个系统），最近看见一个大佬在朋友圈转发这个课，才发现张老师原来是有自己的公司和培训，看了下来太牛了，立马报名了。&lt;/p&gt;
+&lt;p&gt;​	(老师b站也有号, 官网nanocode.cn,) 还有其他很多优秀的课程,看来要好好买一波了..这才是真正有价值的知识付费!!&lt;/p&gt;
+&lt;h1 id=&#34;背景&#34;&gt;&lt;a href=&#34;#背景&#34; class=&#34;headerlink&#34; title=&#34;背景&#34;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;​	老师将实际案例中的一个问题抽象出了一个很简单的demo, 用于搜索argv[0]的名字, 其实也就是当前可执行程序的名字,本身看着这个代码是没有什么问题的(不,有问题,没有include parser.c)&lt;/p&gt;
+&lt;p&gt;parser.c&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// parser.c&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;type&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;char&lt;/span&gt; * &lt;span class=&#34;title function_&#34;&gt;get_name&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;type&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;char&lt;/span&gt;* full_path)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;type&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;type&#34;&gt;char&lt;/span&gt; * sep = &lt;span class=&#34;built_in&#34;&gt;strrchr&lt;/span&gt;(full_path, &lt;span class=&#34;string&#34;&gt;&amp;#x27;/&amp;#x27;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; (sep == &lt;span class=&#34;literal&#34;&gt;NULL&lt;/span&gt;)? &lt;span class=&#34;string&#34;&gt;&amp;quot;errname&amp;quot;&lt;/span&gt;: sep+&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;;	&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;ptrtrap.c&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;type&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;title function_&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(&lt;span class=&#34;type&#34;&gt;int&lt;/span&gt; argc, &lt;span class=&#34;type&#34;&gt;char&lt;/span&gt;* argv[])&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;type&#34;&gt;char&lt;/span&gt;* name = get_name(argv[&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;printf&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;Demo of pointer trap by Raymond.\n&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;built_in&#34;&gt;printf&lt;/span&gt;(&lt;span class=&#34;string&#34;&gt;&amp;quot;Name: %s\n&amp;quot;&lt;/span&gt;, name);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;​	在编译的时候会给出一个警告&lt;/p&gt;
+&lt;p&gt;gcc -g ptrtrap.c parser.c&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;root@VM-4-8-ubuntu:/home/ubuntu/youlan# gcc -g ptrtrap.c parser.c&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ptrtrap.c: In function ‘main’:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ptrtrap.c:5:22: warning: implicit declaration of function ‘get_name’; did you mean ‘rename’? [-Wimplicit-function-declaration]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    5 |         char* name = get_name(argv[0]);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      |                      ^~~~~~~~&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      |                      rename&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ptrtrap.c:5:22: warning: initialization of ‘char *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;​	运行的时候会发生段错误&lt;/p&gt;
+&lt;p&gt;Program received signal SIGSEGV, Segmentation fault&lt;/p&gt;
+&lt;p&gt;段错误，访问了不该访问的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/image-20231024145754493.png&#34; alt=&#34;image-20231024145754493&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;调试分析&#34;&gt;&lt;a href=&#34;#调试分析&#34; class=&#34;headerlink&#34; title=&#34;调试分析&#34;&gt;&lt;/a&gt;调试分析&lt;/h1&gt;&lt;h2 id=&#34;回溯粗看&#34;&gt;&lt;a href=&#34;#回溯粗看&#34; class=&#34;headerlink&#34; title=&#34;回溯粗看&#34;&gt;&lt;/a&gt;回溯粗看&lt;/h2&gt;&lt;p&gt;​	朱熹的不远复:“不远复”，出自《易经》“不远之复，以修身也”。和孔子的吾日三省吾身有异曲同工之妙,人要不断反思自己,反省走的路.&lt;/p&gt;
+&lt;p&gt;​	bt命令回溯 调用栈 , &lt;strong&gt;库函数一般都经过很多修改和测试、一般没问题，所以更多的还是自己写的代码的问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/image-20231024150010518.png&#34; alt=&#34;image-20231024150010518&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​	可以减少bt的显示，如 bt -frame-info short-location 不带源代码位置&lt;/p&gt;
+&lt;p&gt;​	frame 3查看自己写的函数里的栈帧的情况, list查看源代码， 这样就能够看到上下文， disass查看汇编&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/image-20231024150656532.png&#34; alt=&#34;image-20231024150656532&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​	所以能够看到问题是在 call  printf这里，产生了问题, &lt;strong&gt;也就是传入的name有问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​	问: __printf为什么带下划线？&lt;/p&gt;
+&lt;p&gt;​	答: 因为__printf是libc实现的，   _ _通常是编译器的函数 编译器的优化？&lt;/p&gt;
+&lt;p&gt;​	info shared查看进程里的库, ld负责把程序从外存搬运到内存, libc负责实现标准库函数&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pwndbg&amp;gt; info shared&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;From                To                  Syms Read   Shared Object Library&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;0x00007ffff7fc5090  0x00007ffff7fee315  Yes         /lib64/ld-linux-x86-64.so.2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;0x00007ffff7daf700  0x00007ffff7f41b3d  Yes         /lib/x86_64-linux-gnu/libc.so.6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;h4 id=&#34;函数从哪里开始执行？&#34;&gt;&lt;a href=&#34;#函数从哪里开始执行？&#34; class=&#34;headerlink&#34; title=&#34;函数从哪里开始执行？&#34;&gt;&lt;/a&gt;函数从哪里开始执行？&lt;/h4&gt;&lt;p&gt;​	elf从哪里开始呢，不是main 是_start(), bt有个选项 -past-main查看main函数之前的,有的默认开启了&lt;/p&gt;
+&lt;p&gt;__libc_start_call_main 用来做准备工作？&lt;/p&gt;
+&lt;h2 id=&#34;细看崩溃指令&#34;&gt;&lt;a href=&#34;#细看崩溃指令&#34; class=&#34;headerlink&#34; title=&#34;细看崩溃指令&#34;&gt;&lt;/a&gt;细看崩溃指令&lt;/h2&gt;&lt;p&gt;​	来到崩溃的那一行汇编来看看什么情况,这里指向的含义是 尝试执行这条指令，但是失败了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/image-20231024151819672.png&#34; alt=&#34;image-20231024151819672&#34;&gt;&lt;/p&gt;
+&lt;p&gt;vpcmpeqb指令&lt;/p&gt;
+&lt;p&gt;​	[rdi]是引用内存, 此时的rdi的值是0xffffffffffffe7db,我们来看一下内存的情况,用info inferiors命令,查看进程,然后从proc里看内存(pwndbg可以直接vmmap)&lt;/p&gt;
+&lt;p&gt;​	从这里看地址就能看出来，是无效地址, 用户空间的大小早超了(所以说每个细节都需要关注)&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;pwndbg&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;info inferiors&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  Num  Description       Connection           Executable&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;* 1    process 1269337   1 (native)           /home/ubuntu/youlan/a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta prompt_&#34;&gt;pwndbg&amp;gt; &lt;/span&gt;&lt;span class=&#34;language-bash&#34;&gt;!&lt;span class=&#34;built_in&#34;&gt;cat&lt;/span&gt; /proc/1269337/maps&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;555555554000-555555555000 r--p 00000000 fc:02 822041                     /home/ubuntu/youlan/a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;555555555000-555555556000 r-xp 00001000 fc:02 822041                     /home/ubuntu/youlan/a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;555555556000-555555557000 r--p 00002000 fc:02 822041                     /home/ubuntu/youlan/a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;555555557000-555555558000 r--p 00002000 fc:02 822041                     /home/ubuntu/youlan/a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;555555558000-555555559000 rw-p 00003000 fc:02 822041                     /home/ubuntu/youlan/a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;555555559000-55555557a000 rw-p 00000000 00:00 0                          [heap]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7d84000-7ffff7d87000 rw-p 00000000 00:00 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7d87000-7ffff7daf000 r--p 00000000 fc:02 29791                      /usr/lib/x86_64-linux-gnu/libc.so.6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7daf000-7ffff7f44000 r-xp 00028000 fc:02 29791                      /usr/lib/x86_64-linux-gnu/libc.so.6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7f44000-7ffff7f9c000 r--p 001bd000 fc:02 29791                      /usr/lib/x86_64-linux-gnu/libc.so.6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7f9c000-7ffff7fa0000 r--p 00214000 fc:02 29791                      /usr/lib/x86_64-linux-gnu/libc.so.6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fa0000-7ffff7fa2000 rw-p 00218000 fc:02 29791                      /usr/lib/x86_64-linux-gnu/libc.so.6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fa2000-7ffff7faf000 rw-p 00000000 00:00 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fbb000-7ffff7fbd000 rw-p 00000000 00:00 0&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fbd000-7ffff7fc1000 r--p 00000000 00:00 0                          [vvar]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fc1000-7ffff7fc3000 r-xp 00000000 00:00 0                          [vdso]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fc3000-7ffff7fc5000 r--p 00000000 fc:02 2337                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fc5000-7ffff7fef000 r-xp 00002000 fc:02 2337                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7fef000-7ffff7ffa000 r--p 0002c000 fc:02 2337                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7ffb000-7ffff7ffd000 r--p 00037000 fc:02 2337                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffff7ffd000-7ffff7fff000 rw-p 00039000 fc:02 2337                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7ffffffde000-7ffffffff000 rw-p 00000000 00:00 0                          [stack]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 id=&#34;何人传来无效指针&#34;&gt;&lt;a href=&#34;#何人传来无效指针&#34; class=&#34;headerlink&#34; title=&#34;何人传来无效指针?&#34;&gt;&lt;/a&gt;何人传来无效指针?&lt;/h2&gt;&lt;p&gt;​	库函数出问题概率很低，所以找自己写的函数.  我们知道问题出在name变量上&lt;/p&gt;
+&lt;p&gt;​	frame 3 、然后用 p name 、info locals 都能看到是无效的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/Snipaste_2023-10-26_17-16-56.jpg&#34; alt=&#34;Snipaste_2023-10-26_17-16-56&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​	info frame 看函数的栈帧信息&lt;/p&gt;
+&lt;p&gt;​	既然是name错了 它哪里来的？ &lt;strong&gt;get_name&lt;/strong&gt;，&lt;/p&gt;
+&lt;h3 id=&#34;get-name调试&#34;&gt;&lt;a href=&#34;#get-name调试&#34; class=&#34;headerlink&#34; title=&#34;get_name调试&#34;&gt;&lt;/a&gt;get_name调试&lt;/h3&gt;&lt;p&gt;​	设置get_name的断点进行调试&lt;/p&gt;
+&lt;p&gt;​	返回值看rax（通常通用寄存器第一个存返回值），&lt;strong&gt;rax在返回的时候是没问题的，那哪里出问题了。。此时事情就很奇怪了&lt;/strong&gt;&lt;/p&gt;
+&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/Snipaste_2023-10-26_17-38-09.jpg&#34; alt=&#34;Snipaste_2023-10-26_17-38-09&#34; style=&#34;zoom:50%;&#34;&gt;
+
+
+
+&lt;p&gt;返回后执行ni, 单步一下,再看值,就错了&lt;/p&gt;
+&lt;img src=&#34;/%E7%9B%9B%E6%A0%BC%E5%A1%BE%E8%AF%BE%E7%A8%8B-%E6%8B%8D%E6%A1%88%E6%83%8A%E5%A5%87GDB%E4%BB%A5%E6%88%98%E8%AF%B4%E6%B3%951-%E8%B0%81%E6%88%AA%E6%96%AD%E4%BA%86%E6%88%91%E7%9A%84%E6%8C%87%E9%92%88/Snipaste_2023-10-26_17-35-28.jpg&#34; alt=&#34;Snipaste_2023-10-26_17-35-28&#34; style=&#34;zoom:50%;&#34;&gt;
+
+
+
+&lt;h2 id=&#34;答案揭晓&#34;&gt;&lt;a href=&#34;#答案揭晓&#34; class=&#34;headerlink&#34; title=&#34;答案揭晓&#34;&gt;&lt;/a&gt;答案揭晓&lt;/h2&gt;&lt;p&gt;​	问题就出在这一条指令上,它改变了值的大小&lt;/p&gt;
+&lt;p&gt;​	cdqe: 扩展指令,使用eax的最高位拓展rax高32位的所有位&lt;/p&gt;
+&lt;p&gt;​	x86下和arm不太一样, sxtw这条指令有问题（arm下&lt;/p&gt;
+&lt;p&gt;​	&lt;font color=&#34;red&#34;&gt;这是编译器故意产生的指令,和没有include这个函数有关系&lt;/font&gt;,再深入的..就先放放&lt;/p&gt;
+&lt;h1 id=&#34;问题与知识补充&#34;&gt;&lt;a href=&#34;#问题与知识补充&#34; class=&#34;headerlink&#34; title=&#34;问题与知识补充&#34;&gt;&lt;/a&gt;问题与知识补充&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;include进来就没问题了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt; #include “parser.c”&lt;/p&gt;
+&lt;p&gt;但是有个新的warning&lt;/p&gt;
+&lt;p&gt;32位下编译没问题&lt;/p&gt;
+&lt;p&gt;为什么会有一个nop指令&lt;/p&gt;
+&lt;p&gt;nop插桩&lt;/p&gt;
+&lt;h3 id=&#34;如何跑arm系统&#34;&gt;&lt;a href=&#34;#如何跑arm系统&#34; class=&#34;headerlink&#34; title=&#34;如何跑arm系统&#34;&gt;&lt;/a&gt;如何跑arm系统&lt;/h3&gt;&lt;p&gt;macbook直接可以&lt;/p&gt;
+&lt;p&gt;x86怎么装？：看样子基本上离不开qemu&lt;/p&gt;
+&lt;p&gt;云服务器买&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/chenxiangneu/article/details/78955462&#34;&gt;https://blog.csdn.net/chenxiangneu/article/details/78955462&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;设置符号服务器？&lt;/p&gt;
+&lt;h3 id=&#34;失败了如何再执行？&#34;&gt;&lt;a href=&#34;#失败了如何再执行？&#34; class=&#34;headerlink&#34; title=&#34;失败了如何再执行？&#34;&gt;&lt;/a&gt;失败了如何再执行？&lt;/h3&gt;&lt;p&gt;info signal&lt;/p&gt;
+&lt;p&gt;info handle&lt;/p&gt;
+&lt;p&gt;handle SIGSEGV nopass （不给应用程序&lt;/p&gt;
+&lt;p&gt;再跑一遍又会收到这个信号&lt;/p&gt;
+&lt;p&gt;smd指令。。。&lt;/p&gt;
+&lt;p&gt;用户空间 内核空间大小&lt;/p&gt;
+</content>
+        <category term="调试" />
+        <updated>2023-10-26T13:54:31.000Z</updated>
+    </entry>
+</feed>

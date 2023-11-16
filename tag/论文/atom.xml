@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://tangzichengcc.github.io</id>
+    <title>唐仔橙 • Posts by &#34;论文&#34; tag</title>
+    <link href="https://tangzichengcc.github.io" />
+    <updated>2023-10-20T06:59:53.000Z</updated>
+    <category term="旅游" />
+    <category term="路由器" />
+    <category term="浏览器安全" />
+    <category term="csapp" />
+    <category term="C语言" />
+    <category term="PWN入门" />
+    <category term="堆" />
+    <category term="docker" />
+    <category term="脚本" />
+    <category term="研究生课程" />
+    <category term="诗歌" />
+    <category term="调试" />
+    <category term="论文" />
+    <category term="KVM" />
+    <category term="USENIX" />
+    <entry>
+        <id>https://tangzichengcc.github.io/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</id>
+        <title>网安四大顶会及科研前沿资源整理</title>
+        <link rel="alternate" href="https://tangzichengcc.github.io/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/"/>
+        <content type="html">&lt;p&gt;研一读了一点论文,研二开始读的少了,毕竟是专硕………. 不过好歹是学习到了一点东西,觉得有必要整理一下,将来肯定还会用到.&lt;/p&gt;
+&lt;p&gt;顶会论文,其他CCF类论文&lt;/p&gt;
+&lt;p&gt;论文寻找方式, 下载方式  知网 scihub、  中文期刊&lt;/p&gt;
+&lt;p&gt;其他 像 blackhat等会议&lt;/p&gt;
+&lt;p&gt;论文知识图谱&lt;/p&gt;
+&lt;p&gt;dblp&lt;/p&gt;
+&lt;p&gt;国外几大出版社&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/&#34;&gt;https://arxiv.org&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;一、论文获取&#34;&gt;&lt;a href=&#34;#一、论文获取&#34; class=&#34;headerlink&#34; title=&#34;一、论文获取&#34;&gt;&lt;/a&gt;一、论文获取&lt;/h1&gt;&lt;h2 id=&#34;四大顶会&#34;&gt;&lt;a href=&#34;#四大顶会&#34; class=&#34;headerlink&#34; title=&#34;四大顶会&#34;&gt;&lt;/a&gt;四大顶会&lt;/h2&gt;&lt;p&gt;​	网安有四大顶会, 文章质量非常高,代表了最前沿的网安技术.&lt;/p&gt;
+&lt;img src=&#34;/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/image-20231020150449912.png&#34; alt=&#34;image-20231020150449912&#34; style=&#34;zoom:33%;&#34;&gt;
+
+&lt;h3 id=&#34;1-usenix-security&#34;&gt;&lt;a href=&#34;#1-usenix-security&#34; class=&#34;headerlink&#34; title=&#34;1. usenix security&#34;&gt;&lt;/a&gt;1. usenix security&lt;/h3&gt;&lt;p&gt;官网:&lt;a href=&#34;https://www.usenix.org/&#34;&gt;https://www.usenix.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​	可以从上方的conferences找到会议信息,或者直接进这个链接,有历年的&lt;a href=&#34;https://www.usenix.org/conferences/byname/108&#34;&gt;https://www.usenix.org/conferences/byname/108&lt;/a&gt;&lt;/p&gt;
+&lt;img src=&#34;/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/image-20231020150708818.png&#34; alt=&#34;image-20231020150708818&#34; style=&#34;zoom:33%;&#34;&gt;
+
+
+
+&lt;p&gt;​	从主入口进的不一定是usenix顶会会议,还有其他会议,这个才是&lt;/p&gt;
+&lt;img src=&#34;/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/image-20231020150649592.png&#34; alt=&#34;image-20231020150649592&#34; style=&#34;zoom:33%;&#34;&gt;
+
+
+
+&lt;p&gt;然后可以从program里面找paper&lt;/p&gt;
+&lt;img src=&#34;/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/image-20231020151254634.png&#34; alt=&#34;image-20231020151254634&#34; style=&#34;zoom:33%;&#34;&gt;
+
+
+
+
+
+&lt;p&gt;快速的论文检索: 可以看目录 program–TECHNICAL SESSIONS–Table of Contents&lt;/p&gt;
+&lt;p&gt;可以从里面看小标题分类,找感兴趣的方向&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.usenix.org/sites/default/files/sec23_contents.pdf&#34;&gt;https://www.usenix.org/sites/default/files/sec23_contents.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-NDSS&#34;&gt;&lt;a href=&#34;#2-NDSS&#34; class=&#34;headerlink&#34; title=&#34;2.NDSS&#34;&gt;&lt;/a&gt;2.NDSS&lt;/h3&gt;&lt;p&gt;官网:&lt;a href=&#34;https://www.ndss-symposium.org/&#34;&gt;https://www.ndss-symposium.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;NDSS收文量就少很多了,上方导航能很清晰看到会议信息,&lt;/p&gt;
+&lt;p&gt;可以查看目录快速浏览(program-symposium program-Proceedings Frontmatter):&lt;a href=&#34;https://www.ndss-symposium.org/wp-content/uploads/NDSS2022_Proceedings_Front_Matter.pdf&#34;&gt;https://www.ndss-symposium.org/wp-content/uploads/NDSS2022_Proceedings_Front_Matter.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.likecs.com/show-433567.html&#34;&gt;https://www.likecs.com/show-433567.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.ndss-symposium.org/ndss2019/accepted-papers/&#34;&gt;https://www.ndss-symposium.org/ndss2019/accepted-papers/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-CCS&#34;&gt;&lt;a href=&#34;#3-CCS&#34; class=&#34;headerlink&#34; title=&#34;3.CCS&#34;&gt;&lt;/a&gt;3.CCS&lt;/h3&gt;&lt;p&gt;ACM SIGSAC Conference on Computer and Communications Security&lt;/p&gt;
+&lt;p&gt;官网: &lt;a href=&#34;https://www.sigsac.org/ccs.html&#34;&gt;https://www.sigsac.org/ccs.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;acm数据库中: &lt;a href=&#34;https://dl.acm.org/conference/ccs/proceedings&#34;&gt;https://dl.acm.org/conference/ccs/proceedings&lt;/a&gt;  可以看Front Matter,类似于目录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.sigsac.org/ccs/CCS2018/proceedings/&#34;&gt;https://www.sigsac.org/ccs/CCS2018/proceedings/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.sigsac.org/ccs/CCS2022/program/accepted-papers.html&#34;&gt;https://www.sigsac.org/ccs/CCS2022/program/accepted-papers.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-S-amp-P&#34;&gt;&lt;a href=&#34;#4-S-amp-P&#34; class=&#34;headerlink&#34; title=&#34;4. S&amp;amp;P&#34;&gt;&lt;/a&gt;4. S&amp;amp;P&lt;/h3&gt;&lt;p&gt;IEEE Symposium on Security and Privacy&lt;/p&gt;
+&lt;p&gt;官网:&lt;a href=&#34;https://www.ieee-security.org/index.html&#34;&gt;https://www.ieee-security.org/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;dblp:&lt;a href=&#34;https://dblp.uni-trier.de/db/conf/sp/index.html&#34;&gt;https://dblp.uni-trier.de/db/conf/sp/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2023年的: &lt;a href=&#34;https://www.ieee-security.org/TC/SP2023/&#34;&gt;https://www.ieee-security.org/TC/SP2023/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;sp的sok论文(综述论文) &lt;a href=&#34;https://oaklandsok.github.io/&#34;&gt;https://oaklandsok.github.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个好像分了sp和euro sp, euro sp就不是A类会议了?&lt;/p&gt;
+&lt;h2 id=&#34;CCF推荐&#34;&gt;&lt;a href=&#34;#CCF推荐&#34; class=&#34;headerlink&#34; title=&#34;CCF推荐&#34;&gt;&lt;/a&gt;CCF推荐&lt;/h2&gt;&lt;img src=&#34;/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/image-20231020160551139.png&#34; alt=&#34;image-20231020160551139&#34; style=&#34;zoom:33%;&#34;&gt;
+
+&lt;h2 id=&#34;中文论文&#34;&gt;&lt;a href=&#34;#中文论文&#34; class=&#34;headerlink&#34; title=&#34;中文论文&#34;&gt;&lt;/a&gt;中文论文&lt;/h2&gt;&lt;p&gt;​	虽然确实好的期刊大部分都是国外的,尤其是top,但不能一棒子否认国内的期刊,国内也是要发展的,也不能都投到国外,中文期刊还是有一些不错的,可以参考. &lt;strong&gt;尤其是前期调研,读大段英语费劲的时候,可以先看看中文的,(不过话说是不是英语很好了就没这个问题了..233)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;信息安全学报 &lt;a href=&#34;http://jcs.iie.ac.cn/xxaqxb/ch/index.aspx&#34;&gt;http://jcs.iie.ac.cn/xxaqxb/ch/index.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;电子学报 &lt;a href=&#34;https://www.ejournal.org.cn/CN/0372-2112/home.shtml&#34;&gt;https://www.ejournal.org.cn/CN/0372-2112/home.shtml&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;计算机学报&lt;/p&gt;
+&lt;h2 id=&#34;其他途径获取&#34;&gt;&lt;a href=&#34;#其他途径获取&#34; class=&#34;headerlink&#34; title=&#34;其他途径获取&#34;&gt;&lt;/a&gt;其他途径获取&lt;/h2&gt;&lt;p&gt;公众号,如gossip&lt;/p&gt;
+&lt;h2 id=&#34;硕博论文&#34;&gt;&lt;a href=&#34;#硕博论文&#34; class=&#34;headerlink&#34; title=&#34;硕博论文&#34;&gt;&lt;/a&gt;硕博论文&lt;/h2&gt;&lt;h1 id=&#34;二、论文工具与经验&#34;&gt;&lt;a href=&#34;#二、论文工具与经验&#34; class=&#34;headerlink&#34; title=&#34;二、论文工具与经验&#34;&gt;&lt;/a&gt;二、论文工具与经验&lt;/h1&gt;&lt;p&gt;&lt;a href=&#34;https://www.researchrabbit.ai/&#34;&gt;https://www.researchrabbit.ai/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;工具:Connected Papers &lt;a href=&#34;https://www.connectedpapers.com/&#34;&gt;https://www.connectedpapers.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://letpub.com.cn/&#34;&gt;https://letpub.com.cn/&lt;/a&gt; 可以查影响因子什么的&lt;/p&gt;
+&lt;p&gt;大佬们:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dl.acm.org/profile/81100363323&#34;&gt;https://dl.acm.org/profile/81100363323&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;苏璞睿:二进制漏洞 &lt;a href=&#34;https://people.ucas.edu.cn/~purui&#34;&gt;https://people.ucas.edu.cn/~purui&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;信息计量学&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E7%BD%91%E5%AE%89%E5%9B%9B%E5%A4%A7%E9%A1%B6%E4%BC%9A%E5%8F%8A%E7%A7%91%E7%A0%94%E5%89%8D%E6%B2%BF%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/image-20231020163023512.png&#34; alt=&#34;image-20231020163023512&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;zotero&#34;&gt;&lt;a href=&#34;#zotero&#34; class=&#34;headerlink&#34; title=&#34;zotero&#34;&gt;&lt;/a&gt;zotero&lt;/h3&gt;&lt;p&gt;一个非常好用的文献管理工具, 还可以选择翻译!&lt;/p&gt;
+&lt;h2 id=&#34;经验&#34;&gt;&lt;a href=&#34;#经验&#34; class=&#34;headerlink&#34; title=&#34;经验&#34;&gt;&lt;/a&gt;经验&lt;/h2&gt;&lt;p&gt;找论文可以以一篇好的综述，往旧的年份找的话，看它引用，往新的年份找的话，可以看谁引用了它&lt;/p&gt;
+&lt;p&gt;看引用数量也可以看出来文章的质量,(就不用看期刊的等级了)&lt;/p&gt;
+</content>
+        <category term="论文" />
+        <updated>2023-10-20T06:59:53.000Z</updated>
+    </entry>
+</feed>

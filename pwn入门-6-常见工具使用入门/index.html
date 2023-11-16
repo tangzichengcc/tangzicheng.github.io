@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>pwn入门-6-常见工具使用入门 | 唐仔橙</title><meta name="keywords" content="PWN入门"><meta name="author" content="唐仔橙,tangzicheng233@gmail.com"><meta name="copyright" content="唐仔橙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="寒假一回来,一段时间没用,有点手生了,觉得还是需要写一篇博客来梳理一下常见工具的使用. 主要是静态分析、动态分析、脚本编写、小工具 静态分析:IDA proida 里面很多奇怪的东西dword ptr qword ptr 图形模式设置一下这俩,行号和显示数据内容  箭头红色: 条件跳转没有被采用 绿色: 条件跳转被采用 蓝色: 无条件跳转被采用 方向向上表示循环 文本模式 在设置里可以打开 aut">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn入门-6-常见工具使用入门">
+<meta property="og:url" content="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="唐仔橙">
+<meta property="og:description" content="寒假一回来,一段时间没用,有点手生了,觉得还是需要写一篇博客来梳理一下常见工具的使用. 主要是静态分析、动态分析、脚本编写、小工具 静态分析:IDA proida 里面很多奇怪的东西dword ptr qword ptr 图形模式设置一下这俩,行号和显示数据内容  箭头红色: 条件跳转没有被采用 绿色: 条件跳转被采用 蓝色: 无条件跳转被采用 方向向上表示循环 文本模式 在设置里可以打开 aut">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tangzichengcc.github.io/img/background/9.png">
+<meta property="article:published_time" content="2023-01-24T10:13:28.000Z">
+<meta property="article:modified_time" content="2023-10-13T13:15:54.337Z">
+<meta property="article:author" content="唐仔橙">
+<meta property="article:tag" content="PWN入门">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tangzichengcc.github.io/img/background/9.png"><link rel="shortcut icon" href="/img/favicon.webp"><link rel="canonical" href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="MTZmw-Jp9gUmwt4q-TLzEzI1_TFDA2QpQLuyUeOqzk4"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":500,"languages":{"author":"作者: 唐仔橙","link":"链接: ","source":"来源: 唐仔橙","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pwn入门-6-常见工具使用入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-13 21:15:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/profile.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background/9.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">唐仔橙</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pwn入门-6-常见工具使用入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-24T10:13:28.000Z" title="发表于 2023-01-24 18:13:28">2023-01-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-13T13:15:54.337Z" title="更新于 2023-10-13 21:15:54">2023-10-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PWN/">PWN</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="pwn入门-6-常见工具使用入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>寒假一回来,一段时间没用,有点手生了,觉得还是需要写一篇博客来梳理一下常见工具的使用.</p>
+<p>主要是静态分析、动态分析、脚本编写、小工具</p>
+<h1 id="静态分析-IDA-pro"><a href="#静态分析-IDA-pro" class="headerlink" title="静态分析:IDA pro"></a>静态分析:IDA pro</h1><h2 id="ida-里面很多奇怪的东西"><a href="#ida-里面很多奇怪的东西" class="headerlink" title="ida 里面很多奇怪的东西"></a>ida 里面很多奇怪的东西</h2><p>dword ptr</p>
+<p>qword ptr</p>
+<h2 id="图形模式"><a href="#图形模式" class="headerlink" title="图形模式"></a>图形模式</h2><p>设置一下这俩,行号和显示数据内容</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230303204724726.png" alt="image-20230303204724726"></p>
+<h3 id="箭头"><a href="#箭头" class="headerlink" title="箭头"></a>箭头</h3><p>红色: 条件跳转没有被采用</p>
+<p>绿色: 条件跳转被采用</p>
+<p>蓝色: 无条件跳转被采用</p>
+<p>方向向上表示循环</p>
+<h2 id="文本模式"><a href="#文本模式" class="headerlink" title="文本模式"></a>文本模式</h2><p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230303205201647.png" alt="image-20230303205201647"></p>
+<p>在设置里可以打开 auto comments 自动注释</p>
+<h3 id="视图文件操作"><a href="#视图文件操作" class="headerlink" title="视图文件操作"></a>视图文件操作</h3><p>选择Windows中的Reset Desktop返回默认 视图 </p>
+<p> 选择Windows中的Save Desktop保存这个 新视图</p>
+<p>配置文件吗??</p>
+<p>后退操作 esc</p>
+<p>前进操作 ctrl+enter</p>
+<h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键:"></a>常用快捷键:</h2><p>Table 切换视图</p>
+<p>快捷键</p>
+<p>p 在汇编中函数开头使用p,从当前地址处解析为函数</p>
+<p>u</p>
+<p>c 转换成代码</p>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作:"></a>数据操作:</h3><p>shift + f12 显示字符串string</p>
+<p>D – 设置数据 (Data)  1字节 2字节 4字节 8字节 进行循环 </p>
+<p>C – 设置代码 (Code) 设置为指令 </p>
+<p>A – 设置ASCII字符串 (ASCII)</p>
+<p>*设置数组 </p>
+<p>O – 设置地址偏移 (Offset) </p>
+<p>U – 取消定义 (Undefine) </p>
+<p>X – 交叉引用查找 (Cross-reference, Xref)</p>
+<h3 id="函数操作"><a href="#函数操作" class="headerlink" title="函数操作"></a>函数操作</h3><p>P – 创建函数 Del – 删除函数 Ctrl+E – 修改函数(函数窗口)</p>
+<p>Alt+P 修改函数(反汇编窗口)</p>
+<h3 id="伪代码操作"><a href="#伪代码操作" class="headerlink" title="伪代码操作"></a>伪代码操作</h3><p>N – 修改标识符名称 (Name) </p>
+<p>Y – 修改标识符类型 (tYpe) 比如int类型还是double还是什么</p>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>alt+t查找字符串</p>
+<p>a 转换成字符串</p>
+<p>d 分开的字符</p>
+<p>G跳转指定地址</p>
+<p>x 交叉引用 (函数和数据都有)</p>
+<p>: 加一条注释</p>
+<p>; 所有交叉引用都会回显这个注释</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ul>
+<li><p>WORD (w)  16位 无符号数值 </p>
+</li>
+<li><p>DWORD (dw) 32位 无符号数值</p>
+</li>
+</ul>
+<h2 id="脚本编写"><a href="#脚本编写" class="headerlink" title="脚本编写"></a>脚本编写</h2><h1 id="动态分析-gdb-pwndbg插件"><a href="#动态分析-gdb-pwndbg插件" class="headerlink" title="动态分析:gdb(pwndbg插件)"></a>动态分析:gdb(pwndbg插件)</h1><p>There are a number of good gdb crash courses &#x2F; reference manuals:</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://sourceware.org/gdb/onlinedocs/gdb/index.html">GDB’s documentation</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://users.umiacs.umd.edu/~tdumitra/courses/ENEE757/Fall15/misc/gdb_tutorial.html">Tudor’s gdb crash course</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html">gdb debugging full example</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md">pwndbg: a gdb extension (feature list)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://hugsy.github.io/gef/commands/aliases/">gef: another gdb extension (feature list)</a></p>
+</li>
+<li><p>The course <a target="_blank" rel="noopener" href="https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1012_GDB_1+2021_v1/course/">Debuggers 1012: Introductory GDB</a> from OpenSecurityTraining2.</p>
+</li>
+</ul>
+<p>pwn.college <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=r185fCzdw8Y">https://www.youtube.com/watch?v=r185fCzdw8Y</a></p>
+<p>pwndbg官方文档:<a target="_blank" rel="noopener" href="https://browserpwndbg.readthedocs.io/en/docs/">https://browserpwndbg.readthedocs.io/en/docs/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md">https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md</a></p>
+<p>gdb官方文档:</p>
+<h3 id="调整"><a href="#调整" class="headerlink" title="调整"></a>调整</h3><p>把 stack 和 backtrace的行数减少,不然看不见上面的汇编了</p>
+<p>配置文件:<a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md">https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md</a></p>
+<p>修改配置文件就可以了</p>
+<p>找到pwndbg的下载目录的这个文件<a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg">pwndbg</a>&#x2F;<a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg/tree/dev/pwndbg">pwndbg</a>&#x2F;<a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg/tree/dev/pwndbg/commands">commands</a>&#x2F;<strong>context.py</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">751行</span><br><span class="line">stack_lines = pwndbg.gdblib.config.add_param(</span><br><span class="line">    &quot;context-stack-lines&quot;, 8, &quot;number of lines to print in the stack context&quot;</span><br><span class="line">)</span><br><span class="line">766行</span><br><span class="line">backtrace_lines = pwndbg.gdblib.config.add_param(</span><br><span class="line">    &quot;context-backtrace-lines&quot;, 8, &quot;number of lines to print in the backtrace context&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="启动调试"><a href="#启动调试" class="headerlink" title="启动调试"></a>启动调试</h3><p>gdb filename</p>
+<p>gdb processName PID 或者 gdb -p <PID></PID></p>
+<p>添加参数 </p>
+<p>gdb -args .&#x2F;a.out a b c</p>
+<h3 id="断点相关"><a href="#断点相关" class="headerlink" title="断点相关"></a>断点相关</h3><p>b 函数名,如果有符号表的话可以,例如b gets</p>
+<p>b 地址  例如:b *0x3123213  这样打</p>
+<p>info b 查看断点信息</p>
+<p>delete n 删除n号断点</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>r 运行程序,会一直运行,直到比如需要输入什么东西等</p>
+<p>s 从头开始运行,断到第一行</p>
+<p>c 运行到下一个断点</p>
+<p>调试地址 就是 这个程序的基地址 + ida中的地址</p>
+<p>n 单步执行,(有函数的话直接跳过不进入)</p>
+<p>s 单步进入,有函数的话会进入</p>
+<p>finish 执行完当前函数,返回调用它的函数</p>
+<p>怎么查看自己当前在哪一行??和下面的代码??</p>
+<p>disass </p>
+<p>运行的时候 怎么 添加参数?</p>
+<h3 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h3><p>codebase 查看地址 (调试地址 就是 这个程序的基地址 + ida中的地址)</p>
+<p>vmmap查看内存映射mmap地址 信息</p>
+<p>teles 查看栈的信息</p>
+<p>p  变量名 查看变量地址</p>
+<p>info </p>
+<p>reg 查看寄存器信息</p>
+<p>dereference $esp 是啥??</p>
+<h4 id="查看内存信息"><a href="#查看内存信息" class="headerlink" title="查看内存信息"></a>查看内存信息</h4><p>使用examine命令（简写是x）来查看内存地址中的值</p>
+<p>x&#x2F;nuf <addr> 例如x &#x2F;20wx 0x0000000</addr></p>
+<p>n是个数,表示从当前地址往后显示的内存的长度,即显示几个地址的内容</p>
+<p>u表示,从当前地址往后请求的字节数,不指定的话默认4bytes,32位.b表示单字节，h表示双字节，w表示四字节，g表示八字节。</p>
+<p> f是显示的格式( i可以查看汇编代码)</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20220929162158033.png" alt="image-20220929162158033"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; x/<span class="number">4b</span>x <span class="number">0x7fffffffe490</span></span><br><span class="line"><span class="number">0x7fffffffe490</span>:	<span class="number">0x00</span>	<span class="number">0x80</span>	<span class="number">0x00</span>	<span class="number">0x00</span></span><br><span class="line">pwndbg&gt; x/<span class="number">4</span>hx <span class="number">0x7fffffffe490</span></span><br><span class="line"><span class="number">0x7fffffffe490</span>:	<span class="number">0x8000</span>	<span class="number">0x0000</span>	<span class="number">0x0001</span>	<span class="number">0x0000</span></span><br><span class="line">pwndbg&gt; x/<span class="number">4</span>wx <span class="number">0x7fffffffe490</span></span><br><span class="line"><span class="number">0x7fffffffe490</span>:	<span class="number">0x00008000</span>	<span class="number">0x00000001</span>	<span class="number">0x55554759</span>	<span class="number">0x00005555</span></span><br><span class="line">pwndbg&gt; x/<span class="number">4</span>gx <span class="number">0x7fffffffe490</span></span><br><span class="line"><span class="number">0x7fffffffe490</span>:	<span class="number">0x0000000100008000</span>	<span class="number">0x0000555555554759</span></span><br><span class="line"><span class="number">0x7fffffffe4a0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0xa2698e7a0212c01a</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="堆相关"><a href="#堆相关" class="headerlink" title="堆相关"></a>堆相关</h3><p>heap 查看堆的信息</p>
+<p>heap bins 查看bins的信息</p>
+<p>heap chunks 查看chunk的信息</p>
+<p>Vis 查看堆内存</p>
+<h3 id="修改内存、寄存器等-方便调试"><a href="#修改内存、寄存器等-方便调试" class="headerlink" title="修改内存、寄存器等 方便调试"></a>修改内存、寄存器等 方便调试</h3><p>set $eip &#x3D; xxxx</p>
+<p>set {unsigned int}0x8048a51&#x3D;0x0</p>
+<p>find 内存搜索</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>watch 监测点?</p>
+<p>canary</p>
+<p>q 退出</p>
+<p>display &#x2F;3i $rip 设置单步执行后自动显示的内容,这里显示后续三条指令</p>
+<p>查看寄存器</p>
+<p>(gdb) i r (gdb) i r a # 查看所有<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AF%84%E5%AD%98%E5%99%A8&spm=1001.2101.3001.7020">寄存器</a>（包括<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%B5%AE%E7%82%B9&spm=1001.2101.3001.7020">浮点</a>、多媒体） (gdb) i r esp (gdb) i r pc</p>
+<p>info reg</p>
+<p>eb address [data [data …]]</p>
+<h3 id="结构体相关"><a href="#结构体相关" class="headerlink" title="结构体相关"></a>结构体相关</h3><p>p 结构体名字</p>
+<p>p *(struct  xxx *) addr</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; p *(DSI *) dsi</span><br><span class="line">value of type `DSI<span class="number">&#x27;</span> requires <span class="number">67416</span> bytes, which is more than max-value-size</span><br><span class="line">pwndbg&gt; p dsi</span><br><span class="line">$<span class="number">4</span> = (DSI *) <span class="number">0x5555555b8960</span></span><br><span class="line">pwndbg&gt; p *(DSI *) <span class="number">0x5555555b8960</span></span><br><span class="line">value of type `DSI<span class="number">&#x27;</span> requires <span class="number">67416</span> bytes, which is more than max-value-size</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h2><p>下好断点,然后多用c,在堆的调试中很好用</p>
+<p>pwntools中加input()</p>
+<p>gdb中怎么看文件描述符呢,有多少个,打开的  ll &#x2F;proc&#x2F;1562844&#x2F;fd 需要看进程信息</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mfryf/p/5329770.html">https://www.cnblogs.com/mfryf/p/5329770.html</a></p>
+<p>vmmap 查看内存分布</p>
+<h3 id="子进程调试"><a href="#子进程调试" class="headerlink" title="子进程调试"></a>子进程调试</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cjfeii/article/details/21647663">https://blog.csdn.net/cjfeii/article/details/21647663</a></p>
+<p> <strong>set detach-on-fork off</strong></p>
+<p>有好几种模式</p>
+<p>info threads</p>
+<p>切换线程</p>
+<p> info inferiors</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bsp_mpu6050/article/details/107886383">https://blog.csdn.net/bsp_mpu6050/article/details/107886383</a></p>
+<h1 id="脚本编写-pwntools"><a href="#脚本编写-pwntools" class="headerlink" title="脚本编写:pwntools"></a>脚本编写:pwntools</h1><p>官方文档:<a target="_blank" rel="noopener" href="https://docs.pwntools.com/">https://docs.pwntools.com</a></p>
+<p><a target="_blank" rel="noopener" href="https://pwntools-docs-zh.readthedocs.io/zh_CN/dev/gdb.html">https://pwntools-docs-zh.readthedocs.io/zh_CN/dev/gdb.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level= <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./pwn3&quot;</span>)</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]</span><br><span class="line">gdb.attach(io,<span class="string">&quot;b main&quot;</span>)</span><br><span class="line"><span class="comment">#pause()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#io.sendlineafter(&#x27;Input:&#x27;,payload)</span></span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level= <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./pwn3&quot;</span>)</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]</span><br><span class="line">gdb.debug(io,<span class="string">&quot;b main&quot;</span>)</span><br><span class="line"><span class="comment">#pause()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#io.sendlineafter(&#x27;Input:&#x27;,payload)</span></span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fjh1997/article/details/105434992/">https://blog.csdn.net/fjh1997/article/details/105434992/</a></p>
+<h3 id="配合gdb"><a href="#配合gdb" class="headerlink" title="配合gdb"></a>配合gdb</h3><p>在输入一段数据后 断下,比如字符串的那个例子,我们想要查看刚刚输入完数据后的情况,</p>
+<p>第一种方法,找到断点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="number">0x5655563b</span> &lt;fmtstr+<span class="number">110</span>&gt;    push   <span class="number">0x63</span></span><br><span class="line">  <span class="number">0x5655563d</span> &lt;fmtstr+<span class="number">112</span>&gt;    lea    eax, [ebp - <span class="number">0x70</span>]</span><br><span class="line">► <span class="number">0x56555640</span> &lt;fmtstr+<span class="number">115</span>&gt;    push   eax</span><br><span class="line">  <span class="number">0x56555641</span> &lt;fmtstr+<span class="number">116</span>&gt;    call   fgets@plt                    &lt;fgets@plt&gt;</span><br><span class="line"></span><br><span class="line">  <span class="number">0x56555646</span> &lt;fmtstr+<span class="number">121</span>&gt;    add    esp, <span class="number">0x10</span></span><br><span class="line">  <span class="number">0x56555649</span> &lt;fmtstr+<span class="number">124</span>&gt;    sub    esp, <span class="number">0xc</span></span><br><span class="line">  <span class="number">0x5655564c</span> &lt;fmtstr+<span class="number">127</span>&gt;    lea    eax, [ebp - <span class="number">0x70</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>attach的时候断到断点这里就好了,然后 gdb那边c, 然后pwntools这边执行一下(回车) 即可, 或者不用pause, 直接在gdb那c一下就行了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level= <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./vul32&quot;</span>)</span><br><span class="line"><span class="comment">#io = process(&quot;./pwn3&quot;,&quot;b main&quot;)</span></span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]</span><br><span class="line">gdb.attach(io,<span class="string">&quot;break *0x56555646&quot;</span>)</span><br><span class="line"><span class="comment">#gdb.debug(&quot;./vul32&quot;,&quot;break main&quot;)</span></span><br><span class="line">pause()</span><br><span class="line">io.sendline(<span class="string">&quot;aaaaaa&quot;</span>)</span><br><span class="line">pause()</span><br><span class="line"><span class="comment">#io.sendlineafter(&#x27;Input:&#x27;,payload)</span></span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>__kernel_vsyscall+ 一上来的这个是什么?????????? 这是进入到了内核里面吧 可以通过backtrace来看</p>
+<p>#6  0xf7e4b29c in _IO_fgets</p>
+<p>#7  0x56555646 in fmtstr ()<br>#8  0x565556a5 in main ()<br>#9  0xf7dfdfa1 in __libc_start_main (main&#x3D;0x56<br>555685 <main>, argc&#x3D;1, argv</main></p>
+<p>确实是进入到断点后的位置</p>
+<p>右边c的时候,需要左边pwntools这边进行输入,右边不能进行输入的</p>
+<p>第二种,直接在开头就断点就好了</p>
+<h2 id="pwntools基础操作"><a href="#pwntools基础操作" class="headerlink" title="pwntools基础操作"></a>pwntools基础操作</h2><p>send和sendline的区别,send只是发送数据,sendline发送一行数据,也就是除了数据,还会加一个换行(回车)</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45556441/article/details/113982718">https://blog.csdn.net/weixin_45556441/article/details/113982718</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>apt-get install libffi-dev,libssl-dev</p>
+<p>pip install pwntools</p>
+<h3 id="环境变量设置"><a href="#环境变量设置" class="headerlink" title="环境变量设置"></a>环境变量设置</h3><p>​		许多都是通过全局变量context进行设置的,例如操作系统,架构,字节序等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">context.os = <span class="string">&#x27;linux&#x27;</span></span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span>  <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="连接及交互"><a href="#连接及交互" class="headerlink" title="连接及交互"></a>连接及交互</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">file = process(<span class="string">&quot;./pwn&quot;</span>)		<span class="comment">#本地文件         </span></span><br><span class="line"></span><br><span class="line">p= remote(<span class="string">&quot;xx.xx.xx.xx&quot;</span>,<span class="number">12345</span>)		<span class="comment">#远程		</span></span><br><span class="line">p.send(payload)    <span class="comment">#发送数据</span></span><br><span class="line">p.sendline(payload) <span class="comment">#发送数据并添加换行符</span></span><br><span class="line">p.senduntil?</span><br><span class="line">p.sendafter(string)</span><br><span class="line">p.sendlineafter()</span><br><span class="line"></span><br><span class="line">p.recv(count) <span class="comment"># 接收count长度的信息</span></span><br><span class="line">p.recvuntil(string,drop=<span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span>) <span class="comment">#返回直到接收到指定字符串的信息,drop参数可以指定是否包含终止字符串</span></span><br><span class="line"></span><br><span class="line">p.clear() <span class="comment"># 清空消息缓存</span></span><br><span class="line">p.interactive() <span class="comment"># 与程序进行交互</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="编码类"><a href="#编码类" class="headerlink" title="编码类"></a>编码类</h3><p>​		漏洞利用时,payload可能有各种形式,8.16,32,64位、大端小端,pwntools提供了编码和解码的函数,p开头是编码,u开头是解码,后面跟着的是位数. 此外还提供了asm和disasm两个函数进行汇编和反汇编的转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p32(<span class="number">0x8040000</span>)  <span class="string">&#x27;\x00\x00\x04\x08&#x27;</span></span><br><span class="line"><span class="built_in">hex</span>(u32(<span class="string">&#x27;\x00\x00\x04\x08&#x27;</span>))    <span class="string">&#x27;0x8040000&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件信息获取类"><a href="#文件信息获取类" class="headerlink" title="文件信息获取类"></a>文件信息获取类</h3><p>​		获取二进制文件或者libc等的got plt表地址,或者偏移等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">elf = ELF(<span class="string">&#x27;bin-path&#x27;</span>) <span class="comment">#加载二进制文件</span></span><br><span class="line">elf.got[<span class="string">&#x27;fun_name&#x27;</span>] <span class="comment">#获取对应函数的got表地址</span></span><br><span class="line">elf.plt[<span class="string">&#x27;fun_name&#x27;</span>] <span class="comment">#获取对应函数的plt表地址</span></span><br><span class="line">libc = ELF(<span class="string">&#x27;libc-path&#x27;</span>) <span class="comment">#加载二进制文件</span></span><br><span class="line">libc.symbols[‘system’] <span class="comment">#获取函数地址   </span></span><br><span class="line">libc.sym[<span class="string">&#x27;system&#x27;</span>] 有什么区别??</span><br></pre></td></tr></table></figure>
+
+<p>symbols和got plt的关系???3</p>
+<h3 id="libc地址计算类"><a href="#libc地址计算类" class="headerlink" title="libc地址计算类"></a>libc地址计算类</h3><h3 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h3><h3 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h3><p>Shellcraft.sh()</p>
+<h1 id="patchelf"><a href="#patchelf" class="headerlink" title="patchelf"></a>patchelf</h1><p>patchelf –set-interpreter &#x2F;home&#x2F;ubuntu&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F;ld-linux.so.2 .&#x2F;a.out<br>patchelf –set-rpath &#x2F;home&#x2F;ubuntu&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F; .&#x2F;a.out		</p>
+<h1 id="gadget相关工具"><a href="#gadget相关工具" class="headerlink" title="gadget相关工具"></a>gadget相关工具</h1><h2 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h2><p>ROPgadget –binary rop  –only ‘pop|ret’ | grep ‘eax’   </p>
+<p>ROPgadget –binary ret2syscall  –only ‘int’</p>
+<p>ROPgadget –binary ret2syscall  –string ‘&#x2F;bin&#x2F;sh’</p>
+<h1 id="objdump"><a href="#objdump" class="headerlink" title="objdump"></a>objdump</h1><p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230221224643726.png" alt="image-20230221224643726"></p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230221224632067.png" alt="image-20230221224632067"></p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230221224616734.png" alt="image-20230221224616734"></p>
+<h1 id="libcsearch"><a href="#libcsearch" class="headerlink" title="libcsearch"></a>libcsearch</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44108455/article/details/105458234">https://blog.csdn.net/qq_44108455/article/details/105458234</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn546229768/article/details/121177641">https://blog.csdn.net/csdn546229768/article/details/121177641</a></p>
+<p>apt get install zstd</p>
+<h2 id="在线搜索libc-libc-database-search"><a href="#在线搜索libc-libc-database-search" class="headerlink" title="在线搜索libc libc database search"></a>在线搜索libc libc database search</h2><p><a target="_blank" rel="noopener" href="https://libc.blukat.me/">https://libc.blukat.me</a></p>
+<p><a target="_blank" rel="noopener" href="https://libc.rip/">https://libc.rip</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/niklasb/libc-database">https://github.com/niklasb/libc-database</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lieanu/LibcSearcher">https://github.com/lieanu/LibcSearcher</a></p>
+<h1 id="Linux自带工具"><a href="#Linux自带工具" class="headerlink" title="Linux自带工具"></a>Linux自带工具</h1><h1 id="file"><a href="#file" class="headerlink" title="file"></a>file</h1><p>​		查看文件基本信息</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230222132901291.png" alt="image-20230222132901291"></p>
+<h1 id="ldd"><a href="#ldd" class="headerlink" title="ldd"></a>ldd</h1><p>打印依赖的共享库文件</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230222132915670.png" alt="image-20230222132915670"></p>
+<h1 id="nm"><a href="#nm" class="headerlink" title="nm"></a>nm</h1><p>打印可执行程序的符号信息</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230222132921275.png" alt="image-20230222132921275"></p>
+<h1 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h1><p>查看可打印字符串信息</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230222132932791.png" alt="image-20230222132932791"></p>
+<h1 id="objdump-1"><a href="#objdump-1" class="headerlink" title="objdump"></a>objdump</h1><p>打印可执行程序的信息</p>
+<p>-h 打印section头信息</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230222132942474.png" alt="image-20230222132942474"></p>
+<p>-d 打印可执行section汇编</p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20230222132950821.png" alt="image-20230222132950821"></p>
+<h1 id="readelf"><a href="#readelf" class="headerlink" title="readelf"></a>readelf</h1><p>查看data段</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tangzichengcc.github.io">唐仔橙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/">https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tangzichengcc.github.io" target="_blank">唐仔橙</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PWN%E5%85%A5%E9%97%A8/">PWN入门</a></div><div class="post_share"><div class="social-share" data-image="/img/background/9.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/pwn%E5%85%A5%E9%97%A8-7-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A01/"><img class="prev-cover" src="/img/background/2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">pwn入门-7-格式化字符串题目练习1</div></div></a></div><div class="next-post pull-right"><a href="/pwn%E5%85%A5%E9%97%A8-5-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/"><img class="next-cover" src="/img/background/6.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">pwn入门-5-格式化字符串漏洞</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/pwn%E5%85%A5%E9%97%A8-1-%E5%88%9D%E8%AF%86/" title="pwn入门-1-初识"><img class="cover" src="/img/background/6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-11</div><div class="title">pwn入门-1-初识</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-10-%E5%A0%86%E5%85%A5%E9%97%A8%E4%B9%8B%E5%A0%86%E6%BA%A2%E5%87%BA%E5%8F%8Aunsorted-bin%E6%94%BB%E5%87%BB/" title="pwn入门-10-堆入门之堆溢出及unsorted_bin攻击"><img class="cover" src="/img/background/7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-24</div><div class="title">pwn入门-10-堆入门之堆溢出及unsorted_bin攻击</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-11-2%E6%9C%88%E6%9C%88%E8%B5%9B%E9%A2%98%E5%8F%8A%E5%8F%8D%E6%80%9D/" title="pwn入门-11-2月月赛题及反思"><img class="cover" src="/img/background/15.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-26</div><div class="title">pwn入门-11-2月月赛题及反思</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-12-pltgot%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A/" title="pwn入门-12-pltgot延迟绑定及符号解析"><img class="cover" src="/img/background/11.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="title">pwn入门-12-pltgot延迟绑定及符号解析</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-13-%E5%A0%86%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/" title="pwn入门-13-堆入门基础"><img class="cover" src="/img/background/11.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="title">pwn入门-13-堆入门基础</div></div></a></div><div><a href="/pwn%E5%85%A5%E9%97%A8-14-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F1/" title="pwn入门-14-基础知识查缺补漏1"><img class="cover" src="/img/background/7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-03</div><div class="title">pwn入门-14-基础知识查缺补漏1</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/profile.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">唐仔橙</div><div class="author-info__description">喜欢探索世界,在读研究生,计算机爱好者的成长记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tangzichengcc"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">会记录自己的学习经历,以及一些经历,如果有想法或者疑惑,欢迎交流!!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90-IDA-pro"><span class="toc-number">1.</span> <span class="toc-text">静态分析:IDA pro</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ida-%E9%87%8C%E9%9D%A2%E5%BE%88%E5%A4%9A%E5%A5%87%E6%80%AA%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="toc-number">1.1.</span> <span class="toc-text">ida 里面很多奇怪的东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">图形模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4"><span class="toc-number">1.2.1.</span> <span class="toc-text">箭头</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">文本模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">视图文件操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.4.</span> <span class="toc-text">常用快捷键:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-number">1.4.1.</span> <span class="toc-text">数据操作:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%93%8D%E4%BD%9C"><span class="toc-number">1.4.2.</span> <span class="toc-text">函数操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E6%93%8D%E4%BD%9C"><span class="toc-number">1.4.3.</span> <span class="toc-text">伪代码操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2"><span class="toc-number">1.4.4.</span> <span class="toc-text">搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.5.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99"><span class="toc-number">1.6.</span> <span class="toc-text">脚本编写</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90-gdb-pwndbg%E6%8F%92%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">动态分析:gdb(pwndbg插件)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E6%95%B4"><span class="toc-number">2.0.1.</span> <span class="toc-text">调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E8%B0%83%E8%AF%95"><span class="toc-number">2.0.2.</span> <span class="toc-text">启动调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E7%9B%B8%E5%85%B3"><span class="toc-number">2.0.3.</span> <span class="toc-text">断点相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">2.0.4.</span> <span class="toc-text">运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">2.0.5.</span> <span class="toc-text">查看信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="toc-number">2.0.5.1.</span> <span class="toc-text">查看内存信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E7%9B%B8%E5%85%B3"><span class="toc-number">2.0.6.</span> <span class="toc-text">堆相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%86%85%E5%AD%98%E3%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E7%AD%89-%E6%96%B9%E4%BE%BF%E8%B0%83%E8%AF%95"><span class="toc-number">2.0.7.</span> <span class="toc-text">修改内存、寄存器等 方便调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">2.0.8.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E7%9B%B8%E5%85%B3"><span class="toc-number">2.0.9.</span> <span class="toc-text">结构体相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="toc-number">2.1.</span> <span class="toc-text">调试技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">子进程调试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99-pwntools"><span class="toc-number">3.</span> <span class="toc-text">脚本编写:pwntools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E5%90%88gdb"><span class="toc-number">3.0.1.</span> <span class="toc-text">配合gdb</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwntools%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-number">3.1.</span> <span class="toc-text">pwntools基础操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">3.1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.1.2.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%8F%8A%E4%BA%A4%E4%BA%92"><span class="toc-number">3.1.3.</span> <span class="toc-text">连接及交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E7%B1%BB"><span class="toc-number">3.1.4.</span> <span class="toc-text">编码类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E7%B1%BB"><span class="toc-number">3.1.5.</span> <span class="toc-text">文件信息获取类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#libc%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97%E7%B1%BB"><span class="toc-number">3.1.6.</span> <span class="toc-text">libc地址计算类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.1.7.</span> <span class="toc-text">格式化字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shellcode"><span class="toc-number">3.1.8.</span> <span class="toc-text">shellcode</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#patchelf"><span class="toc-number">4.</span> <span class="toc-text">patchelf</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gadget%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-number">5.</span> <span class="toc-text">gadget相关工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ROPgadget"><span class="toc-number">5.1.</span> <span class="toc-text">ROPgadget</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#objdump"><span class="toc-number">6.</span> <span class="toc-text">objdump</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#libcsearch"><span class="toc-number">7.</span> <span class="toc-text">libcsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E6%90%9C%E7%B4%A2libc-libc-database-search"><span class="toc-number">7.1.</span> <span class="toc-text">在线搜索libc libc database search</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E8%87%AA%E5%B8%A6%E5%B7%A5%E5%85%B7"><span class="toc-number">8.</span> <span class="toc-text">Linux自带工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#file"><span class="toc-number">9.</span> <span class="toc-text">file</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ldd"><span class="toc-number">10.</span> <span class="toc-text">ldd</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nm"><span class="toc-number">11.</span> <span class="toc-text">nm</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strings"><span class="toc-number">12.</span> <span class="toc-text">strings</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#objdump-1"><span class="toc-number">13.</span> <span class="toc-text">objdump</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#readelf"><span class="toc-number">14.</span> <span class="toc-text">readelf</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf"><img src="/img/background/15.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-47-zh3R0CTF2021-moreprintf"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf">pwn入门-47-zh3R0CTF2021-moreprintf</a><time datetime="2023-11-12T15:40:29.000Z" title="发表于 2023-11-12 23:40:29">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口"><img src="/img/background/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c语言回炉重造-unix系统接口"/></a><div class="content"><a class="title" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口">c语言回炉重造-unix系统接口</a><time datetime="2023-11-12T07:29:52.000Z" title="发表于 2023-11-12 15:29:52">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-46-glibc%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95/" title="pwn入门-46-glibc源码调试"><img src="/img/background/4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-46-glibc源码调试"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-46-glibc%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95/" title="pwn入门-46-glibc源码调试">pwn入门-46-glibc源码调试</a><time datetime="2023-11-06T13:01:36.000Z" title="发表于 2023-11-06 21:01:36">2023-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-%E7%BB%93%E6%9E%84-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" title="c语言回炉重造-结构-输入与输出"><img src="/img/background/9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c语言回炉重造-结构-输入与输出"/></a><div class="content"><a class="title" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-%E7%BB%93%E6%9E%84-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" title="c语言回炉重造-结构-输入与输出">c语言回炉重造-结构-输入与输出</a><time datetime="2023-10-31T10:00:20.000Z" title="发表于 2023-10-31 18:00:20">2023-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-45-10%E6%9C%88%E6%9C%88%E8%B5%9B%E4%B8%A4%E9%A2%98/" title="pwn入门-45-10月月赛两题"><img src="/img/background/7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-45-10月月赛两题"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-45-10%E6%9C%88%E6%9C%88%E8%B5%9B%E4%B8%A4%E9%A2%98/" title="pwn入门-45-10月月赛两题">pwn入门-45-10月月赛两题</a><time datetime="2023-10-30T13:15:56.000Z" title="发表于 2023-10-30 21:15:56">2023-10-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 唐仔橙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment-5fim5uiat-tangzichengcc.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
