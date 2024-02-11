@@ -5,10 +5,10 @@
     <link href="https://tangzichengcc.github.io" />
     <updated>2023-11-12T07:29:52.000Z</updated>
     <category term="路由器" />
-    <category term="旅游" />
     <category term="浏览器安全" />
     <category term="csapp" />
     <category term="C语言" />
+    <category term="旅游" />
     <category term="PWN入门" />
     <category term="堆" />
     <category term="docker" />
@@ -16,9 +16,9 @@
     <category term="研究生课程" />
     <category term="诗歌" />
     <category term="调试" />
-    <category term="论文" />
     <category term="KVM" />
     <category term="USENIX" />
+    <category term="论文" />
     <entry>
         <id>https://tangzichengcc.github.io/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/</id>
         <title>c语言回炉重造-unix系统接口</title>

