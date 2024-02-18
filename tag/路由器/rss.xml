@@ -7,21 +7,21 @@
         <language>zh-CN</language>
         <pubDate>Sat, 03 Jun 2023 20:09:40 +0800</pubDate>
         <lastBuildDate>Sat, 03 Jun 2023 20:09:40 +0800</lastBuildDate>
+        <category>旅游</category>
         <category>路由器</category>
         <category>浏览器安全</category>
-        <category>csapp</category>
         <category>C语言</category>
-        <category>旅游</category>
+        <category>csapp</category>
         <category>PWN入门</category>
         <category>堆</category>
-        <category>docker</category>
         <category>脚本</category>
+        <category>docker</category>
         <category>研究生课程</category>
         <category>诗歌</category>
+        <category>论文</category>
         <category>调试</category>
         <category>KVM</category>
         <category>USENIX</category>
-        <category>论文</category>
         <item>
             <guid isPermalink="true">https://tangzichengcc.github.io/%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7firmae%E5%AE%89%E8%A3%85/</guid>
             <title>固件模拟工具firmae安装</title>
@@ -155,22 +155,22 @@
 
 &lt;p&gt;登陆虚拟机、配置网络&lt;/p&gt;
 &lt;p&gt;root&amp;#x2F;root&lt;/p&gt;
-&lt;p&gt;ifconfig eth0 192.168.6.15 up # 配置路由器IP&lt;br&gt;scp -r squashfs-root&amp;#x2F; &lt;a href=&#34;mailto:&amp;#x72;&amp;#111;&amp;#111;&amp;#x74;&amp;#64;&amp;#49;&amp;#57;&amp;#50;&amp;#46;&amp;#x31;&amp;#54;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#49;&amp;#53;&#34;&gt;&amp;#x72;&amp;#111;&amp;#111;&amp;#x74;&amp;#64;&amp;#49;&amp;#57;&amp;#50;&amp;#46;&amp;#x31;&amp;#54;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#49;&amp;#53;&lt;/a&gt;:&amp;#x2F;root&amp;#x2F; # 拷贝路由器文件到虚拟机&lt;/p&gt;
+&lt;p&gt;ifconfig eth0 192.168.6.15 up # 配置路由器IP&lt;br&gt;scp -r squashfs-root&amp;#x2F; &lt;a href=&#34;mailto:&amp;#x72;&amp;#x6f;&amp;#111;&amp;#116;&amp;#64;&amp;#49;&amp;#x39;&amp;#50;&amp;#46;&amp;#x31;&amp;#x36;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#x31;&amp;#53;&#34;&gt;&amp;#x72;&amp;#x6f;&amp;#111;&amp;#116;&amp;#64;&amp;#49;&amp;#x39;&amp;#50;&amp;#46;&amp;#x31;&amp;#x36;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#x31;&amp;#53;&lt;/a&gt;:&amp;#x2F;root&amp;#x2F; # 拷贝路由器文件到虚拟机&lt;/p&gt;
 &lt;p&gt;注意这里有个坑 &lt;/p&gt;
 &lt;p&gt;就是上一个开启的qemu里面的squashfs-root不是要搭建的那个路由器的…很奇怪…不知道哪里来的…&lt;/p&gt;
 &lt;p&gt;所以其实要先从物理机上考过去一份到qemu的debian系统里,然后再拷到路由系统里&lt;/p&gt;
 &lt;p&gt;物理机&amp;#x2F;云服务器执行: scp -r &amp;#x2F;tmp&amp;#x2F;squashfs-root 192.168.6.15:&amp;#x2F;root&amp;#x2F; 拷贝到qemu虚拟出的debian里面&lt;/p&gt;
-&lt;p&gt;qemu里执行 scp -r squashfs-root&amp;#x2F; &lt;a href=&#34;mailto:&amp;#x72;&amp;#111;&amp;#x6f;&amp;#x74;&amp;#x40;&amp;#49;&amp;#x39;&amp;#50;&amp;#46;&amp;#49;&amp;#54;&amp;#x38;&amp;#46;&amp;#54;&amp;#46;&amp;#x31;&amp;#x35;&#34;&gt;&amp;#x72;&amp;#111;&amp;#x6f;&amp;#x74;&amp;#x40;&amp;#49;&amp;#x39;&amp;#50;&amp;#46;&amp;#49;&amp;#54;&amp;#x38;&amp;#46;&amp;#54;&amp;#46;&amp;#x31;&amp;#x35;&lt;/a&gt;:&amp;#x2F;root&amp;#x2F;  拷贝到&lt;/p&gt;
+&lt;p&gt;qemu里执行 scp -r squashfs-root&amp;#x2F; &lt;a href=&#34;mailto:&amp;#x72;&amp;#x6f;&amp;#111;&amp;#116;&amp;#64;&amp;#x31;&amp;#57;&amp;#50;&amp;#x2e;&amp;#49;&amp;#x36;&amp;#56;&amp;#46;&amp;#x36;&amp;#46;&amp;#49;&amp;#x35;&#34;&gt;&amp;#x72;&amp;#x6f;&amp;#111;&amp;#116;&amp;#64;&amp;#x31;&amp;#57;&amp;#50;&amp;#x2e;&amp;#49;&amp;#x36;&amp;#56;&amp;#46;&amp;#x36;&amp;#46;&amp;#49;&amp;#x35;&lt;/a&gt;:&amp;#x2F;root&amp;#x2F;  拷贝到&lt;/p&gt;
 &lt;p&gt;chroot .&amp;#x2F;squashfs-root&amp;#x2F; &amp;#x2F;bin&amp;#x2F;sh # 挂载路由器系统&lt;br&gt;.&amp;#x2F;bin&amp;#x2F;lighttpd -f .&amp;#x2F;lighttp&amp;#x2F;lighttpd.conf -m .&amp;#x2F;lighttp&amp;#x2F;lib # 启动路由器服务&lt;/p&gt;
 &lt;p&gt;报错(server.c.624) opening pid-file failed: &amp;#x2F;var&amp;#x2F;run&amp;#x2F;lighttpd.pid No such file or directory&lt;/p&gt;
 &lt;p&gt;创建一下即可&lt;/p&gt;
 &lt;h2 id=&#34;1-2-流量转发&#34;&gt;&lt;a href=&#34;#1-2-流量转发&#34; class=&#34;headerlink&#34; title=&#34;1.2 流量转发&#34;&gt;&lt;/a&gt;1.2 流量转发&lt;/h2&gt;&lt;p&gt;怎么把流量转发出来呢?&lt;/p&gt;
 &lt;p&gt;把qemu的流量转发到主机的端口&lt;/p&gt;
-&lt;p&gt;ssh &lt;a href=&#34;mailto:&amp;#x72;&amp;#111;&amp;#x6f;&amp;#x74;&amp;#x40;&amp;#x31;&amp;#57;&amp;#50;&amp;#46;&amp;#49;&amp;#54;&amp;#56;&amp;#46;&amp;#54;&amp;#46;&amp;#x31;&amp;#x35;&#34;&gt;&amp;#x72;&amp;#111;&amp;#x6f;&amp;#x74;&amp;#x40;&amp;#x31;&amp;#57;&amp;#50;&amp;#46;&amp;#49;&amp;#54;&amp;#56;&amp;#46;&amp;#54;&amp;#46;&amp;#x31;&amp;#x35;&lt;/a&gt; -L 127.0.0.1:80:127.0.0.1:80&lt;/p&gt;
+&lt;p&gt;ssh &lt;a href=&#34;mailto:&amp;#x72;&amp;#x6f;&amp;#111;&amp;#x74;&amp;#64;&amp;#x31;&amp;#x39;&amp;#50;&amp;#46;&amp;#49;&amp;#x36;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#49;&amp;#x35;&#34;&gt;&amp;#x72;&amp;#x6f;&amp;#111;&amp;#x74;&amp;#64;&amp;#x31;&amp;#x39;&amp;#50;&amp;#46;&amp;#49;&amp;#x36;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#49;&amp;#x35;&lt;/a&gt; -L 127.0.0.1:80:127.0.0.1:80&lt;/p&gt;
 &lt;p&gt;把主机的流量转发到PC端口,就可以在自己电脑上访问了&lt;/p&gt;
 &lt;p&gt;ssh root@xxxxxx (vps的ip) -L 127.0.0.1:80:127.0.0.1:80&lt;/p&gt;
 &lt;p&gt;或者安装一个图形化界面(用服务器搭建的)&lt;/p&gt;
-&lt;p&gt;ssh &lt;a href=&#34;mailto:&amp;#114;&amp;#111;&amp;#x6f;&amp;#x74;&amp;#64;&amp;#49;&amp;#57;&amp;#50;&amp;#x2e;&amp;#x31;&amp;#54;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#x31;&amp;#53;&#34;&gt;&amp;#114;&amp;#111;&amp;#x6f;&amp;#x74;&amp;#64;&amp;#49;&amp;#57;&amp;#50;&amp;#x2e;&amp;#x31;&amp;#54;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#x31;&amp;#53;&lt;/a&gt; -L 127.0.0.1:80:127.0.0.1:80&lt;/p&gt;
+&lt;p&gt;ssh &lt;a href=&#34;mailto:&amp;#114;&amp;#111;&amp;#x6f;&amp;#116;&amp;#64;&amp;#x31;&amp;#57;&amp;#x32;&amp;#x2e;&amp;#49;&amp;#x36;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#49;&amp;#x35;&#34;&gt;&amp;#114;&amp;#111;&amp;#x6f;&amp;#116;&amp;#64;&amp;#x31;&amp;#57;&amp;#x32;&amp;#x2e;&amp;#49;&amp;#x36;&amp;#56;&amp;#46;&amp;#54;&amp;#x2e;&amp;#49;&amp;#x35;&lt;/a&gt; -L 127.0.0.1:80:127.0.0.1:80&lt;/p&gt;
 &lt;p&gt;或者直接一个转发就行了吧?(vps关了,还没尝试)&lt;/p&gt;
 &lt;p&gt;ssh root@xxxxxx (vps的ip) -L 127.0.0.1:80:192.168.6.15:80&lt;/p&gt;
 &lt;h2 id=&#34;1-3-虚拟环境的各种问题&#34;&gt;&lt;a href=&#34;#1-3-虚拟环境的各种问题&#34; class=&#34;headerlink&#34; title=&#34;1.3 虚拟环境的各种问题&#34;&gt;&lt;/a&gt;1.3 虚拟环境的各种问题&lt;/h2&gt;&lt;p&gt;登陆报错&lt;/p&gt;

@@ -4,21 +4,21 @@
     <title>唐仔橙 • Posts by &#34;pwn&#34; category</title>
     <link href="https://tangzichengcc.github.io" />
     <updated>2024-01-27T15:28:41.000Z</updated>
+    <category term="旅游" />
     <category term="路由器" />
     <category term="浏览器安全" />
-    <category term="csapp" />
     <category term="C语言" />
-    <category term="旅游" />
+    <category term="csapp" />
     <category term="PWN入门" />
     <category term="堆" />
-    <category term="docker" />
     <category term="脚本" />
+    <category term="docker" />
     <category term="研究生课程" />
     <category term="诗歌" />
+    <category term="论文" />
     <category term="调试" />
     <category term="KVM" />
     <category term="USENIX" />
-    <category term="论文" />
     <entry>
         <id>https://tangzichengcc.github.io/pwn%E5%85%A5%E9%97%A8-48-setcontext%E5%BA%94%E7%94%A8/</id>
         <title>pwn入门-48-setcontext应用</title>
@@ -3155,6 +3155,7 @@
 &lt;p&gt;i春秋   &lt;a href=&#34;https://www.ichunqiu.com/competition&#34;&gt;https://www.ichunqiu.com/competition&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.wechall.net/active_sites&#34;&gt;http://www.wechall.net/active_sites&lt;/a&gt;  一个ctf网站，同时也收录了很多学习网站&lt;/p&gt;
 &lt;p&gt;Tryhackme\hackthebox\&lt;/p&gt;
+&lt;p&gt;蓝桥云课&lt;/p&gt;
 &lt;h3 id=&#34;pwn专属&#34;&gt;&lt;a href=&#34;#pwn专属&#34; class=&#34;headerlink&#34; title=&#34;pwn专属&#34;&gt;&lt;/a&gt;pwn专属&lt;/h3&gt;&lt;p&gt;pwn.college   由浅入深,一步一步,还有机器可以用!&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://pwnable.kr/&#34;&gt;https://pwnable.kr&lt;/a&gt;            &lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://pwnable.tw/&#34;&gt;http://pwnable.tw&lt;/a&gt;            &lt;/p&gt;
@@ -3726,6 +3727,23 @@
 &lt;p&gt;pwndbg官方文档:&lt;a href=&#34;https://browserpwndbg.readthedocs.io/en/docs/&#34;&gt;https://browserpwndbg.readthedocs.io/en/docs/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md&#34;&gt;https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;gdb官方文档:&lt;/p&gt;
+&lt;p&gt;【CppCon 2016 比你知道更多的 GDB 知识，GDB - A Lot More Than You Knew 中英字幕】 &lt;a href=&#34;https://www.bilibili.com/video/BV1Zk4y1w7ih/?share_source=copy_web&amp;amp;vd_source=2d8fb63a145457ff1a7e34f534a732e6&#34;&gt;https://www.bilibili.com/video/BV1Zk4y1w7ih/?share_source=copy_web&amp;amp;vd_source=2d8fb63a145457ff1a7e34f534a732e6&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1p14y1y7zv/?share_source=copy_web&amp;amp;vd_source=2d8fb63a145457ff1a7e34f534a732e6&#34;&gt;https://www.bilibili.com/video/BV1p14y1y7zv/?share_source=copy_web&amp;amp;vd_source=2d8fb63a145457ff1a7e34f534a732e6&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;TUI mode&lt;/p&gt;
+&lt;p&gt;control + x + a&lt;/p&gt;
+&lt;p&gt;ctrl + L重新绘制&lt;/p&gt;
+&lt;p&gt;ctrl + x + 2 两个窗口&lt;/p&gt;
+&lt;p&gt;ctrl + x + 1显示一个src窗口&lt;/p&gt;
+&lt;p&gt;ctrl + x + a 传统模式&lt;/p&gt;
+&lt;p&gt;ctrl p 上一个命令  ctrl n下一个&lt;/p&gt;
+&lt;p&gt;python 可以查看断点 下断点&lt;/p&gt;
+&lt;p&gt;可逆调试??? reverse-stepi&lt;/p&gt;
+&lt;p&gt;Target native does not support this command&lt;/p&gt;
+&lt;p&gt;使用前输入target record-full&lt;/p&gt;
+&lt;p&gt;触发间接性的错误, 需要多次运行, 设置条件判断&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20231113161842093.png&#34; alt=&#34;image-20231113161842093&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/pwn%E5%85%A5%E9%97%A8-6-%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/image-20231113162334467.png&#34; alt=&#34;image-20231113162334467&#34;&gt;&lt;/p&gt;
+&lt;p&gt;commond命令&lt;/p&gt;
 &lt;h3 id=&#34;调整&#34;&gt;&lt;a href=&#34;#调整&#34; class=&#34;headerlink&#34; title=&#34;调整&#34;&gt;&lt;/a&gt;调整&lt;/h3&gt;&lt;p&gt;把 stack 和 backtrace的行数减少,不然看不见上面的汇编了&lt;/p&gt;
 &lt;p&gt;配置文件:&lt;a href=&#34;https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md&#34;&gt;https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;修改配置文件就可以了&lt;/p&gt;
@@ -3785,6 +3803,7 @@
 &lt;p&gt;info reg&lt;/p&gt;
 &lt;p&gt;调试一下输出为16进制吧: set output-radix 16&lt;/p&gt;
 &lt;p&gt;eb address [data [data …]]&lt;/p&gt;
+&lt;p&gt;p sizeof()查看变量、结构体大小&lt;/p&gt;
 &lt;h3 id=&#34;结构体相关&#34;&gt;&lt;a href=&#34;#结构体相关&#34; class=&#34;headerlink&#34; title=&#34;结构体相关&#34;&gt;&lt;/a&gt;结构体相关&lt;/h3&gt;&lt;p&gt;p 结构体名字&lt;/p&gt;
 &lt;p&gt;p *(struct  xxx *) addr&lt;/p&gt;
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pwndbg&amp;gt; p *(DSI *) dsi&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;value of type `DSI&lt;span class=&#34;number&#34;&gt;&amp;#x27;&lt;/span&gt; requires &lt;span class=&#34;number&#34;&gt;67416&lt;/span&gt; bytes, which is more than max-value-size&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pwndbg&amp;gt; p dsi&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt; = (DSI *) &lt;span class=&#34;number&#34;&gt;0x5555555b8960&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pwndbg&amp;gt; p *(DSI *) &lt;span class=&#34;number&#34;&gt;0x5555555b8960&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;value of type `DSI&lt;span class=&#34;number&#34;&gt;&amp;#x27;&lt;/span&gt; requires &lt;span class=&#34;number&#34;&gt;67416&lt;/span&gt; bytes, which is more than max-value-size&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
