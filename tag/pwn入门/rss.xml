@@ -7,19 +7,19 @@
         <language>zh-CN</language>
         <pubDate>Sat, 27 Jan 2024 23:28:41 +0800</pubDate>
         <lastBuildDate>Sat, 27 Jan 2024 23:28:41 +0800</lastBuildDate>
-        <category>旅游</category>
         <category>路由器</category>
+        <category>旅游</category>
         <category>浏览器安全</category>
-        <category>C语言</category>
         <category>csapp</category>
+        <category>C语言</category>
         <category>PWN入门</category>
         <category>堆</category>
-        <category>脚本</category>
         <category>docker</category>
+        <category>脚本</category>
         <category>研究生课程</category>
         <category>诗歌</category>
-        <category>论文</category>
         <category>调试</category>
+        <category>论文</category>
         <category>KVM</category>
         <category>USENIX</category>
         <item>
@@ -3372,7 +3372,7 @@
 &lt;p&gt;finish 执行完当前函数,返回调用它的函数&lt;/p&gt;
 &lt;p&gt;怎么查看自己当前在哪一行??和下面的代码??&lt;/p&gt;
 &lt;p&gt;disass &lt;/p&gt;
-&lt;p&gt;运行的时候 怎么 添加参数?&lt;/p&gt;
+&lt;p&gt;运行的时候 怎么 添加参数? run arg1 arg2…&lt;/p&gt;
 &lt;h3 id=&#34;查看信息&#34;&gt;&lt;a href=&#34;#查看信息&#34; class=&#34;headerlink&#34; title=&#34;查看信息&#34;&gt;&lt;/a&gt;查看信息&lt;/h3&gt;&lt;p&gt;codebase 查看地址 (调试地址 就是 这个程序的基地址 + ida中的地址)&lt;/p&gt;
 &lt;p&gt;vmmap查看内存映射mmap地址 信息&lt;/p&gt;
 &lt;p&gt;teles 查看栈的信息&lt;/p&gt;
